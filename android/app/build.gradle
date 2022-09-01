@@ -12,9 +12,6 @@ if (localPropertiesFile.exists()) {
     }
 }
 
-
-
-
 def flutterRoot = localProperties.getProperty('flutter.sdk')
 if (flutterRoot == null) {
     throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
@@ -34,7 +31,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
-
 android {
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
@@ -46,10 +42,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.friends"
-        //
-
-//        minSdk 19 //to solve git conflict .
-        // You can update the following values to match your application needs.
+        // You can update the following values to match your application needs. 
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
         minSdkVersion 19
         targetSdkVersion flutter.targetSdkVersion
