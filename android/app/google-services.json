@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "633327727228",
+    "firebase_url": "https://offers-app-707fd-default-rtdb.firebaseio.com",
+    "project_id": "offers-app-707fd",
+    "storage_bucket": "offers-app-707fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:633327727228:android:39b1cc215bf02531898ff9",
+        "android_client_info": {
+          "package_name": "com.example.friends"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "633327727228-ekgm5oekv25a5c6aa0nfk6d85p1kpksv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.friends",
+            "certificate_hash": "82e66bf2530f4cd858fb8f7e600801d083f4c4ec"
+          }
+        },
+        {
+          "client_id": "633327727228-nvhodsod3ki3nsmnqn7rprehclp9haub.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnkkQxHJAxXguEH38CRYfoS4QeUb9BVQg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "633327727228-nvhodsod3ki3nsmnqn7rprehclp9haub.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
