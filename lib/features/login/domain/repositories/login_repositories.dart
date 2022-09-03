@@ -27,7 +27,7 @@ abstract class LoginRepositories {
   ///to login.
   ///return [UserCredential] when completed successfully
   ///and return Type of [Failure] when error happened
-  Future<Either<Failure, UserCredential>> loginWithEmail({
+  Future<Either<Failure, UserCredential>> loginWithEmailAndPassword({
     required String email,
 
     required String password,
