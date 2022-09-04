@@ -13,7 +13,7 @@ dependencies:
 
   cupertino_icons: ^1.0.2
 #to check network connection
-  data_connection_checker: ^0.3.4
+  internet_connection_checker: ^0.0.1+4
 #value equality
   equatable:
 #that package contain a lot of build-in functions
