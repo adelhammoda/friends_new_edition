@@ -9,7 +9,7 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../repositories/login_repositories.dart';
 
-import '../../../../core/exception/failure.dart';
+import '../../../../core/failure/failure.dart';
 
 class LoginWithGoogle{
   final LoginRepositories repositories;

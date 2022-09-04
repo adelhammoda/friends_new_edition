@@ -1,12 +1,18 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/widg'
-    'ets.dart';
+import 'package:flutter/widgets.dart';
 
-import '../../../../core/exception/failure.dart';
+import '../../../../core/failure/failure.dart';
 
 
 abstract class LoginRepositories {
+  // ///auto login from cash memory
+  // ///so we need to fetch email and password first
+  // ///return [CashFailure] when we find no thing in cash memory.
+  // ///return [FirebaseFailure] when we failed in login.
+  // Future<Either<Failure,UserCredential>> tryAutoLogin();
+
+
   ///login with google account that supported by
   ///firebase auth .
   ///return [UserCredential] if the process completed successfully
@@ -37,21 +43,14 @@ abstract class LoginRepositories {
   ///navigate to forget password page and
   ///return no thing if the navigation completed successfully
   ///where it return  type of [Failure] when any exception happened.
-  Either<Failure, Null> forgetPassword(BuildContext context);
+  Either<Failure, void> forgetPassword(BuildContext context);
 
   ///navigate to create account page it's hold
   ///the email and password and pass them to {email controller}
   ///and {password controller}
   ///Return a [Failure]  when any navigation error happened
-  Either<Failure, Null> createAccount({
-    required String email,
-    required String password,
-  });
-
-  ///we need to cash user after he logged in successfully to
-  ///auto log in in next time  he enter the app
-  ///Return [Failure] when any cashing exception happened
-  Future<Either<Failure, Null>> cashEmailAndPassword({
+  Either<Failure, void> createAccount({
+    required BuildContext context,
     required String email,
     required String password,
   });

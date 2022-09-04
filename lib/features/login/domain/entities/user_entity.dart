@@ -1,7 +1,7 @@
 class UserEntity {
   String name, email, user, imageUrl;
   Map<String, dynamic> address;
-  String subscibeId;
+  String subscribeId;
 
   UserEntity(
       {required this.name,
@@ -9,5 +9,5 @@ class UserEntity {
         required this.user,
         required this.address,
         required this.imageUrl,
-        required this.subscibeId});
+        required this.subscribeId});
 }
