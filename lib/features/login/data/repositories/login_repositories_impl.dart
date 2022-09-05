@@ -87,26 +87,23 @@ class LoginRepositoriesImpl implements LoginRepositories {
   }
 
   @override
-  Future<Either<Failure, UserCredential>> loginWithApple() => _signIn(() {
-      return FirebaseAuth.instance.signInWithAuthProvider(AppleAuthProvider());
-    });
+  Future<Either<Failure, UserCredential>> loginWithApple() => _signIn(()=>remote.loginWithApple());
 
   @override
   Future<Either<Failure, UserCredential>> loginWithEmailAndPassword(
       {required String email, required String password})  => _signIn(() async {
-      UserCredential u = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      UserCredential u = await remote.loginWithEmailAndPassword(email: email, password: password);
       local.cashUserEmailAndPassword(email: email, password: password);
       return u;
     });
 
   @override
   Future<Either<Failure, UserCredential>> loginWithFacebook()  => _signIn(() =>
-        FirebaseAuth.instance.signInWithAuthProvider(FacebookAuthProvider()));
+       remote.loginWithFacebook());
 
   @override
   Future<Either<Failure, UserCredential>> loginWithGoogle() => _signIn(() =>
-        FirebaseAuth.instance.signInWithAuthProvider(GoogleAuthProvider()));
+        remote.loginWithGoogle());
 
 
 }
