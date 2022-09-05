@@ -12,10 +12,12 @@ dependencies:
 
 
   cupertino_icons: ^1.0.2
+#to store all data in local storage
+  shared_preferences:
 #to check network connection
   internet_connection_checker: ^0.0.1+4
 #value equality
-  equatable:
+  equatable: ^2.0.5
 #that package contain a lot of build-in functions
 #that used in dart and flutter
   dartz:
