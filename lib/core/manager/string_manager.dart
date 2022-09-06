@@ -11,6 +11,8 @@ class StringManager {
 
 
 class ConstantManager {
+  ///app constant
+  static const appTitle ="Friends";
   ///cashed email and password key.
   static const cashedEmailAndPasswordKey = "user_data";
   ///login loading state keys.

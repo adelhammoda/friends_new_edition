@@ -12,6 +12,10 @@ dependencies:
 
 
   cupertino_icons: ^1.0.2
+#to use media query in easiest way
+  responsive_s:
+#to details with svg images
+  flutter_svg: ^1.1.4
 #state management package
   bloc:
 #to store all data in local storage
