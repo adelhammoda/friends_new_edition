@@ -12,6 +12,8 @@ dependencies:
 
 
   cupertino_icons: ^1.0.2
+#state management package
+  bloc:
 #to store all data in local storage
   shared_preferences:
 #to check network connection

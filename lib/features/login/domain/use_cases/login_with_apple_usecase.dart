@@ -9,13 +9,13 @@ import 'package:friends/features/login/domain/repositories/login_repositories.da
 
 import '../../../../core/failure/failure.dart';
 
-class LoginWithApple{
+class LoginWithAppleUseCases{
 
 
 
   final LoginRepositories repositories;
 
-  LoginWithApple(this.repositories);
+  LoginWithAppleUseCases(this.repositories);
 
   Future<Either<Failure,UserCredential>> call()async=>await repositories.loginWithApple();
 

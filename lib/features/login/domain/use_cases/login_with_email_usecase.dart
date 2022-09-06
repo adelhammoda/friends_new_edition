@@ -8,11 +8,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:friends/core/failure/failure.dart';
 import 'package:friends/features/login/domain/repositories/login_repositories.dart';
 
-class LoginWithEmailAndPassword{
+class LoginWithEmailAndPasswordUseCases{
 
   final LoginRepositories loginRepositories;
 
-  LoginWithEmailAndPassword(this.loginRepositories);
+  LoginWithEmailAndPasswordUseCases(this.loginRepositories);
 
 
   Future<Either<Failure,UserCredential>> call({

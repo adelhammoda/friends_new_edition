@@ -11,6 +11,13 @@ class StringManager {
 
 
 class ConstantManager {
+  ///cashed email and password key.
   static const cashedEmailAndPasswordKey = "user_data";
+  ///login loading state keys.
+  static const loadingStatusForLogin = "Login";
+  static const loadingStatusForLoginWithGoogle  = "Google";
+  static const loadingStatusForLoginWithFacebook  = "Facebook";
+  static const loadingStatusForLoginWithApple  = "Apple";
+  ///
 
 }

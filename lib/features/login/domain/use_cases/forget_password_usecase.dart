@@ -11,11 +11,11 @@ import 'package:friends/features/login/domain/repositories/login_repositories.da
 
 import '../../../../core/failure/failure.dart';
 
-class ForgetPassword{
+class ForgetPasswordUseCases{
 
   final LoginRepositories repositories;
 
-  ForgetPassword(this.repositories);
+  ForgetPasswordUseCases(this.repositories);
 
 
   Either<Failure,void> call(BuildContext context)=>repositories.forgetPassword(context);

@@ -4,10 +4,10 @@ import 'package:friends/features/login/domain/repositories/login_repositories.da
 
 import '../../../../core/failure/failure.dart';
 
-class CreateAccount {
+class CreateAccountUseCases {
   final LoginRepositories repositories;
 
-  CreateAccount(this.repositories);
+  CreateAccountUseCases(this.repositories);
 
   Either<Failure, void> call({
     required BuildContext context,

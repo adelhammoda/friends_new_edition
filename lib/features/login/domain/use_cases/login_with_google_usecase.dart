@@ -11,10 +11,10 @@ import '../repositories/login_repositories.dart';
 
 import '../../../../core/failure/failure.dart';
 
-class LoginWithGoogle{
+class LoginWithGoogleUseCases{
   final LoginRepositories repositories;
 
-  LoginWithGoogle(this.repositories);
+  LoginWithGoogleUseCases(this.repositories);
 
   Future<Either<Failure,UserCredential>> call()async => await repositories.loginWithGoogle();
 
