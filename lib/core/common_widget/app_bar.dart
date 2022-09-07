@@ -6,6 +6,7 @@ class FriendsAppbar extends AppBar {
   FriendsAppbar({Key? key})
       : super(
           key: key,
+          actions: [],
           leading: const FriendsBackButton(),
         );
 }
