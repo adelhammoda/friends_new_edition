@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:friends/core/common_widget/app_bar.dart';
 import 'package:friends/core/common_widget/background_widget.dart';
+import 'package:friends/core/manager/color_manager.dart';
 
 import '../../../../core/common_widget/footer.dart';
 
@@ -13,6 +14,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: FriendsAppbar(),
       bottomNavigationBar:const Footer(
         ///example of url that worked natively "mailto:adel@gmail.com"

@@ -30,5 +30,5 @@ class AssetsManager{
   static const String facebook = '$_mainPath/facebook.svg';
   static const String instagram = '$_mainPath/instagram.svg';
   static const String email = '$_mainPath/email.svg';
-  static const String background = '$_mainPath/background.svg';
+  static const String background = '$_mainPath/background.png';
 }

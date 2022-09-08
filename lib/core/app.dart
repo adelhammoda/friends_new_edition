@@ -20,11 +20,11 @@ class App extends StatelessWidget {
       title: ConstantManager.appTitle,
       routes: RoutesManager.routes(),
       theme: ThemeData(
+        scaffoldBackgroundColor: ColorManager.grey,
         appBarTheme: AppBarTheme(
           shadowColor:ColorManager.white.withOpacity(0),
           backgroundColor: ColorManager.white.withOpacity(0),
           elevation: 0,
-
         )
       ),
     );

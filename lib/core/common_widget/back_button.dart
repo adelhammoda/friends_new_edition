@@ -15,12 +15,13 @@ class FriendsBackButton extends StatelessWidget {
         alignment: Alignment.center,
         decoration:  BoxDecoration(
           border: Border.all(
-            color: ColorManager.grey,
+            color: ColorManager.grey.withOpacity(0.4),
             width: SizeManager.s2
           ),
           shape: BoxShape.circle,
         ),
         child: IconButton(
+
           iconSize:responsive.responsiveWidth(forUnInitialDevices:4),
           padding: EdgeInsets.zero,
             alignment: Alignment.center,
@@ -29,8 +30,9 @@ class FriendsBackButton extends StatelessWidget {
                 Navigator.of(context).pop();
               }
             },
-            icon: const Icon(
+            icon:  Icon(
               Icons.arrow_back,
+              color: ColorManager.grey.withOpacity(0.4),
             )),
       ),
     );
