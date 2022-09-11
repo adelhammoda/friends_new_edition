@@ -21,7 +21,7 @@ class RoutesManager{
       case Routes.homePage:
         return const HomePage();
       case Routes.login:
-        return const LoginPage();
+        return  LoginPage();
       default:
         //TODO:remove this container and replace it with stakeholder page
         return  Container();
