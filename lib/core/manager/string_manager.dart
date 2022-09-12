@@ -32,6 +32,9 @@ class ConstantManager {
   static const loadingStatusForLoginWithFacebook  = "Facebook";
   static const loadingStatusForLoginWithApple  = "Apple";
   ///
+/// public message
+ static const String error = "Error";
+ static const String success="Success";
 
 }
 
@@ -56,4 +59,6 @@ class AssetsManager{
   static const String firaCode = "firaCode";
   ///lottie
   static const String loader = "assets/lottie/loader.json";
+  static const String successAnimation = "assets/lottie/success.json";
+  static const String wrongAnimation = "assets/lottie/error.json";
 }

@@ -59,4 +59,5 @@ Future<void> init() async {
   ///External
   sl.registerLazySingleton<InternetConnectionChecker>(
       () => InternetConnectionChecker());
+
 }

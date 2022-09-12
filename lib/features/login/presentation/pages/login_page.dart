@@ -7,11 +7,12 @@ import 'package:friends/core/common_widget/friends_button.dart';
 import 'package:friends/core/common_widget/input_field.dart';
 import 'package:friends/core/manager/string_manager.dart';
 import 'package:friends/features/login/presentation/manager/login_bloc.dart';
+import 'package:friends/features/login/presentation/widgets/build_options_buttons.dart';
 import 'package:responsive_s/responsive_s.dart';
-
 
 import '../../../../core/common_widget/footer.dart';
 import '../../../../core/common_widget/loader.dart';
+import '../../../../core/common_widget/snackbar_widget.dart';
 import '../../../../injection_container.dart' as di;
 
 class LoginPage extends StatefulWidget {
@@ -25,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   //editors
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
+  final ScrollController scrollController = ScrollController();
   //for animation
   late Responsive _responsive;
 
@@ -39,30 +40,35 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (c)=>di.sl<LoginBloc>(),child: Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: FriendsAppbar(),
-      bottomNavigationBar: const Footer(
-        ///example of url that worked natively "mailto:adel@gmail.com"
-        emailUrlNatively: 'emailNativelyUrl',
+    return BlocProvider(
+      create: (c) => di.sl<LoginBloc>(),
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        resizeToAvoidBottomInset: true,
+        appBar: FriendsAppbar(),
+        bottomNavigationBar: const Footer(
+          ///example of url that worked natively "mailto:adel@gmail.com"
+          emailUrlNatively: 'emailNativelyUrl',
 
-        ///example of url that worked natively 'fb://profile/100004920094579'
-        facebookUrlNatively: 'facebookNativelyUrl',
+          ///example of url that worked natively 'fb://profile/100004920094579'
+          facebookUrlNatively: 'facebookNativelyUrl',
 
-        ///example of url that worked natively 'instagram://user?username=aadel_hammoda'
-        instagramUrlNatively: "instagramNativelyUrl",
+          ///example of url that worked natively 'instagram://user?username=aadel_hammoda'
+          instagramUrlNatively: "instagramNativelyUrl",
 
-        ///example of url that work in web-view mood "https://www.gmail.com"
-        emailUrl: "emailUrl",
+          ///example of url that work in web-view mood "https://www.gmail.com"
+          emailUrl: "emailUrl",
 
-        ///example of url that work in web-view mood 'https://www.facebook.com/aadel.hammoda'
-        facebookUrl: "facebookUrl",
+          ///example of url that work in web-view mood 'https://www.facebook.com/aadel.hammoda'
+          facebookUrl: "facebookUrl",
 
-        ///example of url that work in web-view mood 'https://www.instagram.com/moaazallaham/'
-        instagramUrl: "instagramUrl",
-      ),
-      body: FriendsBackgroundWidget(
-          child: SingleChildScrollView(
+          ///example of url that work in web-view mood 'https://www.instagram.com/moaazallaham/'
+          instagramUrl: "instagramUrl",
+        ),
+        body: SingleChildScrollView(
+          child: FriendsBackgroundWidget(
+              child: SingleChildScrollView(
+                primary: true,
             child: Column(
               children: [
                 Padding(
@@ -72,68 +78,39 @@ class _LoginPageState extends State<LoginPage> {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 15.0),
-                  child: BlocBuilder<LoginBloc, LoginState>(
-                    builder: (context, state) {
-                      switch(state.runtimeType){
-                        case LoginInitial:case LoadedState:
-                        return AnotherLoginOption(
-                          onTap: () {
-                            BlocProvider.of<LoginBloc>(context).add(LoginWithGoogleEvent());
-                          },
-                          image: AssetsManager.googleLogo,
-                          content: StringManager.loginWithGoogle,
-                        );
-                        case LoadingState:
-                          {
-                            print(state.props);
-                            if((state as LoadingState).loadingIn==ConstantManager.loadingStatusForLoginWithGoogle){
-                            return const Loader();
-                          }else{
-                            return AnotherLoginOption(
-                              onTap: () {
-                                //TODO:add login with google option;
-                              },
-                              image: AssetsManager.googleLogo,
-                              content: StringManager.loginWithGoogle,
-                            );
-                          }
-
-                          }
-                        default:
-                          return AnotherLoginOption(
-                            onTap: () {
-                              //TODO:add login with google option;
-                            },
-                            image: AssetsManager.googleLogo,
-                            content: StringManager.loginWithGoogle,
-                          );
-                      }
-
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 15.0),
-                  child: AnotherLoginOption(
+                buildLoginOptionButton(
+                    responsive: _responsive,
+                    event: LoginWithGoogleEvent(),
                     onTap: () {
-                      //TODO:add login with facebook option;
+                      BlocProvider.of<LoginBloc>(context)
+                          .add(LoginWithGoogleEvent());
+                    },
+                    image: AssetsManager.googleLogo,
+                    content: StringManager.loginWithGoogle,
+                    loadingStatus:
+                        ConstantManager.loadingStatusForLoginWithGoogle),
+                buildLoginOptionButton(
+                    event: LoginWithFacebookEvent(),
+                    responsive: _responsive,
+                    onTap: () {
+                      BlocProvider.of<LoginBloc>(context)
+                          .add(LoginWithFacebookEvent());
                     },
                     image: AssetsManager.facebookLogo,
                     content: StringManager.loginWithFacebook,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 15.0),
-                  child: AnotherLoginOption(
+                    loadingStatus:
+                        ConstantManager.loadingStatusForLoginWithFacebook),
+                buildLoginOptionButton(
+                    event: LoginWithAppleEvent(),
+                    responsive: _responsive,
                     onTap: () {
-                      //TODO:add login with apple option;
+                      BlocProvider.of<LoginBloc>(context)
+                          .add(LoginWithAppleEvent());
                     },
                     image: AssetsManager.appleLogo,
                     content: StringManager.loginWithApple,
-                  ),
-                ),
+                    loadingStatus:
+                        ConstantManager.loadingStatusForLoginWithApple),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 5.0),
                   child: AnimatedContainer(
@@ -148,17 +125,18 @@ class _LoginPageState extends State<LoginPage> {
                         child: Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(bottom: 15.0, top: 5),
+                              padding:
+                                  const EdgeInsets.only(bottom: 15.0, top: 5),
                               child: AnotherLoginOption(
                                 onTap: () {
                                   setState(() {
                                     height = height ==
-                                        _responsive.responsiveHeight(
-                                            forUnInitialDevices: 15)
+                                            _responsive.responsiveHeight(
+                                                forUnInitialDevices: 15)
                                         ? _responsive.responsiveHeight(
-                                        forUnInitialDevices: 40)
+                                            forUnInitialDevices: 40)
                                         : _responsive.responsiveHeight(
-                                        forUnInitialDevices: 15);
+                                            forUnInitialDevices: 15);
                                   });
                                 },
                                 image: AssetsManager.emailLogo,
@@ -181,7 +159,12 @@ class _LoginPageState extends State<LoginPage> {
                               children: [
                                 TextButton(
                                   onPressed: () {
-                                    //TODO:create account
+                                    BlocProvider.of<LoginBloc>(context)
+                                        .add(CreateAccountNavigatorEvent(
+                                      context: context,
+                                      email: emailController.text,
+                                      password: passwordController.text,
+                                    ));
                                   },
                                   child: Text(
                                     StringManager.createAccount,
@@ -190,7 +173,8 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 TextButton(
                                   onPressed: () {
-                                    //TODO:forget password
+                                    BlocProvider.of<LoginBloc>(context).add(
+                                        ForgetPasswordNavigatorEvent(context));
                                   },
                                   child: Text(
                                     StringManager.forgetPassword,
@@ -207,16 +191,63 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 30.0),
-                  child: FriendsButton(
-                      onPressed: () {
-                        //TODO:login on pressed.
-                      },
-                      child: Text(StringManager.login,
-                          style: Theme.of(context).textTheme.displayMedium)),
+                  child: BlocBuilder<LoginBloc, LoginState>(
+                    builder: (context, state) {
+                      if(state is ErrorState){
+                        print(state.failure.message);
+                        WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                          ScaffoldMessenger.of(context).clearSnackBars();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              MessageSnackBar(context,
+                                responsive: _responsive,errorMessage: state.failure.message,success: false,));
+                        });
+                      }
+                        final loginOption = FriendsButton(
+                            onPressed: () {
+                              BlocProvider.of<LoginBloc>(context).add(
+                                  LoginWithEmailAndPasswordEvent(
+                                      emailController.text,
+                                      passwordController.text));
+                            },
+                            child: Text(StringManager.login,
+                                style: Theme.of(context).textTheme.displayMedium));
+                      switch(state.runtimeType){
+                        case LoadingState:
+                          {
+                            if((state as LoadingState).loadingIn==ConstantManager.loadingStatusForLogin){
+                              return const Loader();
+                            }else{
+                              return loginOption;
+                            }
+                          }
+                        case ErrorState:
+                          {
+                            return loginOption;
+                          }
+                        case LoadedState:{
+                          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                            ScaffoldMessenger.of(context).clearSnackBars();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                MessageSnackBar(context,
+                                  responsive: _responsive,errorMessage: ConstantManager.success,success: true,));
+                          });
+                          return loginOption;
+                        }
+                        case LoginInitial:default:
+                        return loginOption;
+                      }
+
+                    },
+                  ),
                 ),
               ],
             ),
           )),
-    ),);
+        ),
+      ),
+    );
   }
 }
+
+
+

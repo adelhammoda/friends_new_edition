@@ -38,18 +38,29 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit.call(const LoadingState(ConstantManager.loadingStatusForLogin));
         Either<Failure,UserCredential> res =await loginWithEmailAndPassword(email: event.email, password: event.password);
         res.fold((failure) =>emit(ErrorState(failure)), (userCredential) => emit(LoadedState(userCredential)));
+        await Future.delayed(const Duration(seconds: 1),(){
+          emit(LoginInitial());});
       }else if(event is LoginWithGoogleEvent){
         emit.call(const LoadingState(ConstantManager.loadingStatusForLoginWithGoogle));
         Either<Failure,UserCredential> res =await loginWithGoogle();
         res.fold((failure) =>emit(ErrorState(failure)), (userCredential) => emit(LoadedState(userCredential)));
+        await Future.delayed(const Duration(seconds: 1),(){
+          emit(LoginInitial());});
       }else if (event is LoginWithFacebookEvent){
         emit.call(const LoadingState(ConstantManager.loadingStatusForLoginWithFacebook));
         Either<Failure,UserCredential> res =await loginWithFacebook();
-        res.fold((failure) =>emit(ErrorState(failure)), (userCredential) => emit(LoadedState(userCredential)));
+        res.fold((failure) {
+          emit(ErrorState(failure));
+        }, (userCredential) => emit(LoadedState(userCredential)));
+       await Future.delayed(const Duration(seconds: 1),(){
+          emit(LoginInitial());
+        });
       }else if(event is LoginWithAppleEvent){
         emit.call(const LoadingState(ConstantManager.loadingStatusForLoginWithApple));
         Either<Failure,UserCredential> res =await loginWithApple();
         res.fold((failure) =>emit(ErrorState(failure)), (userCredential) => emit(LoadedState(userCredential)));
+        await Future.delayed(const Duration(seconds: 1),(){
+          emit(LoginInitial());});
       }
       else if(event is ForgetPasswordNavigatorEvent){
         emit(LoginInitial());

@@ -39,6 +39,12 @@ static  ThemeData getAllThemeData(){
             fontWeight: FontWeight.w400,
             color: ColorManager.black,
           ),
+          labelLarge: const TextStyle(
+            fontSize: 18,
+            fontFamily: AssetsManager.roboto,
+            fontWeight: FontWeight.bold,
+            color: ColorManager.black
+          ),
           displayMedium: TextStyle(
             shadows: [
               Shadow(
@@ -70,7 +76,7 @@ static  ThemeData getAllThemeData(){
             fontWeight: FontWeight.w400,
             fontFamily: AssetsManager.firaCode,
             fontSize: 13
-          )
+          ),
         ),
         inputDecorationTheme: InputDecorationTheme(
           enabledBorder: _inputBorder,
