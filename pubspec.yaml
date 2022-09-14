@@ -12,6 +12,8 @@ dependencies:
 
 
   cupertino_icons: ^1.0.2
+#for getting device id
+  device_info_plus: ^4.1.2
 #for animation icons
   lottie: ^1.4.2
 #dependency injection package
