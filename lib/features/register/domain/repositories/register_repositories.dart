@@ -20,7 +20,7 @@ abstract class RegisterRepositories{
   /// be thrown.
   /// otherwise , [UnKnownFailure] will be thrown.
   /// returns [UserCredential] in success case.
-  Future<Either<Failure,UserCredential>> registerWithEmailAndPassword({required UserEntity user});
+  Future<Either<Failure,UserCredential>> registerWithEmailAndPassword({required UserEntity user,required String password});
   ///if there is no network [NetworkFailure] will be thrown.
   ///start with getting user data from his email then, it will
   ///start register user by his email and password.
@@ -69,17 +69,6 @@ abstract class RegisterRepositories{
   /// otherwise , [UnKnownFailure] will be thrown.
   /// returns [UserCredential] in success case.
   Future<Either<Failure,UserCredential>> registerWithApple();
-  ///if there is no network [NetworkFailure] will be thrown.
-  ///start creating user by taking his phone id to use it as user id.
-  ///then we push all data that token form fields in UI or from
-  ///provider authenticator into database.
-  ///the type will be student if registration happened from mobile app.
-  ///user profile photo can be null and it will replaced with place holder image.
-  /// in case Firebase  errors [FirebaseFailure] will
-  /// be thrown.
-  /// otherwise , [UnKnownFailure] will be thrown.
-  /// returns [UserCredential] in success case.
-  Future<Either<Failure,void>> createUser({required UserEntity user});
   ///navigate to login page.
   ///in case failure it will throw [NavigateFailure].
   Either<Failure,void> alreadyHaveAccountNavigator(BuildContext context);

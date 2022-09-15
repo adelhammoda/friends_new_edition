@@ -88,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                     image: AssetsManager.googleLogo,
                     content: StringManager.loginWithGoogle,
                     loadingStatus:
-                        ConstantManager.loadingStatusForLoginWithGoogle),
+                        ConstantManager.loadingStatusForAuthenticationWithGoogle),
                 buildLoginOptionButton(
                     event: LoginWithFacebookEvent(),
                     responsive: _responsive,
@@ -99,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                     image: AssetsManager.facebookLogo,
                     content: StringManager.loginWithFacebook,
                     loadingStatus:
-                        ConstantManager.loadingStatusForLoginWithFacebook),
+                        ConstantManager.loadingStatusForAuthenticationWithFacebook),
                 buildLoginOptionButton(
                     event: LoginWithAppleEvent(),
                     responsive: _responsive,
@@ -110,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                     image: AssetsManager.appleLogo,
                     content: StringManager.loginWithApple,
                     loadingStatus:
-                        ConstantManager.loadingStatusForLoginWithApple),
+                        ConstantManager.loadingStatusForAuthenticationWithApple),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 5.0),
                   child: AnimatedContainer(
@@ -214,7 +214,7 @@ class _LoginPageState extends State<LoginPage> {
                       switch(state.runtimeType){
                         case LoadingState:
                           {
-                            if((state as LoadingState).loadingIn==ConstantManager.loadingStatusForLogin){
+                            if((state as LoadingState).loadingIn==ConstantManager.loadingStatusForAuth){
                               return const Loader();
                             }else{
                               return loginOption;

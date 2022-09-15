@@ -30,3 +30,11 @@ class CreateUserException extends ExceptionBase{
     int code = StatusCode.createUser
 }):super(message,code);
 }
+
+
+class DeviceInfoException extends ExceptionBase{
+  DeviceInfoException({
+    String message = StringManager.deviceInfoErrorMessage,
+    int code = StatusCode.deviceInfo
+  }):super(message,code);
+}

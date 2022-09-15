@@ -14,7 +14,7 @@ import 'package:friends/features/register/domain/repositories/register_repositor
 
 import '../../../../core/device_info/device_info.dart';
 import '../../domain/entities/user_entity.dart';
-import '../models/user_models.dart';
+import '../models/user_model.dart';
 
 class RegisterRepositoriesImpl extends RegisterRepositories {
   final RegisterLocalDataSource localDataSource;
@@ -29,6 +29,45 @@ class RegisterRepositoriesImpl extends RegisterRepositories {
     required this.networkInfo,
   });
 
+  Future<Either<Failure,UserCredential>> _register(
+      Future<UserCredential> Function() registerProvider
+      )async{
+    try{
+      final UserCredential userCredential = await registerProvider();
+      return Right(userCredential);
+    }on FirebaseException catch (e) {
+      debugPrint(e.message);
+      return Left(FirebaseFailure(
+          message: e.message??StringManager.createUserErrorMessage,
+          statusCode: StatusCode.firebase
+      ));
+    } on DeviceInfoException catch(e){
+      debugPrint(e.message);
+      return Left(DeviceInfoFailure(
+          statusCode: StatusCode.deviceInfo,
+          message: e.message
+      ));
+    } on CreateUserException catch(e){
+      debugPrint(e.message);
+      return Left(CreateUserFailure(
+          message: e.message,
+          statusCode: StatusCode.createUser
+      ));
+    } on CashException catch(e){
+      debugPrint(e.message);
+      return Left(CashFailure(
+          statusCode: StatusCode.cash,
+          message: e.message
+      ));
+    } on Exception catch(e){
+      debugPrint(e.toString());
+      return const Left(UnKnownFailure(
+          message: StringManager.createUserErrorMessage,
+          statusCode: StatusCode.unknown
+      ));
+    }
+  }
+
   @override
   Either<Failure, void> alreadyHaveAccountNavigator(BuildContext context) {
     try {
@@ -42,53 +81,50 @@ class RegisterRepositoriesImpl extends RegisterRepositories {
     }
   }
 
-  @override
-  Future<Either<Failure, void>> createUser({required UserEntity user}) async {
-    try {
-      await remoteDataSource.createUser(user: user as UserModel);
-      localDataSource.cashUser(user: user);
-      return const Right(null);
-    } on FirebaseException catch (e) {
-      debugPrint(e.message);
-      return Left(FirebaseFailure(
-          statusCode: StatusCode.firebase,
-          message: e.message ?? StringManager.createUserErrorMessage));
-    } on CashException catch (e) {
-      debugPrint(e.message);
-      return Left(CashFailure(
-        message: e.message,
-        statusCode: e.code,
-      ));
-    }on Exception catch(e){
-      debugPrint(e.toString());
-      return const Left( UnKnownFailure(
-        message: StringManager.registerUnknownErrorMessage,statusCode: StatusCode.unknown
-      ));
-    }
-  }
 
   @override
-  Future<Either<Failure, UserCredential>> registerWithApple() {
-    // TODO: implement registerWithApple
-    throw UnimplementedError();
+  Future<Either<Failure, UserCredential>> registerWithApple()async {
+  return _register(()async {
+     UserCredential userCredential = await remoteDataSource.registerWithApple();
+     String userPhoneId = await deviceInfo.getDeviceId();
+     await remoteDataSource.createUser(user: UserModel.fromUserCredential(userCredential: userCredential), userPhoneId: userPhoneId);
+     await localDataSource.cashUser(user: UserModel.fromUserCredential(userCredential: userCredential));
+     return userCredential;
+   });
+
   }
 
   @override
   Future<Either<Failure, UserCredential>> registerWithEmailAndPassword(
-      {required UserEntity user}) {
-    // TODO: implement registerWithEmailAndPassword
-    throw UnimplementedError();
+      {required UserEntity user,required String password}) async{
+   return _register(()async{
+     final UserCredential userCredential = await remoteDataSource.registerWithEmailAndPassword(email: user.email, password: password);
+     final String userPhoneId = await  deviceInfo.getDeviceId();
+     await remoteDataSource.createUser(user: UserModel.fromUserCredential(userCredential: userCredential), userPhoneId: userPhoneId);
+     await localDataSource.cashUser(user: UserModel.fromUserCredential(userCredential: userCredential));
+     return userCredential;
+   });
   }
 
   @override
   Future<Either<Failure, UserCredential>> registerWithFacebook() {
-    // TODO: implement registerWithFacebook
-    throw UnimplementedError();
+    return _register(() async{
+      UserCredential userCredential = await remoteDataSource.registerWithFacebook();
+      String userPhoneId = await deviceInfo.getDeviceId();
+      await remoteDataSource.createUser(user: UserModel.fromUserCredential(userCredential: userCredential), userPhoneId: userPhoneId);
+      await localDataSource.cashUser(user: UserModel.fromUserCredential(userCredential: userCredential));
+      return userCredential;
+    });
   }
 
   @override
   Future<Either<Failure, UserCredential>> registerWithGoogle() {
-    // TODO: implement registerWithGoogle
-    throw UnimplementedError();
+    return _register(() async{
+      UserCredential userCredential = await remoteDataSource.registerWithGoogle();
+      String userPhoneId = await deviceInfo.getDeviceId();
+      await remoteDataSource.createUser(user: UserModel.fromUserCredential(userCredential: userCredential), userPhoneId: userPhoneId);
+      await localDataSource.cashUser(user: UserModel.fromUserCredential(userCredential: userCredential));
+      return userCredential;
+    });
   }
 }

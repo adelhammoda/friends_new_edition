@@ -10,6 +10,6 @@ class RegisterWithEmailAndPasswordUseCase {
 
   RegisterWithEmailAndPasswordUseCase({required this.repo});
 
-  Future<Either<Failure, UserCredential>> call({required UserEntity user}) async =>
-      await repo.registerWithEmailAndPassword(user: user);
+  Future<Either<Failure, UserCredential>> call({required UserEntity user,required String password}) async =>
+      await repo.registerWithEmailAndPassword(user: user,password: password);
 }

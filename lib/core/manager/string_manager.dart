@@ -16,7 +16,10 @@ class StringManager {
       .if this error continue happening, please contact us and give us your feedback''';
   static const registerUnknownErrorMessage =
       "Unknown error happened while trying to register";
-
+  static const deviceInfoErrorMessage =
+      "Can't getting some info form your device.We need this info to continue our process";
+  static const createErrorDataMissing =
+      "Some data is missing.Please try with another way";
   ///
   static const emailHint = "Email";
   static const passwordHint = "Password";
@@ -37,15 +40,17 @@ class ConstantManager {
   static const cashedEmailAndPasswordKey = "user_data";
 
   ///login loading state keys.
-  static const loadingStatusForLogin = "Login";
-  static const loadingStatusForLoginWithGoogle = "Google";
-  static const loadingStatusForLoginWithFacebook = "Facebook";
-  static const loadingStatusForLoginWithApple = "Apple";
-
+  static const loadingStatusForAuth = "Login";
+  static const loadingStatusForAuthenticationWithGoogle = "Google";
+  static const loadingStatusForAuthenticationWithFacebook = "Facebook";
+  static const loadingStatusForAuthenticationWithApple = "Apple";
   ///
   /// public message
   static const String error = "Error";
   static const String success = "Success";
+  ///
+/// users type
+ static const String studentType  = "Student";
 }
 
 class AssetsManager {

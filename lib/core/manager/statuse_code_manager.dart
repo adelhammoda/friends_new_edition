@@ -7,4 +7,5 @@ class StatusCode {
   static const int navigation = 15;
   static const int network = 20;
   static const int createUser = 25;
+  static const int deviceInfo = 30;
 }

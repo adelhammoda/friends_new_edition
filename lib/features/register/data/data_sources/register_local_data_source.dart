@@ -5,7 +5,7 @@ import 'package:friends/core/exception/exception.dart';
 import 'package:friends/core/manager/string_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/user_models.dart';
+import '../models/user_model.dart';
 
 abstract class RegisterLocalDataSource{
   ///cash user after he register successfully in local storage

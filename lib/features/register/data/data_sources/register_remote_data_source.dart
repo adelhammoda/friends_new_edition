@@ -3,8 +3,9 @@
 
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:friends/core/exception/exception.dart';
 
-import '../models/user_models.dart';
+import '../models/user_model.dart';
 
 
 abstract class RegisterRemoteDataSource{
@@ -35,6 +36,6 @@ abstract class RegisterRemoteDataSource{
   ///create user in firebase database after fetching his
   ///phone id and use it as id for firebase
   ///if any error happened [CreateUserException] will thrown.
-  Future<void> createUser({required UserModel user});
+  Future<void> createUser({required UserModel user,required String userPhoneId});
 
 }
