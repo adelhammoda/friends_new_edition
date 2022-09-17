@@ -1,4 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:friends/features/login/domain/entities/user_entity.dart';
+
+import '../../../../core/exception/exception.dart';
+import '../../../../core/manager/string_manager.dart';
 
 class UserModel extends UserEntity {
   UserModel(
@@ -33,6 +37,24 @@ class UserModel extends UserEntity {
       'image_url':imageUrl,
       'subscribe_id':subscribeId
     };
+  }
+
+
+  factory UserModel.fromUserCredential(
+      {required UserCredential userCredential}) {
+    User? user = userCredential.user;
+    if (user == null||user.email == null) {
+      throw CreateUserException(
+        message: StringManager.createErrorDataMissing,
+      );
+    }
+    return UserModel(
+        name: user.displayName ?? "name",
+        email: user.email!,
+        user: ConstantManager.studentType,
+        address: {},
+        imageUrl: user.photoURL,
+        subscribeId: "");
   }
 
 }

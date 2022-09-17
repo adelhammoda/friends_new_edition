@@ -53,10 +53,10 @@ static  ThemeData getAllThemeData(){
                   blurRadius:12,
               ),
             ],
-            fontSize:40,
+            fontSize:35,
             color:ColorManager.white,
             fontFamily: AssetsManager.firaCode,
-            fontWeight: FontWeight.w300,
+            fontWeight: FontWeight.w400,
           ),
           titleLarge: TextStyle(
             fontSize: 60,

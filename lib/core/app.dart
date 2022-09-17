@@ -1,10 +1,12 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:friends/core/manager/color_manager.dart';
 import 'package:friends/core/manager/string_manager.dart';
 import 'package:friends/core/manager/theme_manager.dart';
-import 'package:friends/core/routes/routes.dart';
+
+
+import '../features/register/presentation/pages/register_page.dart';
+
 
 
 class App extends StatelessWidget {
@@ -19,7 +21,8 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: ConstantManager.appTitle,
-      routes: RoutesManager.routes(),
+      // routes: RoutesManager.routes(),
+      home:  RegisterPage(),
       theme: ThemeManager.getAllThemeData(),
     );
   }

@@ -40,6 +40,7 @@ dependencies:
 #firebase  packages
   firebase_auth: ^3.7.0
   firebase_core: ^1.21.1
+  firebase_database: ^9.1.4
 
 dev_dependencies:
   flutter_test:
@@ -76,3 +77,6 @@ flutter:
         - asset: assets/fonts/roboto/Roboto-Regular.ttf
           weight: 400
         - asset: assets/fonts/roboto/Roboto-Italic.ttf
+    - family: MyFlutterApp
+      fonts:
+        - asset: assets/icons/fonts/MyFlutterApp.ttf

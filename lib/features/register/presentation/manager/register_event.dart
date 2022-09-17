@@ -6,23 +6,21 @@ abstract class RegisterEvent extends Equatable {
 }
 
 class SignupWithGoogle extends RegisterEvent{
-  final UserModel userModel;
-  const SignupWithGoogle(this.userModel);
+  const SignupWithGoogle();
 
   @override
-  List<Object?> get props => [userModel];
+  List<Object?> get props => [];
 }
 class SignupWithFacebook extends RegisterEvent{
-  final UserModel userModel;
- const  SignupWithFacebook(this.userModel);
+ const  SignupWithFacebook();
   @override
-  List<Object?> get props => [userModel];
+  List<Object?> get props => [];
 }
 class SignupWithApple extends RegisterEvent{
-  final UserModel userModel;
- const  SignupWithApple(this.userModel);
+
+ const  SignupWithApple();
   @override
-  List<Object?> get props => [userModel];
+  List<Object?> get props => [];
 }
 class SignupWithEmailAndPassword extends RegisterEvent{
   final String password;

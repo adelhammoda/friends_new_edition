@@ -78,35 +78,23 @@ class _LoginPageState extends State<LoginPage> {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
-                buildLoginOptionButton(
+                buildAuthOptionButton<LoginBloc,LoginState,LoginEvent>(
                     responsive: _responsive,
                     event: LoginWithGoogleEvent(),
-                    onTap: () {
-                      BlocProvider.of<LoginBloc>(context)
-                          .add(LoginWithGoogleEvent());
-                    },
                     image: AssetsManager.googleLogo,
                     content: StringManager.loginWithGoogle,
                     loadingStatus:
                         ConstantManager.loadingStatusForAuthenticationWithGoogle),
-                buildLoginOptionButton(
+                buildAuthOptionButton<LoginBloc,LoginState,LoginEvent>(
                     event: LoginWithFacebookEvent(),
                     responsive: _responsive,
-                    onTap: () {
-                      BlocProvider.of<LoginBloc>(context)
-                          .add(LoginWithFacebookEvent());
-                    },
                     image: AssetsManager.facebookLogo,
                     content: StringManager.loginWithFacebook,
                     loadingStatus:
                         ConstantManager.loadingStatusForAuthenticationWithFacebook),
-                buildLoginOptionButton(
+                buildAuthOptionButton<LoginBloc,LoginState,LoginEvent>(
                     event: LoginWithAppleEvent(),
                     responsive: _responsive,
-                    onTap: () {
-                      BlocProvider.of<LoginBloc>(context)
-                          .add(LoginWithAppleEvent());
-                    },
                     image: AssetsManager.appleLogo,
                     content: StringManager.loginWithApple,
                     loadingStatus:
@@ -194,7 +182,6 @@ class _LoginPageState extends State<LoginPage> {
                   child: BlocBuilder<LoginBloc, LoginState>(
                     builder: (context, state) {
                       if(state is ErrorState){
-                        print(state.failure.message);
                         WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
                           ScaffoldMessenger.of(context).clearSnackBars();
                           ScaffoldMessenger.of(context).showSnackBar(

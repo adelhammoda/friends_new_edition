@@ -20,9 +20,13 @@ class StringManager {
       "Can't getting some info form your device.We need this info to continue our process";
   static const createErrorDataMissing =
       "Some data is missing.Please try with another way";
+  static const unsupportedPlatformError =
+      "Unsupported platform.It seems your platform have some issue.So we can't get important data";
+
   ///
   static const emailHint = "Email";
   static const passwordHint = "Password";
+  static const confirmPassword = "Confirm password";
   static const login = "Login";
   static const createAccount = "Create account";
   static const forgetPassword = "Forget password";
@@ -30,27 +34,40 @@ class StringManager {
   static const loginWithFacebook = "Login with Facebook";
   static const loginWithApple = "Login with Apple";
   static const loginWithEmail = "Login with Email";
+  static const register = "Register";
+  static const create = "Create";
+  static const userName = "User Name";
+  static const signupWithGoogle = "Signup with Google";
+  static const signupWithFacebook = "Signup with Facebook";
+  static const signupWithApple = "Signup with Apple";
+  static const signupWithEmail = "Signup with Email";
 }
 
 class ConstantManager {
   ///app constant
   static const appTitle = "Friends";
 
-  ///cashed email and password key.
+  ///cashed keys.
   static const cashedEmailAndPasswordKey = "user_data";
+  static const cashedUser = "user";
 
   ///login loading state keys.
   static const loadingStatusForAuth = "Login";
   static const loadingStatusForAuthenticationWithGoogle = "Google";
   static const loadingStatusForAuthenticationWithFacebook = "Facebook";
   static const loadingStatusForAuthenticationWithApple = "Apple";
+
   ///
   /// public message
   static const String error = "Error";
   static const String success = "Success";
+
   ///
-/// users type
- static const String studentType  = "Student";
+  /// users type
+  static const String studentType = "Student";
+
+  // firebase constant
+  static const String userRef = "users";
 }
 
 class AssetsManager {
@@ -63,6 +80,7 @@ class AssetsManager {
   static const String googleLogo = "$_mainPath/google_logo.svg";
   static const String facebookLogo = "$_mainPath/facebook_logo.svg";
   static const String appleLogo = "$_mainPath/apple_logo.svg";
+  static const String user = "$_mainPath/user.svg";
 
   ///png
   static const String background = '$_mainPath/background.png';

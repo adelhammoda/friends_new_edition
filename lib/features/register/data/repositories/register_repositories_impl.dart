@@ -13,6 +13,7 @@ import 'package:friends/features/register/data/data_sources/register_remote_data
 import 'package:friends/features/register/domain/repositories/register_repositories.dart';
 
 import '../../../../core/device_info/device_info.dart';
+import '../../../login/data/models/user_model.dart';
 import '../../domain/entities/user_entity.dart';
 import '../models/user_model.dart';
 

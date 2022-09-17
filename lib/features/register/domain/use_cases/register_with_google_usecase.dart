@@ -8,12 +8,12 @@ import 'package:friends/features/register/domain/repositories/register_repositor
 import '../../../../core/failure/failure.dart';
 
 class RegisterWithGoogleUseCase{
-  final RegisterRepositories repositories;
+  final RegisterRepositories repo;
 
-  RegisterWithGoogleUseCase({required this.repositories});
+  RegisterWithGoogleUseCase({required this.repo});
 
 
-  Future<Either<Failure,UserCredential>> call()async => await repositories.registerWithGoogle();
+  Future<Either<Failure,UserCredential>> call()async => await repo.registerWithGoogle();
 
 
 }

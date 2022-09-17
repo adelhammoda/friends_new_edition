@@ -25,7 +25,7 @@ class RoutesManager{
       case Routes.login:
         return  const LoginPage();
       case Routes.register:
-        return const RegisterPage();
+        return  RegisterPage();
       case Routes.forgetPassword:
         return const ForgetPasswordPage();
       default:
