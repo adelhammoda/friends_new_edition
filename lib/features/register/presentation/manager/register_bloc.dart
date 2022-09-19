@@ -34,26 +34,44 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       if (event is SignupWithGoogle) {
         emit(const LoadingState(
             ConstantManager.loadingStatusForAuthenticationWithGoogle));
-        Either<Failure,UserCredential> res =await registerWithGoogleUseCase();
+        Either<Failure,UserCredential> res =await registerWithGoogleUseCase(event.context);
         res.fold((failure) =>emit(ErrorState(failure)) , (userCredential) => LoadedState(userCredential));
+
+      await  Future.delayed(const Duration(seconds: 1),
+                (){
+              emit(RegisterInitial());
+            });
       } else if (event is SignupWithApple) {
         emit(const LoadingState(
             ConstantManager.loadingStatusForAuthenticationWithApple));
-        Either<Failure,UserCredential> res =await registerWithAppleUseCase();
+        Either<Failure,UserCredential> res =await registerWithAppleUseCase(event.context);
         res.fold((failure) =>emit(ErrorState(failure)) , (userCredential) => LoadedState(userCredential));
+        await Future.delayed(const Duration(seconds: 1),
+            (){
+            print("Just for test in sign up with apple");
+              emit(RegisterInitial());
+            });
       } else if (event is SignupWithEmailAndPassword) {
         emit(const LoadingState(
             ConstantManager.loadingStatusForAuth));
-        Either<Failure,UserCredential> res =await registerWithEmailAndPasswordUseCase(
+        Either<Failure,UserCredential> res =await registerWithEmailAndPasswordUseCase(event.context,
           user: event.userModel,
           password: event.password
         );
         res.fold((failure) =>emit(ErrorState(failure)) , (userCredential) => LoadedState(userCredential));
+       await Future.delayed(const Duration(seconds: 1),
+                (){
+              emit(RegisterInitial());
+            });
       } else if (event is SignupWithFacebook) {
         emit(const LoadingState(
             ConstantManager.loadingStatusForAuthenticationWithFacebook));
-        Either<Failure,UserCredential> res =await registerWithFacebookUseCase();
+        Either<Failure,UserCredential> res =await registerWithFacebookUseCase(event.context);
         res.fold((failure) =>emit(ErrorState(failure)) , (userCredential) => LoadedState(userCredential));
+       await Future.delayed(const Duration(seconds: 1),
+                (){
+              emit(RegisterInitial());
+            });
       } else if (event is AlreadyHaveAccountNavigator) {
         Either<Failure,void> res = alreadyHaveAccountNavigator(event.context);
         res.fold((failure) =>emit(ErrorState(failure)) , (_) => emit(RegisterInitial()));

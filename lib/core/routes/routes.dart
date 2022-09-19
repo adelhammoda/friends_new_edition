@@ -12,8 +12,9 @@ class RoutesManager{
 
   static Map<String,Widget Function(BuildContext context)> routes(){
     return {
-      Routes.homePage:(c)=>routesWhere(Routes.login),
+      Routes.homePage:(c)=>routesWhere(Routes.register),
       Routes.login:(c)=>routesWhere(Routes.login),
+
     };
   }
 

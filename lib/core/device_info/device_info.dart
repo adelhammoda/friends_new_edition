@@ -23,7 +23,8 @@ class DeviceInfoImpl extends DeviceInfo{
        if(deviceInfo.id == null){
          throw DeviceInfoException();
        }
-       return deviceInfo.id!;
+       //TODO:add device id validator class where validate device id.
+       return deviceInfo.id!.replaceAll('.', '');
     }else if(Platform.isIOS){
       IosDeviceInfo  deviceInfo;
        deviceInfo = await deviceInfoPlugin.iosInfo;

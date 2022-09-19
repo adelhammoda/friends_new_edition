@@ -17,9 +17,13 @@ class ThemeManager{
 
 static  ThemeData getAllThemeData(){
     return ThemeData(
-      primaryColor: ColorManager.primary,
+      colorScheme: ThemeData().colorScheme.copyWith(
+        primary: ColorManager.primary,
+      ),
         splashColor: ColorManager.black,
         disabledColor: ColorManager.grey,
+        focusColor: ColorManager.lightGreen,
+        canvasColor: ColorManager.lightGreen,
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
             overlayColor: MaterialStateProperty.all(Colors.transparent)
@@ -79,11 +83,18 @@ static  ThemeData getAllThemeData(){
           ),
         ),
         inputDecorationTheme: InputDecorationTheme(
+
           enabledBorder: _inputBorder,
           focusedBorder:_inputBorder ,
-          focusColor: ColorManager.lightGreen,
+          // focusColor: ColorManager.lightGreen,
           fillColor: ColorManager.grey,
           filled: true,
+          errorBorder:OutlineInputBorder(
+              borderRadius: BorderRadius.circular(60),
+              borderSide: const BorderSide(
+                  color: ColorManager.error,
+                  width: 1
+              )),
           focusedErrorBorder:OutlineInputBorder(
               borderRadius: BorderRadius.circular(60),
               borderSide: const BorderSide(

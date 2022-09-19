@@ -6,28 +6,31 @@ abstract class RegisterEvent extends Equatable {
 }
 
 class SignupWithGoogle extends RegisterEvent{
-  const SignupWithGoogle();
+  final BuildContext context;
+  const SignupWithGoogle(this.context);
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [context];
 }
 class SignupWithFacebook extends RegisterEvent{
- const  SignupWithFacebook();
+  final BuildContext context;
+ const  SignupWithFacebook(this.context);
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [context];
 }
 class SignupWithApple extends RegisterEvent{
-
- const  SignupWithApple();
+  final BuildContext context;
+ const  SignupWithApple(this.context);
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [context];
 }
 class SignupWithEmailAndPassword extends RegisterEvent{
+  final BuildContext context;
   final String password;
   final UserModel userModel;
-  const SignupWithEmailAndPassword(this.userModel,this.password,);
+  const SignupWithEmailAndPassword(this.userModel,this.password, this.context,);
   @override
-  List<Object?> get props => [userModel,password];
+  List<Object?> get props => [userModel,password,context];
 }
 
 class AlreadyHaveAccountNavigator extends RegisterEvent{

@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:friends/features/login/domain/entities/user_entity.dart';
 import 'package:friends/features/register/domain/repositories/register_repositories.dart';
 
@@ -10,6 +11,6 @@ class RegisterWithEmailAndPasswordUseCase {
 
   RegisterWithEmailAndPasswordUseCase({required this.repo});
 
-  Future<Either<Failure, UserCredential>> call({required UserEntity user,required String password}) async =>
-      await repo.registerWithEmailAndPassword(user: user,password: password);
+  Future<Either<Failure, UserCredential>> call(BuildContext context,{required UserEntity user,required String password}) async =>
+      await repo.registerWithEmailAndPassword(context,user: user,password: password);
 }

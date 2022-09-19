@@ -49,4 +49,16 @@ class RegisterLocalDataSourceImpl extends RegisterLocalDataSource{
       );
     }
   }
+
+  Future<void> deleteUserFromCash()async{
+    final SharedPreferences sharedPreferences =await SharedPreferences.getInstance();
+   bool deleted = await sharedPreferences.remove(ConstantManager.cashedUser);
+   if(deleted){
+     return ;
+   } else{
+     throw CashException(
+       message: StringManager.cantFindUserInCashErrorMessage
+     );
+   }
+  }
 }

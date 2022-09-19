@@ -31,13 +31,16 @@ class RegisterRepositoriesImpl extends RegisterRepositories {
   });
 
   Future<Either<Failure,UserCredential>> _register(
+      BuildContext context,
       Future<UserCredential> Function() registerProvider
       )async{
     try{
       final UserCredential userCredential = await registerProvider();
       return Right(userCredential);
     }on FirebaseException catch (e) {
+      remoteDataSource.safelyDeleteUserAccount();
       debugPrint(e.message);
+      debugPrint(e.code);
       return Left(FirebaseFailure(
           message: e.message??StringManager.createUserErrorMessage,
           statusCode: StatusCode.firebase
@@ -49,18 +52,21 @@ class RegisterRepositoriesImpl extends RegisterRepositories {
           message: e.message
       ));
     } on CreateUserException catch(e){
+      remoteDataSource.safelyDeleteUserAccount();
       debugPrint(e.message);
       return Left(CreateUserFailure(
           message: e.message,
           statusCode: StatusCode.createUser
       ));
     } on CashException catch(e){
+      remoteDataSource.safelyDeleteUserAccount();
       debugPrint(e.message);
       return Left(CashFailure(
           statusCode: StatusCode.cash,
           message: e.message
       ));
     } on Exception catch(e){
+      remoteDataSource.safelyDeleteUserAccount();
       debugPrint(e.toString());
       return const Left(UnKnownFailure(
           message: StringManager.createUserErrorMessage,
@@ -84,8 +90,8 @@ class RegisterRepositoriesImpl extends RegisterRepositories {
 
 
   @override
-  Future<Either<Failure, UserCredential>> registerWithApple()async {
-  return _register(()async {
+  Future<Either<Failure, UserCredential>> registerWithApple(BuildContext context)async {
+  return _register(context,()async {
      UserCredential userCredential = await remoteDataSource.registerWithApple();
      String userPhoneId = await deviceInfo.getDeviceId();
      await remoteDataSource.createUser(user: UserModel.fromUserCredential(userCredential: userCredential), userPhoneId: userPhoneId);
@@ -96,9 +102,9 @@ class RegisterRepositoriesImpl extends RegisterRepositories {
   }
 
   @override
-  Future<Either<Failure, UserCredential>> registerWithEmailAndPassword(
+  Future<Either<Failure, UserCredential>> registerWithEmailAndPassword(BuildContext context,
       {required UserEntity user,required String password}) async{
-   return _register(()async{
+   return _register(context,()async{
      final UserCredential userCredential = await remoteDataSource.registerWithEmailAndPassword(email: user.email, password: password);
      final String userPhoneId = await  deviceInfo.getDeviceId();
      await remoteDataSource.createUser(user: UserModel.fromUserCredential(userCredential: userCredential), userPhoneId: userPhoneId);
@@ -108,10 +114,11 @@ class RegisterRepositoriesImpl extends RegisterRepositories {
   }
 
   @override
-  Future<Either<Failure, UserCredential>> registerWithFacebook() {
-    return _register(() async{
+  Future<Either<Failure, UserCredential>> registerWithFacebook(BuildContext context) {
+    return _register(context,() async{
       UserCredential userCredential = await remoteDataSource.registerWithFacebook();
       String userPhoneId = await deviceInfo.getDeviceId();
+
       await remoteDataSource.createUser(user: UserModel.fromUserCredential(userCredential: userCredential), userPhoneId: userPhoneId);
       await localDataSource.cashUser(user: UserModel.fromUserCredential(userCredential: userCredential));
       return userCredential;
@@ -119,8 +126,8 @@ class RegisterRepositoriesImpl extends RegisterRepositories {
   }
 
   @override
-  Future<Either<Failure, UserCredential>> registerWithGoogle() {
-    return _register(() async{
+  Future<Either<Failure, UserCredential>> registerWithGoogle(BuildContext context) {
+    return _register(context,() async{
       UserCredential userCredential = await remoteDataSource.registerWithGoogle();
       String userPhoneId = await deviceInfo.getDeviceId();
       await remoteDataSource.createUser(user: UserModel.fromUserCredential(userCredential: userCredential), userPhoneId: userPhoneId);
@@ -128,4 +135,5 @@ class RegisterRepositoriesImpl extends RegisterRepositories {
       return userCredential;
     });
   }
+
 }
