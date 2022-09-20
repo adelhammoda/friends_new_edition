@@ -32,6 +32,8 @@ class StringManager {
       "Auto login failed please login manually";
   static const userNotFoundErrorMessage =
       "User Not found pleas try login again or contact us if you still facing this problem";
+  static const userIsNotAuthenticated =
+      "It seems user is not authenticated.Please login or create new account";
 
   //validation message
   static const requiredField = "This Field must be filled with data";
