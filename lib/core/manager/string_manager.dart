@@ -28,6 +28,8 @@ class StringManager {
   "Can not find user in cash to delete it.This maybe led to some problems";
   static const noUserRegistered =
   "There is no user registered on this device to complete this process";
+  static const autoLoginErrorMessage =
+  "Auto login failed please login manually";
   //validation message
   static const requiredField = "This Field must be filled with data";
   static const shortPassword = "This Password is too short.It must be more than 7 character";
