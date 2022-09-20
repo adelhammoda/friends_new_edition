@@ -105,6 +105,7 @@ class AssetsManager {
   static const String bigLogo = "$_mainPath/big_logo.png";
   static const String mediumLogo = "$_mainPath/medium_logo.png";
   static const String smallLogo = "$_mainPath/small_logo.png";
+  static const String onBoardingBackground = "$_mainPath/on_boarding_image.png";
 
   ///fonts
   static const String roboto = "roboto";
