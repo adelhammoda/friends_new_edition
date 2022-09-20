@@ -34,6 +34,10 @@ class StringManager {
       "User Not found pleas try login again or contact us if you still facing this problem";
   static const userIsNotAuthenticated =
       "It seems user is not authenticated.Please login or create new account";
+  static const autoLoginUnknownErrorMessage =
+      "We trying to auto login but it seems some data missing around.";
+  static const missingDataErrorMessage =
+      "We missing some data to continue this process.";
 
   //validation message
   static const requiredField = "This Field must be filled with data";
@@ -99,6 +103,8 @@ class ConstantManager {
 
   ///public
   static const String syrianNumber = "+963";
+  ///map keys
+ static const String passwordKeyForMap = "Password";
 }
 
 class AssetsManager {
