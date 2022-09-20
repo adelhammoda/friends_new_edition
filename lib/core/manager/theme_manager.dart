@@ -20,7 +20,7 @@ static  ThemeData getAllThemeData(){
       colorScheme: ThemeData().colorScheme.copyWith(
         primary: ColorManager.primary,
       ),
-        splashColor: ColorManager.black,
+        splashColor: ColorManager.lightGreen,
         disabledColor: ColorManager.grey,
         focusColor: ColorManager.lightGreen,
         canvasColor: ColorManager.lightGreen,

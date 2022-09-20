@@ -35,8 +35,18 @@ class RegisterRepositoriesImpl extends RegisterRepositories {
       Future<UserCredential> Function() registerProvider
       )async{
     try{
-      final UserCredential userCredential = await registerProvider();
-      return Right(userCredential);
+      bool hasNetwork = await networkInfo.isConnected;
+      print("$hasNetwork+'''''''''''''''''''''''''''''");
+      if(hasNetwork) {
+        final UserCredential userCredential = await registerProvider();
+        return Right(userCredential);
+      }else{
+        throw NetworkException(
+          message: StringManager.networkErrorMessage,
+          code: StatusCode.network
+        );
+      }
+
     }on FirebaseException catch (e) {
       remoteDataSource.safelyDeleteUserAccount();
       debugPrint(e.message);
@@ -65,7 +75,14 @@ class RegisterRepositoriesImpl extends RegisterRepositories {
           statusCode: StatusCode.cash,
           message: e.message
       ));
-    } on Exception catch(e){
+    } on NetworkException catch(e){
+      debugPrint(e.message);
+      return Left(NetworkFailure(
+        message: e.message,
+        statusCode: StatusCode.network
+      ));
+    }
+    on Exception catch(e){
       remoteDataSource.safelyDeleteUserAccount();
       debugPrint(e.toString());
       return const Left(UnKnownFailure(
@@ -78,7 +95,7 @@ class RegisterRepositoriesImpl extends RegisterRepositories {
   @override
   Either<Failure, void> alreadyHaveAccountNavigator(BuildContext context) {
     try {
-      Go.to(context, Routes.register);
+      Go.to(context, Routes.login);
       return const Right(null);
     } on Exception catch (e) {
       debugPrint(e.toString());

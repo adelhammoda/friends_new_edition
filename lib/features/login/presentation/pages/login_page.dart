@@ -190,6 +190,8 @@ class _LoginPageState extends State<LoginPage> {
                         });
                       }
                         final loginOption = FriendsButton(
+                          width: 70,
+                            height: 13,
                             onPressed: () {
                               BlocProvider.of<LoginBloc>(context).add(
                                   LoginWithEmailAndPasswordEvent(

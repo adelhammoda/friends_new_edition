@@ -82,7 +82,6 @@ class RegisterPage extends StatelessWidget {
               SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(bottom: 50.0),
@@ -131,20 +130,26 @@ class RegisterPage extends StatelessWidget {
                           image: AssetsManager.emailLogo,
                           content: StringManager.signupWithEmail),
                     ),
-                    Padding(
-                      padding:  EdgeInsets.only(left:responsive.responsiveWidth(forUnInitialDevices: 10)),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: TextButton(
-                            onPressed: () {
-                              BlocProvider.of<RegisterBloc>(context)
-                                  .add(AlreadyHaveAccountNavigator(context));
-                            },
-                            child: Text(
-                              StringManager.alreadyHaveAccount,
-                              style: Theme.of(context).textTheme.bodySmall,
-                            )),
-                      ),
+                    BlocBuilder<RegisterBloc, RegisterState>(
+                      builder: (context, state) {
+                        return Padding(
+                          padding: EdgeInsets.only(
+                              left: responsive.responsiveWidth(
+                                  forUnInitialDevices: 10)),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: TextButton(
+                                onPressed: () {
+                                  BlocProvider.of<RegisterBloc>(context).add(
+                                      AlreadyHaveAccountNavigator(context));
+                                },
+                                child: Text(
+                                  StringManager.alreadyHaveAccount,
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                )),
+                          ),
+                        );
+                      },
                     ),
                     const SizedBox(
                       height: 40,
@@ -251,6 +256,8 @@ class RegisterPage extends StatelessWidget {
                         BlocBuilder<RegisterBloc, RegisterState>(
                           builder: (context, state) {
                             Widget button = FriendsButton(
+                              height: 13,
+                              width: 70,
                               child: Text(
                                 StringManager.create,
                                 style:
