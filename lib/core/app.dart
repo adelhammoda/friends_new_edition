@@ -1,10 +1,11 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:friends/core/manager/color_manager.dart';
 import 'package:friends/core/manager/string_manager.dart';
 import 'package:friends/core/manager/theme_manager.dart';
 import 'package:friends/core/routes/routes.dart';
+
+
 
 
 class App extends StatelessWidget {
@@ -20,6 +21,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: ConstantManager.appTitle,
       routes: RoutesManager.routes(),
+      // home:  RegisterPage(),
       theme: ThemeManager.getAllThemeData(),
     );
   }

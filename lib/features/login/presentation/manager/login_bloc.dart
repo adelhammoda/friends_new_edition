@@ -35,19 +35,19 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       : super(LoginInitial()) {
     on<LoginEvent>((event, emit) async{
       if (event is LoginWithEmailAndPasswordEvent) {
-        emit.call(const LoadingState(ConstantManager.loadingStatusForLogin));
+        emit.call(const LoadingState(ConstantManager.loadingStatusForAuth));
         Either<Failure,UserCredential> res =await loginWithEmailAndPassword(email: event.email, password: event.password);
         res.fold((failure) =>emit(ErrorState(failure)), (userCredential) => emit(LoadedState(userCredential)));
         await Future.delayed(const Duration(seconds: 1),(){
           emit(LoginInitial());});
       }else if(event is LoginWithGoogleEvent){
-        emit.call(const LoadingState(ConstantManager.loadingStatusForLoginWithGoogle));
+        emit.call(const LoadingState(ConstantManager.loadingStatusForAuthenticationWithGoogle));
         Either<Failure,UserCredential> res =await loginWithGoogle();
         res.fold((failure) =>emit(ErrorState(failure)), (userCredential) => emit(LoadedState(userCredential)));
         await Future.delayed(const Duration(seconds: 1),(){
           emit(LoginInitial());});
       }else if (event is LoginWithFacebookEvent){
-        emit.call(const LoadingState(ConstantManager.loadingStatusForLoginWithFacebook));
+        emit.call(const LoadingState(ConstantManager.loadingStatusForAuthenticationWithFacebook));
         Either<Failure,UserCredential> res =await loginWithFacebook();
         res.fold((failure) {
           emit(ErrorState(failure));
@@ -56,7 +56,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           emit(LoginInitial());
         });
       }else if(event is LoginWithAppleEvent){
-        emit.call(const LoadingState(ConstantManager.loadingStatusForLoginWithApple));
+        emit.call(const LoadingState(ConstantManager.loadingStatusForAuthenticationWithApple));
         Either<Failure,UserCredential> res =await loginWithApple();
         res.fold((failure) =>emit(ErrorState(failure)), (userCredential) => emit(LoadedState(userCredential)));
         await Future.delayed(const Duration(seconds: 1),(){

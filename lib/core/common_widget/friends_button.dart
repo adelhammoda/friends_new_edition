@@ -5,8 +5,16 @@ import 'package:responsive_s/responsive_s.dart';
 class FriendsButton extends StatefulWidget {
   final Function()? onPressed;
   final Widget? child;
+  final double width;
+  final double height;
 
-  const FriendsButton({Key? key, this.child, this.onPressed}) : super(key: key);
+  const FriendsButton(
+      {Key? key,
+      this.child,
+      this.onPressed,
+      required this.width,
+      required this.height})
+      : super(key: key);
 
   @override
   State<FriendsButton> createState() => _FriendsButtonState();
@@ -27,25 +35,23 @@ class _FriendsButtonState extends State<FriendsButton> {
           });
         },
         onTapUp: (tapUpDetails) {
-
           setState(() {
             clicked = false;
           });
         },
-        onTapCancel: (){
+        onTapCancel: () {
           setState(() {
             clicked = false;
           });
         },
         onTap: widget.onPressed,
-
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 100),
           alignment: Alignment.center,
           width: clicked
-              ? responsive.responsiveWidth(forUnInitialDevices: 68.5)
-              : responsive.responsiveWidth(forUnInitialDevices: 70),
-          height:  responsive.responsiveHeight(forUnInitialDevices: 13),
+              ? responsive.responsiveWidth(forUnInitialDevices: widget.width*0.95)
+              : responsive.responsiveWidth(forUnInitialDevices: widget.width),
+          height: responsive.responsiveHeight(forUnInitialDevices: widget.height),
           decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
