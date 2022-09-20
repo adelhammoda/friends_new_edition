@@ -5,14 +5,14 @@ import 'package:friends/core/exception/exception.dart';
 import 'package:friends/core/failure/failure.dart';
 import 'package:friends/core/manager/statuse_code_manager.dart';
 import 'package:friends/core/manager/string_manager.dart';
-import 'package:friends/features/forget_password/presentation/pages/forget_password_page.dart';
+import 'package:friends/core/routes/routes.dart';
 import 'package:friends/features/login/data/data_sources/login_local_data_source.dart';
 import 'package:friends/features/login/data/data_sources/login_remote_data_source.dart';
 import 'package:friends/features/login/domain/repositories/login_repositories.dart';
 
 import '../../../../core/navigation/navigator.dart';
 import '../../../../core/network/network_info.dart';
-import '../../../register/presentation/pages/register.dart';
+
 
 class LoginRepositoriesImpl implements LoginRepositories {
   LoginRemoteDataSource remote;
@@ -53,7 +53,7 @@ class LoginRepositoriesImpl implements LoginRepositories {
       debugPrint(e.toString());
       return const Left(UnKnownFailure(
           message: StringManager.authErrorMessage,
-          statusCode: StatusCode.firebase));
+          statusCode: StatusCode.unknown));
     }
   }
 
@@ -63,7 +63,7 @@ class LoginRepositoriesImpl implements LoginRepositories {
       required String email,
       required String password}) {
     try {
-      Go.to(context, const Register(), null);
+      Go.to(context,Routes.register);
       return const Right(null);
     } catch (e) {
       debugPrint(e.toString());
@@ -76,7 +76,7 @@ class LoginRepositoriesImpl implements LoginRepositories {
   @override
   Either<Failure, void> forgetPassword(BuildContext context) {
     try {
-      Go.to(context, const ForgetPasswordPage(), null);
+      Go.to(context, Routes.forgetPassword);
       return const Right(null);
     } catch (e) {
       debugPrint(e.toString());

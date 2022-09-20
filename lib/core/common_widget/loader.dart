@@ -10,8 +10,8 @@ class Loader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 70,
-        height: 70,
+      width:120,
+        height: 120,
         child: Lottie.asset(AssetsManager.loader));
   }
 }

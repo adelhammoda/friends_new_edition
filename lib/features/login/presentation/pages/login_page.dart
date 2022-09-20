@@ -78,39 +78,27 @@ class _LoginPageState extends State<LoginPage> {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
-                buildLoginOptionButton(
+                buildAuthOptionButton<LoginBloc,LoginState,LoginEvent>(
                     responsive: _responsive,
                     event: LoginWithGoogleEvent(),
-                    onTap: () {
-                      BlocProvider.of<LoginBloc>(context)
-                          .add(LoginWithGoogleEvent());
-                    },
                     image: AssetsManager.googleLogo,
                     content: StringManager.loginWithGoogle,
                     loadingStatus:
-                        ConstantManager.loadingStatusForLoginWithGoogle),
-                buildLoginOptionButton(
+                        ConstantManager.loadingStatusForAuthenticationWithGoogle),
+                buildAuthOptionButton<LoginBloc,LoginState,LoginEvent>(
                     event: LoginWithFacebookEvent(),
                     responsive: _responsive,
-                    onTap: () {
-                      BlocProvider.of<LoginBloc>(context)
-                          .add(LoginWithFacebookEvent());
-                    },
                     image: AssetsManager.facebookLogo,
                     content: StringManager.loginWithFacebook,
                     loadingStatus:
-                        ConstantManager.loadingStatusForLoginWithFacebook),
-                buildLoginOptionButton(
+                        ConstantManager.loadingStatusForAuthenticationWithFacebook),
+                buildAuthOptionButton<LoginBloc,LoginState,LoginEvent>(
                     event: LoginWithAppleEvent(),
                     responsive: _responsive,
-                    onTap: () {
-                      BlocProvider.of<LoginBloc>(context)
-                          .add(LoginWithAppleEvent());
-                    },
                     image: AssetsManager.appleLogo,
                     content: StringManager.loginWithApple,
                     loadingStatus:
-                        ConstantManager.loadingStatusForLoginWithApple),
+                        ConstantManager.loadingStatusForAuthenticationWithApple),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 5.0),
                   child: AnimatedContainer(
@@ -194,7 +182,6 @@ class _LoginPageState extends State<LoginPage> {
                   child: BlocBuilder<LoginBloc, LoginState>(
                     builder: (context, state) {
                       if(state is ErrorState){
-                        print(state.failure.message);
                         WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
                           ScaffoldMessenger.of(context).clearSnackBars();
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -203,6 +190,8 @@ class _LoginPageState extends State<LoginPage> {
                         });
                       }
                         final loginOption = FriendsButton(
+                          width: 70,
+                            height: 13,
                             onPressed: () {
                               BlocProvider.of<LoginBloc>(context).add(
                                   LoginWithEmailAndPasswordEvent(
@@ -214,7 +203,7 @@ class _LoginPageState extends State<LoginPage> {
                       switch(state.runtimeType){
                         case LoadingState:
                           {
-                            if((state as LoadingState).loadingIn==ConstantManager.loadingStatusForLogin){
+                            if((state as LoadingState).loadingIn==ConstantManager.loadingStatusForAuth){
                               return const Loader();
                             }else{
                               return loginOption;

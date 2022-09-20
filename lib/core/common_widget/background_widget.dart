@@ -5,10 +5,13 @@ import 'package:responsive_s/responsive_s.dart';
 
 class FriendsBackgroundWidget extends StatelessWidget {
   final Widget? child;
-
+  final double leftPadding;
+  final double rightPadding;
   const FriendsBackgroundWidget({
     Key? key,
     this.child,
+    this.leftPadding= 20,
+    this.rightPadding = 20,
   }) : super(key: key);
 
   @override
@@ -36,8 +39,8 @@ class FriendsBackgroundWidget extends StatelessWidget {
                 clipper: BackgroundClipper(),
                 child: Container(
                   padding: EdgeInsets.only(
-                      left: 20,
-                      right: 20,
+                      left: leftPadding,
+                      right: rightPadding,
                       top: responsive.responsiveHeight(forUnInitialDevices: 30)),
                   alignment: Alignment.topCenter,
                   decoration: const BoxDecoration(

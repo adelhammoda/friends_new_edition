@@ -32,3 +32,12 @@ class NetworkFailure extends Failure{
 
 
 }
+
+class DeviceInfoFailure extends Failure {
+  const DeviceInfoFailure({required super.message, required super.statusCode});
+}
+
+class CreateUserFailure extends Failure{
+  const CreateUserFailure({required super.message, required super.statusCode});
+
+}
