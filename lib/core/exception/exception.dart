@@ -46,3 +46,11 @@ class AutoLoginException extends ExceptionBase{
   }):super(message,code);
 
 }
+
+
+class UserNotFoundException extends ExceptionBase{
+  UserNotFoundException({
+    String message = StringManager.userNotFoundErrorMessage,
+    int code = StatusCode.userNotFound
+  }):super(message,code);
+}
