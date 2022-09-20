@@ -50,9 +50,15 @@ class AnotherLoginOption extends StatelessWidget {
                   fit: BoxFit.fill,
                 ),
               ),
-              Text(
-                content,
-                style: Theme.of(context).textTheme.labelMedium,
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: SizedBox(
+                  width: responsive.responsiveWidth(forUnInitialDevices: 50),
+                  child: Text(
+                    content,
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                ),
               )
             ],
           ),
