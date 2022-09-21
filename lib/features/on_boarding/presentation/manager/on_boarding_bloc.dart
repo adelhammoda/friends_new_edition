@@ -15,7 +15,6 @@ part 'on_boarding_state.dart';
 
 class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
   final NavigateToLoginUseCase navigateToLoginUseCase;
-
   final NavigateToRegisterUseCase navigateToRegisterUseCase;
   final TryAutoLoginUseCase tryAutoLoginUseCase;
 
@@ -26,11 +25,6 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
       : super(OnBoardingInitial()) {
     on<OnBoardingEvent>((event, emit) async {
       switch (event.runtimeType) {
-        case OnBoardingAnimationEvent:
-          {
-            //TODO:add animation use case
-            break;
-          }
         case OnBoardingNavigateToLogin:
           {
             navigateToLoginUseCase(

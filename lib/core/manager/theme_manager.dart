@@ -62,6 +62,12 @@ static  ThemeData getAllThemeData(){
             fontFamily: AssetsManager.firaCode,
             fontWeight: FontWeight.w400,
           ),
+          titleMedium: const TextStyle(
+            fontSize: 30,
+            color: ColorManager.white,
+            fontFamily: AssetsManager.roboto,
+            fontWeight: FontWeight.bold
+          ),
           titleLarge: TextStyle(
             fontSize: 60,
             color: ColorManager.black,

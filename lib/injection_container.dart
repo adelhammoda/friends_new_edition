@@ -11,6 +11,14 @@ import 'package:friends/features/login/domain/use_cases/login_with_email_usecase
 import 'package:friends/features/login/domain/use_cases/login_with_facebook_usecase.dart';
 import 'package:friends/features/login/domain/use_cases/login_with_google_usecase.dart';
 import 'package:friends/features/login/presentation/manager/login_bloc.dart';
+import 'package:friends/features/on_boarding/data/data_sources/on_boarding_local_datasource.dart';
+import 'package:friends/features/on_boarding/data/data_sources/onboarding_remote_datasource.dart';
+import 'package:friends/features/on_boarding/data/repositories/on_boarding_repsoitory_impl.dart';
+import 'package:friends/features/on_boarding/domain/repositories/on_boarding_repository.dart';
+import 'package:friends/features/on_boarding/domain/use_cases/navigate_to_login_usecase.dart';
+import 'package:friends/features/on_boarding/domain/use_cases/navigate_to_register_usecase.dart';
+import 'package:friends/features/on_boarding/domain/use_cases/try_auto_login_usecase.dart';
+import 'package:friends/features/on_boarding/presentation/manager/on_boarding_bloc.dart';
 import 'package:friends/features/register/data/data_sources/register_local_data_source.dart';
 import 'package:friends/features/register/data/data_sources/register_remote_data_source.dart';
 import 'package:friends/features/register/data/repositories/register_repositories_impl.dart';
@@ -30,72 +38,99 @@ GetIt sl = GetIt.asNewInstance();
 Future<void> init() async {
   ///Features
   //login:
-  sl.registerFactory(() => LoginBloc(
-      createAccount: sl(),
-      forgetPassword: sl(),
-      loginWithEmailAndPassword: sl(),
-      loginWithGoogle: sl(),
-      loginWithFacebook: sl(),
-      loginWithApple: sl()));
+  sl.registerFactory(() =>
+      LoginBloc(
+          createAccount: sl(),
+          forgetPassword: sl(),
+          loginWithEmailAndPassword: sl(),
+          loginWithGoogle: sl(),
+          loginWithFacebook: sl(),
+          loginWithApple: sl()));
   //register
-  sl.registerFactory(() => RegisterBloc(
-      alreadyHaveAccountNavigator: sl(),
-      registerWithAppleUseCase: sl(),
-      registerWithEmailAndPasswordUseCase: sl(),
-      registerWithFacebookUseCase: sl(),
-      registerWithGoogleUseCase: sl()));
+  sl.registerFactory(() =>
+      RegisterBloc(
+          alreadyHaveAccountNavigator: sl(),
+          registerWithAppleUseCase: sl(),
+          registerWithEmailAndPasswordUseCase: sl(),
+          registerWithFacebookUseCase: sl(),
+          registerWithGoogleUseCase: sl()));
+  //on boarding
+  sl.registerFactory(() =>
+      OnBoardingBloc(
+          navigateToLoginUseCase: sl(),
+          navigateToRegisterUseCase: sl(),
+          tryAutoLoginUseCase: sl()));
 
   ///use cases
   // login use cases
   sl.registerLazySingleton<CreateAccountUseCases>(
-      () => CreateAccountUseCases(sl()));
+          () => CreateAccountUseCases(sl()));
   sl.registerLazySingleton<ForgetPasswordUseCases>(
-      () => ForgetPasswordUseCases(sl()));
+          () => ForgetPasswordUseCases(sl()));
   sl.registerLazySingleton<LoginWithEmailAndPasswordUseCases>(
-      () => LoginWithEmailAndPasswordUseCases(sl()));
+          () => LoginWithEmailAndPasswordUseCases(sl()));
   sl.registerLazySingleton<LoginWithGoogleUseCases>(
-      () => LoginWithGoogleUseCases(sl()));
+          () => LoginWithGoogleUseCases(sl()));
   sl.registerLazySingleton<LoginWithAppleUseCases>(
-      () => LoginWithAppleUseCases(sl()));
+          () => LoginWithAppleUseCases(sl()));
   sl.registerLazySingleton<LoginWithFacebookUseCases>(
-      () => LoginWithFacebookUseCases(sl()));
+          () => LoginWithFacebookUseCases(sl()));
   //register use cases
   sl.registerLazySingleton<AlreadyHaveAccountUseCase>(
-      () => AlreadyHaveAccountUseCase(repo: sl()));
+          () => AlreadyHaveAccountUseCase(repo: sl()));
   sl.registerLazySingleton<RegisterWithGoogleUseCase>(
-      () => RegisterWithGoogleUseCase(repo: sl()));
+          () => RegisterWithGoogleUseCase(repo: sl()));
   sl.registerLazySingleton<RegisterWithFacebookUseCase>(
-      () => RegisterWithFacebookUseCase(repo: sl()));
+          () => RegisterWithFacebookUseCase(repo: sl()));
   sl.registerLazySingleton<RegisterWithAppleUseCase>(
-      () => RegisterWithAppleUseCase(repo: sl()));
+          () => RegisterWithAppleUseCase(repo: sl()));
   sl.registerLazySingleton<RegisterWithEmailAndPasswordUseCase>(
-      () => RegisterWithEmailAndPasswordUseCase(repo: sl()));
+          () => RegisterWithEmailAndPasswordUseCase(repo: sl()));
+//on boarding use cases
+  sl.registerLazySingleton<NavigateToLoginUseCase>(() =>
+      NavigateToLoginUseCase(sl()));
+  sl.registerLazySingleton<NavigateToRegisterUseCase>(() =>
+      NavigateToRegisterUseCase(sl()));
+  sl.registerLazySingleton<TryAutoLoginUseCase>(() =>
+      TryAutoLoginUseCase(sl()));
 
   ///repositories
   //login repositories
   sl.registerLazySingleton<LoginRepositories>(() =>
       LoginRepositoriesImpl(remote: sl(), local: sl(), networkInfo: sl()));
   //register repositories
-  sl.registerLazySingleton<RegisterRepositories>(() => RegisterRepositoriesImpl(
-      remoteDataSource: sl(),
-      localDataSource: sl(),
-      deviceInfo: sl(),
-      networkInfo: sl()));
+  sl.registerLazySingleton<RegisterRepositories>(() =>
+      RegisterRepositoriesImpl(
+          remoteDataSource: sl(),
+          localDataSource: sl(),
+          deviceInfo: sl(),
+          networkInfo: sl()));
+  //on boarding use cases
+  sl.registerLazySingleton<OnBoardingRepository>(() =>
+      OnBoardingRepositoryImpl(remoteDataSource: sl(),
+          localDataSource: sl(),
+          deviceInfo: sl(),
+          networkConnection: sl()));
 
   ///data source
   //login
   sl.registerLazySingleton<LoginRemoteDataSource>(
-      () => LoginRemoteDataSourceImpl());
+          () => LoginRemoteDataSourceImpl());
   sl.registerLazySingleton<LoginLocalDataSource>(
-      () => LoginLocalDataSourceImpl());
+          () => LoginLocalDataSourceImpl());
 //register
-  sl.registerLazySingleton<RegisterRemoteDataSource>(() => RegisterRemoteDataSourceImpl());
-  sl.registerLazySingleton<RegisterLocalDataSource>(() => RegisterLocalDataSourceImpl());
+  sl.registerLazySingleton<RegisterRemoteDataSource>(
+          () => RegisterRemoteDataSourceImpl());
+  sl.registerLazySingleton<RegisterLocalDataSource>(
+          () => RegisterLocalDataSourceImpl());
+//on boarding
+  sl.registerLazySingleton<OnBoardingLocalDataSource>(() => OnBoardingLocalDataSourceImpl());
+  sl.registerLazySingleton<OnBoardingRemoteDataSource>(() => OnBoardingRemoteDataSourceImpl());
   ///core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
   sl.registerLazySingleton<DeviceInfo>(() => DeviceInfoImpl());
 
   ///External
   sl.registerLazySingleton<InternetConnectionChecker>(
-      () => InternetConnectionChecker());
+          () => InternetConnectionChecker());
 }

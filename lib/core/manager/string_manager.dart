@@ -73,6 +73,7 @@ class StringManager {
   static const phoneNumber = "Phone number";
   static const optional = "(Optional)";
   static const alreadyHaveAccount = "Already have an account?";
+  static const or = "or";
 }
 
 class ConstantManager {

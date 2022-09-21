@@ -7,9 +7,6 @@ class OnBoardingAutoLoginEvent extends OnBoardingEvent {
 
 }
 
-class OnBoardingAnimationEvent extends OnBoardingEvent {
-  //TODO:implement animation event.
-}
 
 class OnBoardingNavigateToLogin extends OnBoardingEvent {
   final BuildContext context;
