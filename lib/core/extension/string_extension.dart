@@ -1,7 +1,7 @@
 
 
 
-extension on String? {
+extension StringNull on String? {
 
   bool isNullOrEmpty(){
     if(this == null){

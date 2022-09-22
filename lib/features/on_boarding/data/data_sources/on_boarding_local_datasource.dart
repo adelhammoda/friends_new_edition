@@ -3,10 +3,11 @@
 import 'dart:convert';
 
 import 'package:friends/core/exception/exception.dart';
+import 'package:friends/core/extension/string_extension.dart';
 import 'package:friends/core/manager/string_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../login/data/models/user_model.dart';
+import 'package:friends/features/login/data/models/user_model.dart';
 
 abstract class OnBoardingLocalDataSource {
   ///override getCashedUser method from parent class
@@ -48,10 +49,10 @@ class OnBoardingLocalDataSourceImpl extends OnBoardingLocalDataSource{
   Future<Map<String, String>> getUserEmailAndPassword() async{
     SharedPreferences sharedPreferences =await SharedPreferences.getInstance();
     String? emailAndPasswordString = sharedPreferences.getString(ConstantManager.cashedEmailAndPasswordKey);
-    if(emailAndPasswordString==null){
+    if(!emailAndPasswordString.isNullOrEmpty()){
       throw UserNotFoundException();
     }else{
-      var emailAndPasswordJson = jsonDecode(emailAndPasswordString);
+      var emailAndPasswordJson = jsonDecode(emailAndPasswordString!);
       if(emailAndPasswordJson is Map){
         return emailAndPasswordJson as Map<String,String>;
       }else{
@@ -64,7 +65,7 @@ class OnBoardingLocalDataSourceImpl extends OnBoardingLocalDataSource{
   Future<bool> isUserExists() async{
     SharedPreferences sharedPreferences =await SharedPreferences.getInstance();
     String? cashedData = sharedPreferences.getString(ConstantManager.userRef);
-    if(cashedData==null){
+    if(cashedData.isNullOrEmpty()){
       return false;
     }else{
       return true;
