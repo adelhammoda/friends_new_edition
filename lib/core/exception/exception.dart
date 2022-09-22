@@ -38,3 +38,11 @@ class DeviceInfoException extends ExceptionBase{
     int code = StatusCode.deviceInfo
   }):super(message,code);
 }
+
+class BadFormatException extends ExceptionBase{
+  BadFormatException({
+    String message = StringManager.badFormatErrorMessage,
+    int code = StatusCode.badFormat
+  }):super(message,code);
+
+}
