@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:friends/core/manager/font_manager.dart';
 import 'package:friends/core/manager/string_manager.dart';
 
 import 'color_manager.dart';
@@ -31,20 +32,20 @@ static  ThemeData getAllThemeData(){
         ),
         textTheme:  TextTheme(
           labelSmall: TextStyle(
-            fontSize: 15,
+            fontSize:FontManager.fontSizeMedium,
             fontFamily: AssetsManager.firaCode,
             fontWeight: FontWeight.w400,
             color: ColorManager.black.withOpacity(0.4),
 
           ) ,
           labelMedium: const TextStyle(
-            fontSize: 18,
+            fontSize: FontManager.fontSizeMediumPlus,
             fontFamily: AssetsManager.firaCode,
             fontWeight: FontWeight.w400,
             color: ColorManager.black,
           ),
           labelLarge: const TextStyle(
-            fontSize: 18,
+            fontSize: FontManager.fontSizeMediumPlus,
             fontFamily: AssetsManager.roboto,
             fontWeight: FontWeight.bold,
             color: ColorManager.black
@@ -57,19 +58,19 @@ static  ThemeData getAllThemeData(){
                   blurRadius:12,
               ),
             ],
-            fontSize:35,
+            fontSize:FontManager.fontSizeLargeLabel,
             color:ColorManager.white,
             fontFamily: AssetsManager.firaCode,
             fontWeight: FontWeight.w400,
           ),
           titleMedium: const TextStyle(
-            fontSize: 30,
+            fontSize: FontManager.fontSizeLarge,
             color: ColorManager.white,
             fontFamily: AssetsManager.roboto,
             fontWeight: FontWeight.bold
           ),
           titleLarge: TextStyle(
-            fontSize: 60,
+            fontSize: FontManager.fontSizeBigTitle,
             color: ColorManager.black,
             fontFamily: AssetsManager.roboto,
             fontWeight: FontWeight.bold,
@@ -85,7 +86,7 @@ static  ThemeData getAllThemeData(){
             color: ColorManager.lightGreen,
             fontWeight: FontWeight.w400,
             fontFamily: AssetsManager.firaCode,
-            fontSize: 13
+            fontSize: FontManager.fontSizeSmallBody
           ),
         ),
         inputDecorationTheme: InputDecorationTheme(
