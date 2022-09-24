@@ -12,6 +12,6 @@ import 'package:friends/features/homePage/domain/repositories/home_page_reposito
 
   const AddToFavoriteUseCase(this.repository);
 
-  Future<Either<Failure,bool>> call({required OfferEntity offer})async=>await repository.addToFavorite(offer: offer);
+  Future<Either<Failure,void>> call({required OfferEntity offer})async=>await repository.addToFavorite(offer: offer);
 
 }

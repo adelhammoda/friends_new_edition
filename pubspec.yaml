@@ -30,6 +30,7 @@ dependencies:
   flutter_bloc: ^8.1.1
 #to store all data in local storage
   shared_preferences: ^2.0.15
+  hive: ^2.2.3
 #to check network connection
   internet_connection_checker: ^0.0.1+4
 #value equality

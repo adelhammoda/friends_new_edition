@@ -112,6 +112,9 @@ class ConstantManager {
   static const String offerDiscount="discount";
   ///users
   static const String userId = "user_id";
+  ///hive
+  static const String hiveBoxNameForOffer = "offers_database";
+  static const String hiveCollectionName = "friends_collection";
 }
 
 class AssetsManager {

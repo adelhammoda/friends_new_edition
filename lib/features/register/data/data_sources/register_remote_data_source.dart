@@ -56,7 +56,7 @@ class RegisterRemoteDataSourceImpl extends RegisterRemoteDataSource {
       {required UserModel user, required String userPhoneId}) async {
     print(userPhoneId);
     Map<String, dynamic> data = {userPhoneId: user.toJson()};
-    await firebaseDatabase.ref(ConstantManager.userRef).set(data);
+    await firebaseDatabase.ref(ConstantManager.usersRef).set(data);
   }
 
   @override
