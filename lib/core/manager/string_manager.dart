@@ -16,6 +16,8 @@ class StringManager {
       .if this error continue happening, please contact us and give us your feedback''';
   static const registerUnknownErrorMessage =
       "Unknown error happened while trying to register";
+  static const unknownErrorMessage =
+      "Unknown error happened.Sorry for that";
   static const deviceInfoErrorMessage =
       "Can't getting some info form your device.We need this info to continue our process";
   static const createErrorDataMissing =
@@ -28,6 +30,14 @@ class StringManager {
   "Can not find user in cash to delete it.This maybe led to some problems";
   static const noUserRegistered =
   "There is no user registered on this device to complete this process";
+  static const badFormatErrorMessage =
+  "Bad format.The data we received is formatted badly";
+  static const addingToCashFailedErrorMessage =
+  "Can't add to storage it seems we face some error.";
+  static const noDataErrorMessage =
+  "There is no data.";
+  static const cantFetchUserErrorMessage =
+  "Can not find this user deo to some error";
   //validation message
   static const requiredField = "This Field must be filled with data";
   static const shortPassword = "This Password is too short.It must be more than 7 character";
@@ -83,9 +93,25 @@ class ConstantManager {
   static const String studentType = "Student";
 
   // firebase constant
-  static const String userRef = "users";
+  static const String usersRef = "users";
+  static const String offersRef = "offers";
   ///public
   static const String syrianNumber = "+963";
+  ///map keys
+  ///offers
+  static const String offerId = "offer_id";
+  static const String offerName="offer_name";
+  static const String offerStartDate="start_date";
+  static const String offerEndDate="end_date";
+  static const String offerDescription="description";
+  static const String offerInfo="info";
+  static const String offerOwnerId="owner_id";
+  static const String offerTotalCapacity="total_capacity";
+  static const String offerValue="value";
+  static const String offerImages="images";
+  static const String offerDiscount="discount";
+  ///users
+  static const String userId = "user_id";
 }
 
 class AssetsManager {

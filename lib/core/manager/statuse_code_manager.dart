@@ -8,5 +8,6 @@ class StatusCode {
   static const int network = 20;
   static const int createUser = 25;
   static const int badFormat = 26;
+  static const int noData = 27;
   static const int deviceInfo = 30;
 }

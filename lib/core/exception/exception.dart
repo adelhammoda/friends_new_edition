@@ -46,3 +46,12 @@ class BadFormatException extends ExceptionBase{
   }):super(message,code);
 
 }
+
+
+class NoDataException extends ExceptionBase{
+  NoDataException({
+    String message = StringManager.noDataErrorMessage,
+    int code = StatusCode.noData
+  }):super(message,code);
+
+}
