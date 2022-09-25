@@ -38,6 +38,8 @@ class StringManager {
   "There is no data.";
   static const cantFetchUserErrorMessage =
   "Can not find this user deo to some error";
+  static const localStoringErrorMessage =
+  "Can not save your choice.";
   //validation message
   static const requiredField = "This Field must be filled with data";
   static const shortPassword = "This Password is too short.It must be more than 7 character";
@@ -113,8 +115,11 @@ class ConstantManager {
   ///users
   static const String userId = "user_id";
   ///hive
-  static const String hiveBoxNameForOffer = "offers_database";
+  static const String hivePath = "./hive";
+  static const String hiveDatabaseName = "offers_database";
+  static const String hiveBoxNameForOffer = "offers_box";
   static const String hiveCollectionName = "friends_collection";
+  static const Set<String> hiveBoxesName = {hiveBoxNameForOffer};
 }
 
 class AssetsManager {

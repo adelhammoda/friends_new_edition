@@ -1,6 +1,7 @@
 
 
 import 'package:dartz/dartz.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:friends/core/failure/failure.dart';
 import 'package:friends/features/homePage/domain/entities/offer.dart';
@@ -17,4 +18,8 @@ abstract class HomePageRepository{
  Future<Either<Failure,UserEntity>> getUserData({required String userId});
  ///load all favorite offers locally using hive.
  Future<Either<Failure,List<OfferEntity>>> getFavoriteOffers();
+ ///navigate to details page
+Either<Failure,void> navigateToDetailsPage({required BuildContext context,required OfferEntity offer});
+
+ Future<Either<Failure,List<OfferEntity>>> removeFromFavorite({required String offerId,required List<OfferEntity> offers}) ;
 }

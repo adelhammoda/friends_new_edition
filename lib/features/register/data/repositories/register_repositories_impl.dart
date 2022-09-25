@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:friends/core/exception/exception.dart';
 import 'package:friends/core/failure/failure.dart';
-import 'package:friends/core/manager/statuse_code_manager.dart';
+import 'package:friends/core/manager/status_code_manager.dart';
 import 'package:friends/core/manager/string_manager.dart';
 import 'package:friends/core/navigation/navigator.dart';
 import 'package:friends/core/network/network_info.dart';

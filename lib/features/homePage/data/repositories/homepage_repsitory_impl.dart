@@ -3,9 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:friends/core/exception/exception.dart';
 import 'package:friends/core/failure/failure.dart';
-import 'package:friends/core/manager/statuse_code_manager.dart';
+import 'package:friends/core/manager/status_code_manager.dart';
 import 'package:friends/core/manager/string_manager.dart';
+import 'package:friends/core/navigation/navigator.dart';
 import 'package:friends/core/network/network_info.dart';
+import 'package:friends/core/routes/routes.dart';
 import 'package:friends/features/homePage/data/data_sources/homepage_local_data_source.dart';
 import 'package:friends/features/homePage/data/data_sources/homepage_remote_data_source.dart';
 import 'package:friends/features/homePage/data/models/offer_model.dart';
@@ -129,5 +131,27 @@ class HomepageRepositoryImpl extends HomePageRepository {
       debugPrint(e.toString());
       return const Left(UnKnownFailure());
     }
+  }
+
+  @override
+  Either<Failure, void> navigateToDetailsPage({required BuildContext context,required OfferEntity offer}) {
+   try{
+     Go.to(context, Routes.offerDetails,arguments: offer,);
+     return const Right(null);
+   }catch(e){
+     debugPrint(e.toString());
+     return const Left(NavigationFailure());
+   }
+  }
+
+  @override
+  Future<Either<Failure, List<OfferEntity>>> removeFromFavorite({required String offerId,required List<OfferEntity> offers}) async{
+   try{
+     List<OfferEntity> newOffers = await local.removerFromFavorite(offerId:offerId,offers: offers);
+     return  Right(newOffers);
+   }catch(e){
+    debugPrint(e.toString());
+    return const Left( LocalStoringFailure());
+   }
   }
 }

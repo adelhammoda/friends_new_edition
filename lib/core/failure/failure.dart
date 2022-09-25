@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:friends/core/manager/statuse_code_manager.dart';
+import 'package:friends/core/manager/status_code_manager.dart';
 import 'package:friends/core/manager/string_manager.dart';
 
 abstract class Failure extends Equatable {
@@ -31,11 +31,15 @@ class UnKnownFailure extends Failure {
 }
 
 class NavigationFailure extends Failure {
-  const NavigationFailure({required super.message, required super.statusCode});
+  const NavigationFailure(
+      {super.message = StringManager.navigatorErrorMessage,
+      super.statusCode = StatusCode.navigation});
 }
 
 class NetworkFailure extends Failure {
-  const NetworkFailure({ super.message = StringManager.networkErrorMessage,  super.statusCode = StatusCode.network});
+  const NetworkFailure(
+      {super.message = StringManager.networkErrorMessage,
+      super.statusCode = StatusCode.network});
 }
 
 class DeviceInfoFailure extends Failure {
@@ -51,9 +55,14 @@ class BadFormatFailure extends Failure {
       {required super.message, super.statusCode = StatusCode.badFormat});
 }
 
-class NoDataFailure extends Failure{
-  const NoDataFailure({
-    super.message = StringManager.noDataErrorMessage,
-    super.statusCode = StatusCode.noData});
+class NoDataFailure extends Failure {
+  const NoDataFailure(
+      {super.message = StringManager.noDataErrorMessage,
+      super.statusCode = StatusCode.noData});
+}
 
+class LocalStoringFailure extends Failure {
+  const LocalStoringFailure(
+      {super.message = StringManager.localStoringErrorMessage,
+      super.statusCode = StatusCode.localStorage});
 }

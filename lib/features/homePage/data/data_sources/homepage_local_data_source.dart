@@ -16,19 +16,29 @@ abstract class HomepageLocalDataSource {
     required List<OfferEntity> offers,
     required String searchKey,
   });
+
+  Future<List<OfferEntity>> removerFromFavorite({required String offerId,required List<OfferEntity> offers}) async {
+    final BoxCollection box = await BoxCollection.open(
+      ConstantManager.hiveDatabaseName, ConstantManager.hiveBoxesName,
+      path: "./",);
+    final CollectionBox<Map> offersBox = await box.openBox<Map>(ConstantManager.hiveBoxNameForOffer);
+    await offersBox.delete(offerId);
+    offers.removeWhere((element) => element.id == offerId);
+    return offers;
+  }
 }
 
 class HomePageLocalDataSourceImpl extends HomepageLocalDataSource {
   @override
-  Future<List<OfferModel>> getAllFavorite()async {
+  Future<List<OfferModel>> getAllFavorite() async {
     Box<Map> box = await Hive.openBox<Map>(
         ConstantManager.hiveBoxNameForOffer,
         collection: ConstantManager.hiveCollectionName);
     List<OfferModel> result = [];
-    for(Map data in box.values){
+    for (Map data in box.values) {
       result.add(OfferModel.fromJson(data));
     }
-    if(result.isNotEmpty) {
+    if (result.isNotEmpty) {
       return result;
     } else {
       throw NoDataException();
@@ -48,6 +58,7 @@ class HomePageLocalDataSourceImpl extends HomepageLocalDataSource {
   @override
   List<OfferEntity> searchOffer(
       {required List<OfferEntity> offers, required String searchKey}) {
-    return offers.where((offer) => offer.name.toLowerCase().compareTo(searchKey)==0).toList();
+    return offers.where((offer) =>
+    offer.name.toLowerCase().compareTo(searchKey) == 0).toList();
   }
 }

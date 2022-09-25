@@ -1,4 +1,4 @@
-import 'package:friends/core/manager/statuse_code_manager.dart';
+import 'package:friends/core/manager/status_code_manager.dart';
 import 'package:friends/core/manager/string_manager.dart';
 
 abstract class ExceptionBase implements Exception {
