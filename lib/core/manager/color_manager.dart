@@ -12,4 +12,5 @@ class  ColorManager{
   static const Color error = Color(0xffE81919);
   static const Color primary = Color(0xff20DB78);
   static const Color darkGrey = Color(0xff707070);
+  static const Color drawerColor = Color(0xff323940);
 }

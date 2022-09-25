@@ -68,6 +68,13 @@ class StringManager {
   static const phoneNumber  = "Phone number";
   static const optional  = "(Optional)";
   static const alreadyHaveAccount = "Already have an account?";
+  static const search = "Search";
+  static const home = "Home";
+  static const favorite = "Favorite";
+  static const setting = "Setting";
+  static const mode = "Mode";
+  static const deleteAccount = "Delete account";
+  static const logout = "Logout";
 
 }
 
@@ -139,6 +146,7 @@ class AssetsManager {
   static const String bigLogo = "$_mainPath/big_logo.png";
   static const String mediumLogo = "$_mainPath/medium_logo.png";
   static const String smallLogo = "$_mainPath/small_logo.png";
+  static const String userImagePlaceHolder = "$_mainPath/user.png";
 
   ///fonts
   static const String roboto = "roboto";
