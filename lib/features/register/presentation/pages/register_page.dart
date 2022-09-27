@@ -10,9 +10,9 @@ import 'package:friends/core/common_widget/snackbar_widget.dart';
 import 'package:friends/core/manager/icon_manager.dart';
 import 'package:friends/core/navigation/navigator.dart';
 import 'package:friends/core/routes/routes.dart';
+import 'package:friends/core/validator/validator.dart';
 import 'package:friends/features/register/data/models/user_model.dart';
 import 'package:friends/features/register/presentation/manager/register_bloc.dart';
-import 'package:friends/validator/validator.dart';
 import 'package:responsive_s/responsive_s.dart';
 
 import '../../../../core/common_widget/footer.dart';
@@ -194,7 +194,7 @@ class RegisterPage extends StatelessWidget {
                               hint: StringManager.passwordHint,
                               icon: const Padding(
                                 padding: EdgeInsets.all(14),
-                                child: Icon(MyFlutterApp.open_lock),
+                                child: Icon(MyFlutterApp.openLock),
                               ),
                               controller: _passwordController),
                         ),

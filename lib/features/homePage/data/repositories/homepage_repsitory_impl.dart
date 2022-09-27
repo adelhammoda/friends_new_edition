@@ -72,8 +72,10 @@ class HomepageRepositoryImpl extends HomePageRepository {
       debugPrint(e.message);
       return Left(NetworkFailure(message: e.message));
     } on BadFormatException catch (e) {
+      debugPrint(e.message);
       return Left(BadFormatFailure(message: e.message,));
     }catch(e){
+      debugPrint(e.toString());
       return const Left( UnKnownFailure());
     }
   }

@@ -80,6 +80,12 @@ static  ThemeData getAllThemeData(){
               fontFamily: AssetsManager.firaCode,
               fontWeight: FontWeight.w400
           ),
+          titleSmall:  const TextStyle(
+              fontSize: 18,
+              color: ColorManager.white,
+              fontFamily: AssetsManager.roboto,
+              fontWeight: FontWeight.w500
+          ),
           bodySmall: const TextStyle(
             color: ColorManager.lightGreen,
             fontWeight: FontWeight.w400,

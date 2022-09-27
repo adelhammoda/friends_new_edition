@@ -40,26 +40,26 @@ class HomepageBloc extends Bloc<HomepageEvent, HomepageState> {
     on<HomepageEvent>((event, emit) {
       switch (event.runtimeType) {
         case HomepageLoadOffersEvent:
-          loadOffersEvent(event as HomepageLoadOffersEvent, emit);
+          loadOffersEvent(event as HomepageLoadOffersEvent, );
           break;
         case HomepageRefreshEvent:
-          refreshPage(event as HomepageRefreshEvent, emit);
+          refreshPage(event as HomepageRefreshEvent, );
           break;
         case HomepageSearchEvent:
-          searchEvent(event as HomepageSearchEvent, emit);
+          searchEvent(event as HomepageSearchEvent, );
           break;
         case HomepageLoadFavoriteEvent:
-          loadFavorite(event as HomepageLoadFavoriteEvent, emit);
+          loadFavorite(event as HomepageLoadFavoriteEvent, );
           break;
         case HomepageNavigateToDetailsEvent:
           navigationToDetailsEvent(
-              event as HomepageNavigateToDetailsEvent, emit);
+              event as HomepageNavigateToDetailsEvent, );
           break;
         case HomepageAddToFavoriteEvent:
-          addToFavorite(event as HomepageAddToFavoriteEvent, emit);
+          addToFavorite(event as HomepageAddToFavoriteEvent, );
           break;
         case HomepageRemoverFromFavoriteEvent:
-          removeFromFavorite(event as HomepageRemoverFromFavoriteEvent, emit);
+          removeFromFavorite(event as HomepageRemoverFromFavoriteEvent);
           break;
         default:
           emit(HomepageInitial());
@@ -69,71 +69,66 @@ class HomepageBloc extends Bloc<HomepageEvent, HomepageState> {
   }
 
   void loadOffersEvent(
-      HomepageLoadOffersEvent event, Emitter<HomepageState> emitter) async {
-    emitter(HomepageLoadingOffersState());
+      HomepageLoadOffersEvent event) async {
+    emit(HomepageLoadingOffersState());
     Either<Failure, List<OfferEntity>> res = await fetchAllOffersUseCase();
-    res.fold((failure) => emitter(HomepageErrorState(failure)),
-        (offers) => emitter(HomepageOffersLoadedState(offers)));
-    await Future.delayed(const Duration(microseconds: 100), () {
-      emitter(HomepageInitial());
-    });
+    res.fold((failure) => emit(HomepageErrorState(failure)),
+        (offers) => emit(HomepageOffersLoadedState(offers)));
   }
 
   void refreshPage(
-      HomepageRefreshEvent event, Emitter<HomepageState> emitter) async {
-    emitter(HomePageRefreshLoadingState());
+      HomepageRefreshEvent event) async {
+    emit(HomePageRefreshLoadingState());
     Either<Failure, List<OfferEntity>> res = await fetchAllOffersUseCase();
-    res.fold((failure) => emitter(HomepageErrorState(failure)),
-        (offers) => emitter(HomepageOffersLoadedState(offers)));
+    res.fold((failure) => emit(HomepageErrorState(failure)),
+        (offers) => emit(HomepageOffersLoadedState(offers)));
     await Future.delayed(const Duration(microseconds: 100), () {
-      emitter(HomepageInitial());
+      emit(HomepageInitial());
     });
   }
 
   void searchEvent(
-      HomepageSearchEvent event, Emitter<HomepageState> emitter) async {
+      HomepageSearchEvent event) async {
     Either<Failure, List<OfferEntity>> res = searchOffersUseCase(
         offers: event.oldOffers, searchKey: event.searchKey);
-    res.fold((failure) => emitter(HomepageErrorState(failure)),
-        (offers) => emitter(HomepageOffersLoadedState(offers)));
+    res.fold((failure) => emit(HomepageErrorState(failure)),
+        (offers) => emit(HomepageOffersLoadedState(offers)));
     await Future.delayed(const Duration(microseconds: 100), () {
-      emitter(HomepageInitial());
+      emit(HomepageInitial());
     });
   }
 
   void loadFavorite(
-      HomepageLoadFavoriteEvent event, Emitter<HomepageState> emitter) async {
+      HomepageLoadFavoriteEvent event) async {
     Either<Failure, List<OfferEntity>> res = await loadFavoriteUseCases();
-    res.fold((failure) => emitter(HomepageErrorState(failure)),
-        (offers) => emitter(HomepageOffersLoadedState(offers)));
+    res.fold((failure) => emit(HomepageErrorState(failure)),
+        (offers) => emit(HomepageOffersLoadedState(offers)));
     await Future.delayed(const Duration(microseconds: 100), () {
-      emitter(HomepageInitial());
+      emit(HomepageInitial());
     });
   }
 
-  void navigationToDetailsEvent(HomepageNavigateToDetailsEvent event,
-      Emitter<HomepageState> emitter) async {
+  void navigationToDetailsEvent(HomepageNavigateToDetailsEvent event) async {
     navigateToDetailsUseCases(context: event.context, offer: event.offer);
   }
 
   void addToFavorite(
-      HomepageAddToFavoriteEvent event, Emitter<HomepageState> emitter) async {
+      HomepageAddToFavoriteEvent event) async {
     Either<Failure, void> res = await addToFavoriteUseCase(offer: event.offer);
-    res.fold((failure) => emitter(HomepageErrorState(failure)),
-        (_) => emitter(HomepageAddToFavoriteDoneAnimationState()));
+    res.fold((failure) => emit(HomepageErrorState(failure)),
+        (_) => emit(HomepageAddToFavoriteDoneAnimationState()));
     await Future.delayed(const Duration(microseconds: 100), () {
-      emitter(HomepageInitial());
+      emit(HomepageInitial());
     });
   }
 
-  void removeFromFavorite(HomepageRemoverFromFavoriteEvent event,
-      Emitter<HomepageState> emitter) async {
+  void removeFromFavorite(HomepageRemoverFromFavoriteEvent event) async {
     final res = await removerFromFavoriteUseCases(
         offerId: event.offerId, offers: event.offers);
-    res.fold((failure) => emitter(HomepageErrorState(failure)),
-        (offers) => emitter(HomepageOffersLoadedState(offers)));
+    res.fold((failure) => emit(HomepageErrorState(failure)),
+        (offers) => emit(HomepageOffersLoadedState(offers)));
     await Future.delayed(const Duration(microseconds: 100), () {
-      emitter(HomepageInitial());
+      emit(HomepageInitial());
     });
   }
 }

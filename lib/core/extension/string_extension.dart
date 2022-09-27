@@ -6,6 +6,7 @@
 
 
 
+import 'package:flutter/widgets.dart';
 import 'package:friends/core/exception/exception.dart';
 
 extension stringEx on String{
@@ -15,20 +16,26 @@ extension stringEx on String{
    return DateTime.parse(this);
   }
 
-  double toDouble(){
+  double toDouble({bool canBeNull = false}){
    double? res =  double.tryParse(this);
-   if(res == null){
+   if(res == null && !canBeNull){
+     debugPrint('to double extension');
      throw BadFormatException();
+   }else if(res == null && canBeNull){
+     return 0.0;
    }else {
-     return res;
+     return res!;
    }
   }
-  int toInt(){
+  int toInt({bool canBeNull = false}){
     int? res =  int.tryParse(this);
-    if(res == null){
+    if(res == null && !canBeNull){
+      debugPrint('$this to int extension');
       throw BadFormatException();
-    }else {
-      return res;
+    }else if(res == null && canBeNull){
+      return 0;
+  } else{
+      return res!;
     }
   }
 

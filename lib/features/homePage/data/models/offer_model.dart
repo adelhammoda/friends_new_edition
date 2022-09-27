@@ -1,3 +1,4 @@
+import 'package:friends/core/extension/list_extension.dart';
 import 'package:friends/core/extension/string_extension.dart';
 import 'package:friends/core/manager/string_manager.dart';
 import 'package:friends/features/homePage/domain/entities/offer.dart';
@@ -17,6 +18,16 @@ class OfferModel extends OfferEntity {
       required super.imagesUrl});
 
   factory OfferModel.fromJson(Map data) {
+    var info = data[ConstantManager.offerInfo];
+    List<Map>? infoM ;
+    if(info is List){
+      infoM = info.convertToListOfMap();
+    }
+    var images = data[ConstantManager.offerImages];
+    List<String> imagesL=[] ;
+    if(images is List){
+      imagesL = images.toListOfString();
+    }
     return OfferModel(
         id: data[ConstantManager.offerId],
         name: data[ConstantManager.offerName],
@@ -24,11 +35,11 @@ class OfferModel extends OfferEntity {
         endDate: data[ConstantManager.offerEndDate].toString().toDateTime(),
         description: data[ConstantManager.offerDescription],
         discount: data[ConstantManager.offerDiscount].toString().toDouble(),
-        info: data[ConstantManager.offerInfo],
+        info:infoM,
         offerOwnerId: data[ConstantManager.offerOwnerId],
-        totalCapacity: data[ConstantManager.offerTotalCapacity].toString().toInt(),
+        totalCapacity: data[ConstantManager.offerTotalCapacity].toString().toInt(canBeNull: true),
         value: data[ConstantManager.offerValue].toString().toDouble(),
-        imagesUrl: data[ConstantManager.offerImages]);
+        imagesUrl:imagesL);
   }
 
   Map<String,dynamic> toJson(){
@@ -38,7 +49,6 @@ class OfferModel extends OfferEntity {
       ConstantManager.offerValue:value,
       ConstantManager.offerTotalCapacity:totalCapacity,
       ConstantManager.offerOwnerId:offerOwnerId,
-      ConstantManager.offerId:id,
       ConstantManager.offerStartDate:startDate.toIso8601String(),
       ConstantManager.offerEndDate:endDate.toIso8601String(),
       ConstantManager.offerDiscount:discount,

@@ -24,14 +24,16 @@ class HomePageRemoteDataSourceImpl extends HomePageRemoteDataSource{
     DataSnapshot snapshot = await FirebaseDatabase.instance.ref(
         ConstantManager.offersRef).get();
     var data = snapshot.value;
-    if (data != null && data is List<Map>) {
+
+    if (data != null && data is Map) {
+      List<String> dataKeys = data.keys.map((e) => e.toString()).toList();
+      List dataValue = data.values.toList();
       List<OfferModel> offers = [];
-      for(Map json in data){
-        String id = json.keys.first.toString();
-        Map convertedJson= json[id];
+      for(int i = 0;i<dataValue.length;i++){
+        String id = dataKeys[i];
+        Map convertedJson=dataValue[i];
         convertedJson.addAll({ConstantManager.offerId:id});
-        offers.add(OfferModel.fromJson(json));
-        return offers;
+        offers.add(OfferModel.fromJson(convertedJson));
       }
       return offers;
     } else if (data!= null && data is Map){
