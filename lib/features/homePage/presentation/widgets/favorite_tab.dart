@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:friends/core/manager/string_manager.dart';
 import 'package:friends/features/homePage/domain/entities/offer.dart';
 import 'package:friends/features/homePage/presentation/widgets/offer_widget.dart';
 
@@ -31,17 +30,10 @@ class _FavoriteTabState extends State<FavoriteTab> {
     List<OfferEntity> favoriteOffers = widget.listOfFavorite
         .where((element) => widget.favorite.contains(element.id))
         .toList();
-    if(widget.listOfFavorite.isEmpty||widget.favorite.isEmpty||favoriteOffers.isEmpty){
-      return const SizedBox(
-          width: double.infinity,
-          height: double.infinity,
-          child: Center(child: Text(StringManager.noDataErrorMessage)));
-    }
-    print(favoriteOffers.length);
     return SizedBox(
       child: AnimatedList(
           key: _listState,
-            // initialItemCount: favoriteOffers.length,
+            initialItemCount: favoriteOffers.length,
             shrinkWrap: true,
             itemBuilder: (c, index, animation) {
               return OfferWidget(

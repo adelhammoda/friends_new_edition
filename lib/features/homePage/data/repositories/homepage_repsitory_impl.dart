@@ -60,7 +60,7 @@ class HomepageRepositoryImpl extends HomePageRepository {
         List<OfferEntity> offers = await remote.fetchOffers();
         return Right(offers);
       }else{
-        throw  NetworkException();
+        throw const NetworkFailure();
       }
 
     } on FirebaseException catch (e) {

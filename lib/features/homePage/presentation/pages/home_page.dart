@@ -96,14 +96,11 @@ class _HomePageState extends State<HomePage>
                       children: [
                         stateSwitcherForOffersTab(state, responsive),
                         FavoriteTab(
-                            favorite:state is HomepageLoadedState?
-                            state.favorite:
+                            favorite:
                             BlocProvider
                                 .of<HomepageBloc>(context)
                                 .favorite,
                             listOfFavorite:
-                                state is HomepageLoadedState?
-                            state.offers:
                             BlocProvider
                                 .of<HomepageBloc>(context)
                                 .offers
@@ -139,14 +136,8 @@ class _HomePageState extends State<HomePage>
               child: const Loader(),
             ));
       case HomepageLoadedState:
-        if((state as HomepageLoadedState).offers.isEmpty){
-          return const SizedBox(
-              width: double.infinity,
-              height: double.infinity,
-              child: Center(child: Text(StringManager.noDataErrorMessage)));
-        }
         return OfferTab(
-            offers: state.offers,
+            offers: (state as HomepageLoadedState).offers,
             favoritesOffersId: (state).favorite);
 
       case HomepageErrorState:
