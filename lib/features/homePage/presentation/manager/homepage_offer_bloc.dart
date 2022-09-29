@@ -40,10 +40,13 @@ class HomepageBloc extends Bloc<HomepageEvent, HomepageState > {
   }) : super(HomepageInitialState()) {
     on<HomepageEvent>((event, emit) {
       switch (event.runtimeType) {
-        case HomepageLoadOffersEvent:case HomepageRefreshEvent:
+        case HomepageLoadOffersEvent:
           loadOffersEvent(
             event as HomepageLoadOffersEvent,
           );
+          break;
+        case HomepageRefreshEvent:
+          refreshOffers(event as HomepageRefreshEvent);
           break;
         case HomepageSearchEvent:
           searchEvent(
@@ -51,22 +54,22 @@ class HomepageBloc extends Bloc<HomepageEvent, HomepageState > {
           );
           break;
         case HomepageLoadFavoriteEvent:
-          // loadFavorite(
-          //   event as HomepageLoadFavoriteEvent,
-          // );
+          loadFavorite(
+            event as HomepageLoadFavoriteEvent,
+          );
           break;
         case HomepageNavigateToDetailsEvent:
-          // navigationToDetailsEvent(
-          //   event as HomepageNavigateToDetailsEvent,
-          // );
+          navigationToDetailsEvent(
+            event as HomepageNavigateToDetailsEvent,
+          );
           break;
         case HomepageAddToFavoriteEvent:
-          // addToFavorite(
-          //   event as HomepageAddToFavoriteEvent,
-          // );
+          addToFavorite(
+            event as HomepageAddToFavoriteEvent,
+          );
           break;
         case HomepageRemoverFromFavoriteEvent:
-          // removeFromFavorite(event as HomepageRemoverFromFavoriteEvent);
+          removeFromFavorite(event as HomepageRemoverFromFavoriteEvent);
           break;
         default:
           emit(HomepageInitialState());
@@ -110,7 +113,7 @@ class HomepageBloc extends Bloc<HomepageEvent, HomepageState > {
               emit(HomepageLoadedState(offers, favorite)));
     }
 
-    void loadFavorite(HomepageLoadFavoriteEvent event) async {
+    Future<void> loadFavorite(HomepageLoadFavoriteEvent event) async {
         Either<Failure, Set<String>> res = await loadFavoriteUseCases();
         // ignore: invalid_use_of_visible_for_testing_member
         res.fold((failure) => emit(HomepageErrorState(failure)),
@@ -122,6 +125,29 @@ class HomepageBloc extends Bloc<HomepageEvent, HomepageState > {
             });
     }
 
+
+
+  Future<void> refreshOffers(HomepageRefreshEvent event) async {
+    Either<Failure, List<OfferEntity>> res = await fetchAllOffersUseCase();
+    Either<Failure, Set<String>> favoriteOffers = await loadFavoriteUseCases();
+    res.fold(
+      // ignore: invalid_use_of_visible_for_testing_member
+            (failure) => emit(HomepageErrorState(failure)),
+            (offers) {
+          this.offers = offers;
+          favoriteOffers.fold(
+            // ignore: invalid_use_of_visible_for_testing_member
+                  (failure) =>
+
+              // ignore: invalid_use_of_visible_for_testing_member
+              emit(HomepageErrorState(failure)),
+                  (favoriteOffers)
+              {
+                favorite = favoriteOffers;
+                // ignore: invalid_use_of_visible_for_testing_member
+                emit(HomepageLoadedState(offers, favoriteOffers));});});
+  }
+
     void navigationToDetailsEvent(HomepageNavigateToDetailsEvent event) async {
       navigateToDetailsUseCases(context: event.context, offer: event.offer);
     }
@@ -132,7 +158,8 @@ class HomepageBloc extends Bloc<HomepageEvent, HomepageState > {
       res.fold((failure) => emit(HomepageErrorState(failure)),
           (_) {
         favorite.add(event.offerId);
-        HomepageLoadedState(offers, favorite);});
+        // ignore: invalid_use_of_visible_for_testing_member
+        emit(HomepageLoadedState(offers, favorite));});
 
     }
 
@@ -144,6 +171,8 @@ class HomepageBloc extends Bloc<HomepageEvent, HomepageState > {
           (failure) => emit(HomepageErrorState(failure)),
           (_){
             favorite.remove(event.offerId);
-            HomepageLoadedState(offers, favorite);} );
+
+            // ignore: invalid_use_of_visible_for_testing_member
+            emit(HomepageLoadedState(offers, favorite));} );
     }
   }
