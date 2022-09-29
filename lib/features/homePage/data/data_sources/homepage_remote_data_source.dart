@@ -35,6 +35,7 @@ class HomePageRemoteDataSourceImpl extends HomePageRemoteDataSource{
         convertedJson.addAll({ConstantManager.offerId:id});
         offers.add(OfferModel.fromJson(convertedJson));
       }
+      offers.sort((offer1,offer2)=>offer1.value.compareTo(offer2.value));
       return offers;
     } else if (data!= null && data is Map){
       List<OfferModel> result = [];

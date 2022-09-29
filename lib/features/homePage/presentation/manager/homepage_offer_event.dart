@@ -1,4 +1,4 @@
-part of 'homepage_bloc.dart';
+part of 'homepage_offer_bloc.dart';
 
 @immutable
 abstract class HomepageEvent extends Equatable {}
@@ -17,33 +17,35 @@ class HomepageRefreshEvent extends HomepageEvent {
 
 class HomepageSearchEvent extends HomepageEvent{
   final String searchKey;
-  final List<OfferEntity> oldOffers;
 
-  HomepageSearchEvent(this.searchKey,this.oldOffers);
+  HomepageSearchEvent(this.searchKey);
   @override
   List<Object?> get props => [searchKey];
 }
 
 
 class HomepageLoadFavoriteEvent extends HomepageEvent{
+
+  HomepageLoadFavoriteEvent( );
   @override
   List<Object?> get props =>[];
 }
 class HomepageAddToFavoriteEvent extends HomepageEvent{
-  final  OfferEntity offer;
+  final  String offerId;
 
-  HomepageAddToFavoriteEvent(this.offer);
+  HomepageAddToFavoriteEvent(this.offerId);
 
 
   @override
-  List<Object?> get props => [offer];
+  List<Object?> get props => [];
 
 }
 class HomepageNavigateToDetailsEvent extends HomepageEvent{
   final BuildContext context;
   final OfferEntity offer;
+  final BlocProvider blocValue;
 
-  HomepageNavigateToDetailsEvent(this.offer, this.context);
+  HomepageNavigateToDetailsEvent(this.offer, this.context, this.blocValue);
 
   @override
   List<Object?> get props => [offer];
@@ -59,8 +61,8 @@ class HomepageLoadUserDetailsEvent extends HomepageEvent{
 
 class HomepageRemoverFromFavoriteEvent extends HomepageEvent{
   final String offerId;
-  final List<OfferEntity> offers;
-  HomepageRemoverFromFavoriteEvent(this.offerId, this.offers);
+
+  HomepageRemoverFromFavoriteEvent(this.offerId);
   @override
   List<Object?> get props => [offerId];
 

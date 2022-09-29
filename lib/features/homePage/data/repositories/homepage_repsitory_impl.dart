@@ -10,7 +10,6 @@ import 'package:friends/core/network/network_info.dart';
 import 'package:friends/core/routes/routes.dart';
 import 'package:friends/features/homePage/data/data_sources/homepage_local_data_source.dart';
 import 'package:friends/features/homePage/data/data_sources/homepage_remote_data_source.dart';
-import 'package:friends/features/homePage/data/models/offer_model.dart';
 import 'package:friends/features/homePage/domain/entities/offer.dart';
 import 'package:friends/features/homePage/domain/repositories/home_page_repository.dart';
 import 'package:friends/features/login/domain/entities/user_entity.dart';
@@ -28,9 +27,9 @@ class HomepageRepositoryImpl extends HomePageRepository {
 
   @override
   Future<Either<Failure, void>> addToFavorite(
-      {required OfferEntity offer}) async {
+      {required String offer}) async {
     try {
-      bool isMoved = await local.moveToFavorite(offer: offer as OfferModel);
+      bool isMoved = await local.moveToFavorite(offer:offer);
       if (isMoved) {
         return const Right(null);
       }
@@ -121,9 +120,9 @@ class HomepageRepositoryImpl extends HomePageRepository {
   }
 
   @override
-  Future<Either<Failure, List<OfferEntity>>> getFavoriteOffers() async{
+  Future<Either<Failure, Set<String>>> getFavoriteOffers() async{
     try{
-      List<OfferEntity> result =await local.getAllFavorite();
+      Set<String> result =await local.getAllFavorite();
       return Right(result);
     }on CashException catch(e){
       return Left(CashFailure(message:e.message));
@@ -147,10 +146,10 @@ class HomepageRepositoryImpl extends HomePageRepository {
   }
 
   @override
-  Future<Either<Failure, List<OfferEntity>>> removeFromFavorite({required String offerId,required List<OfferEntity> offers}) async{
+  Future<Either<Failure, void>> removeFromFavorite({required String offerId}) async{
    try{
-     List<OfferEntity> newOffers = await local.removerFromFavorite(offerId:offerId,offers: offers);
-     return  Right(newOffers);
+       await local.removerFromFavorite(offerId:offerId);
+     return  const Right(null);
    }catch(e){
     debugPrint(e.toString());
     return const Left( LocalStoringFailure());

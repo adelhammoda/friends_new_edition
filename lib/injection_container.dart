@@ -9,7 +9,7 @@ import 'package:friends/features/homePage/domain/use_cases/get_user_data_use_cas
 import 'package:friends/features/homePage/domain/use_cases/navigate_to_details_page_usecases.dart';
 import 'package:friends/features/homePage/domain/use_cases/remove_from_fovorite_usecase.dart';
 import 'package:friends/features/homePage/domain/use_cases/search_offers_use_case.dart';
-import 'package:friends/features/homePage/presentation/manager/homepage_bloc.dart';
+import 'package:friends/features/homePage/presentation/manager/homepage_offer_bloc.dart';
 import 'package:friends/features/login/data/data_sources/login_local_data_source.dart';
 import 'package:friends/features/login/data/data_sources/login_remote_data_source.dart';
 import 'package:friends/features/login/data/repositories/login_repositories_impl.dart';
