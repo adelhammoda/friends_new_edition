@@ -14,6 +14,7 @@ class FriendInputField extends StatelessWidget {
   final TextInputType? textInputType;
   final bool hideText;
   final TextInputAction? textInputAction;
+  final void Function(String? val)? onChanges;
   const FriendInputField(
       {Key? key,
       required this.hint,
@@ -26,7 +27,7 @@ class FriendInputField extends StatelessWidget {
       this.focusNode,
       this.prefixText,
       this.textInputType,
-      this.hideText = false, this.textInputAction=TextInputAction.next})
+      this.hideText = false, this.textInputAction=TextInputAction.next, this.onChanges})
       : super(key: key);
 
   @override
@@ -41,6 +42,7 @@ class FriendInputField extends StatelessWidget {
             spreadRadius: 2)
       ]),
       child: TextFormField(
+        onChanged: onChanges,
         textInputAction: textInputAction,
         obscureText: hideText,
         keyboardType: textInputType,

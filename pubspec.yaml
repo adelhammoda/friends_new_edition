@@ -12,6 +12,12 @@ dependencies:
 
 
   cupertino_icons: ^1.0.2
+#custom refresh indicator
+  custom_refresh_indicator: ^1.2.1
+#to request permission
+  permission_handler: ^10.0.2
+#to get access to directory
+  path_provider: ^2.0.11
 #for getting device id
   device_info_plus: ^4.1.2
 #for animation icons

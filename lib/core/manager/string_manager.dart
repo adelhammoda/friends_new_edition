@@ -1,3 +1,4 @@
+
 class StringManager {
   ///errors
   static const navigatorErrorMessage =
