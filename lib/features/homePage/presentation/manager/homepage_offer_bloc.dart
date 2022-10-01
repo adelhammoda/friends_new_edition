@@ -13,12 +13,13 @@ import 'package:friends/features/homePage/domain/use_cases/load_favorite_use_cas
 import 'package:friends/features/homePage/domain/use_cases/navigate_to_details_page_usecases.dart';
 import 'package:friends/features/homePage/domain/use_cases/remove_from_fovorite_usecase.dart';
 import 'package:friends/features/homePage/domain/use_cases/search_offers_use_case.dart';
-
+import 'package:friends/features/login/domain/entities/user_entity.dart';
 
 part 'homepage_offer_event.dart';
+
 part 'homepage_offer_state.dart';
 
-class HomepageBloc extends Bloc<HomepageEvent, HomepageState > {
+class HomepageBloc extends Bloc<HomepageEvent, HomepageState> {
   final SearchOffersUseCase searchOffersUseCase;
   final GetUserDataUseCases getUserDataUseCases;
   final FetchAllOffersUseCase fetchAllOffersUseCase;
@@ -71,6 +72,9 @@ class HomepageBloc extends Bloc<HomepageEvent, HomepageState > {
         case HomepageRemoverFromFavoriteEvent:
           removeFromFavorite(event as HomepageRemoverFromFavoriteEvent);
           break;
+        case HomepageLoadUserDetailsEvent:
+          loadUserDetails(event as HomepageLoadUserDetailsEvent);
+          break;
         default:
           emit(HomepageInitialState());
           break;
@@ -79,100 +83,100 @@ class HomepageBloc extends Bloc<HomepageEvent, HomepageState > {
   }
 
   void loadOffersEvent(HomepageLoadOffersEvent event) async {
-
     // ignore: invalid_use_of_visible_for_testing_member
     emit(HomepageLoadingState());
     Either<Failure, List<OfferEntity>> res = await fetchAllOffersUseCase();
     Either<Failure, Set<String>> favoriteOffers = await loadFavoriteUseCases();
     res.fold(
         // ignore: invalid_use_of_visible_for_testing_member
-        (failure) => emit(HomepageErrorState(failure)),
-        (offers) {
-          this.offers = offers;
-          favoriteOffers.fold(
-            // ignore: invalid_use_of_visible_for_testing_member
-            (failure) =>
+        (failure) => emit(HomepageErrorState(failure)), (offers) {
+      this.offers = offers;
+      favoriteOffers.fold(
+          // ignore: invalid_use_of_visible_for_testing_member
+          (failure) =>
 
-                // ignore: invalid_use_of_visible_for_testing_member
-                emit(HomepageErrorState(failure)),
-            (favoriteOffers)
-            {
-              favorite = favoriteOffers;
               // ignore: invalid_use_of_visible_for_testing_member
-              emit(HomepageLoadedState(offers, favoriteOffers));});});
+              emit(HomepageErrorState(failure)), (favoriteOffers) {
+        favorite = favoriteOffers;
+        // ignore: invalid_use_of_visible_for_testing_member
+        emit(HomepageLoadedState(offers, favoriteOffers));
+      });
+    });
   }
 
   void searchEvent(HomepageSearchEvent event) async {
-      Either<Failure, List<OfferEntity>> res = searchOffersUseCase(
-          offers: offers, searchKey: event.searchKey);
-      res.fold(
-          // ignore: invalid_use_of_visible_for_testing_member
-          (failure) => emit(HomepageErrorState(failure)),
-          (offers) =>
-              // ignore: invalid_use_of_visible_for_testing_member
-              emit(HomepageLoadedState(offers, favorite)));
-    }
-
-    Future<void> loadFavorite(HomepageLoadFavoriteEvent event) async {
-        Either<Failure, Set<String>> res = await loadFavoriteUseCases();
+    Either<Failure, List<OfferEntity>> res =
+        searchOffersUseCase(offers: offers, searchKey: event.searchKey);
+    res.fold(
         // ignore: invalid_use_of_visible_for_testing_member
-        res.fold((failure) => emit(HomepageErrorState(failure)),
+        (failure) => emit(HomepageErrorState(failure)),
+        (offers) =>
+            // ignore: invalid_use_of_visible_for_testing_member
+            emit(HomepageLoadedState(offers, favorite)));
+  }
 
-            (favoriteOffers) {
-          favorite = favoriteOffers;
-              // ignore: invalid_use_of_visible_for_testing_member
-              emit(HomepageLoadedState(offers, favoriteOffers));
-            });
-    }
-
-
+  Future<void> loadFavorite(HomepageLoadFavoriteEvent event) async {
+    Either<Failure, Set<String>> res = await loadFavoriteUseCases();
+    // ignore: invalid_use_of_visible_for_testing_member
+    res.fold((failure) => emit(HomepageErrorState(failure)), (favoriteOffers) {
+      favorite = favoriteOffers;
+      // ignore: invalid_use_of_visible_for_testing_member
+      emit(HomepageLoadedState(offers, favoriteOffers));
+    });
+  }
 
   Future<void> refreshOffers(HomepageRefreshEvent event) async {
     Either<Failure, List<OfferEntity>> res = await fetchAllOffersUseCase();
     Either<Failure, Set<String>> favoriteOffers = await loadFavoriteUseCases();
     res.fold(
-      // ignore: invalid_use_of_visible_for_testing_member
-            (failure) => emit(HomepageErrorState(failure)),
-            (offers) {
-          this.offers = offers;
-          favoriteOffers.fold(
-            // ignore: invalid_use_of_visible_for_testing_member
-                  (failure) =>
+        // ignore: invalid_use_of_visible_for_testing_member
+        (failure) => emit(HomepageErrorState(failure)), (offers) {
+      this.offers = offers;
+      favoriteOffers.fold(
+          // ignore: invalid_use_of_visible_for_testing_member
+          (failure) =>
 
               // ignore: invalid_use_of_visible_for_testing_member
-              emit(HomepageErrorState(failure)),
-                  (favoriteOffers)
-              {
-                favorite = favoriteOffers;
-                // ignore: invalid_use_of_visible_for_testing_member
-                emit(HomepageLoadedState(offers, favoriteOffers));});});
-  }
-
-    void navigationToDetailsEvent(HomepageNavigateToDetailsEvent event) async {
-      navigateToDetailsUseCases(context: event.context, offer: event.offer);
-    }
-
-    Future<void> addToFavorite(HomepageAddToFavoriteEvent event) async {
-      Either<Failure, void> res = await addToFavoriteUseCase(offer: event.offerId);
-      // ignore: invalid_use_of_visible_for_testing_member
-      res.fold((failure) => emit(HomepageErrorState(failure)),
-          (_) {
-        favorite.add(event.offerId);
+              emit(HomepageErrorState(failure)), (favoriteOffers) {
+        favorite = favoriteOffers;
         // ignore: invalid_use_of_visible_for_testing_member
-        emit(HomepageLoadedState(offers, favorite));});
-
-    }
-
-    void removeFromFavorite(HomepageRemoverFromFavoriteEvent event) async {
-      final res = await removerFromFavoriteUseCases(
-          offerId: event.offerId);
-      res.fold(
-          // ignore: invalid_use_of_visible_for_testing_member
-          (failure) => emit(HomepageErrorState(failure)),
-          (_){
-            favorite.remove(event.offerId);
-
-            // ignore: invalid_use_of_visible_for_testing_member
-            emit(HomepageLoadedState(offers, favorite));} );
-    }
+        emit(HomepageLoadedState(offers, favoriteOffers));
+      });
+    });
   }
+
+  void navigationToDetailsEvent(HomepageNavigateToDetailsEvent event) async {
+    navigateToDetailsUseCases(
+        context: event.context, offer: event.offer, bloc: event.blocValue);
+  }
+
+  Future<void> addToFavorite(HomepageAddToFavoriteEvent event) async {
+    Either<Failure, void> res =
+        await addToFavoriteUseCase(offer: event.offerId);
+    // ignore: invalid_use_of_visible_for_testing_member
+    res.fold((failure) => emit(HomepageErrorState(failure)), (_) {
+      favorite.add(event.offerId);
+      // ignore: invalid_use_of_visible_for_testing_member
+      emit(HomepageLoadedState(offers, favorite));
+    });
+  }
+
+  void removeFromFavorite(HomepageRemoverFromFavoriteEvent event) async {
+    final res = await removerFromFavoriteUseCases(offerId: event.offerId);
+    res.fold(
+        // ignore: invalid_use_of_visible_for_testing_member
+        (failure) => emit(HomepageErrorState(failure)), (_) {
+      favorite.remove(event.offerId);
+
+      // ignore: invalid_use_of_visible_for_testing_member
+      emit(HomepageLoadedState(offers, favorite));
+    });
+  }
+
+  Future<UserEntity?> loadUserDetails(
+      HomepageLoadUserDetailsEvent event) async {
+    final Either<Failure, UserEntity> res =
+        await getUserDataUseCases(userId: event.userId);
+    return res.fold((failure) => null, (user) => user);
+  }
+}

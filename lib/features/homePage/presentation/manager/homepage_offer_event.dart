@@ -43,7 +43,7 @@ class HomepageAddToFavoriteEvent extends HomepageEvent{
 class HomepageNavigateToDetailsEvent extends HomepageEvent{
   final BuildContext context;
   final OfferEntity offer;
-  final BlocProvider blocValue;
+  final HomepageBloc blocValue;
 
   HomepageNavigateToDetailsEvent(this.offer, this.context, this.blocValue);
 

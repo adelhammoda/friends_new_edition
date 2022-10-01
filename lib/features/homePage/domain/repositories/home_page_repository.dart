@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:friends/core/failure/failure.dart';
 import 'package:friends/features/homePage/domain/entities/offer.dart';
 import 'package:friends/features/login/domain/entities/user_entity.dart';
+import 'package:friends/features/homePage/presentation/manager/homepage_offer_bloc.dart';
 
 abstract class HomePageRepository{
   ///fetch all offers from database and convert it to list of offers
@@ -19,7 +20,7 @@ abstract class HomePageRepository{
  ///load all favorite offers locally using hive.
  Future<Either<Failure,Set<String>>> getFavoriteOffers();
  ///navigate to details page
-Either<Failure,void> navigateToDetailsPage({required BuildContext context,required OfferEntity offer});
+Either<Failure,void> navigateToDetailsPage({required BuildContext context,required OfferEntity offer,required HomepageBloc bloc});
 
  Future<Either<Failure,void>> removeFromFavorite({required String offerId}) ;
 }

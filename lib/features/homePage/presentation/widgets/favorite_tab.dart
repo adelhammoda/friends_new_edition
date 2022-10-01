@@ -30,6 +30,7 @@ class _FavoriteTabState extends State<FavoriteTab> {
     List<OfferEntity> favoriteOffers = widget.listOfFavorite
         .where((element) => widget.favorite.contains(element.id))
         .toList();
+    favoriteOffers.sort((f1,f2)=>f1.name.toLowerCase().compareTo(f2.name.toLowerCase()));
     return SizedBox(
       child: AnimatedList(
           key: _listState,

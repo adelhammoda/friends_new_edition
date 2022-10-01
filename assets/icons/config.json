@@ -187,6 +187,12 @@
       "search": [
         "icon-awesome-star"
       ]
+    },
+    {
+      "uid": "081a030199f3ab4e18fd3ebdac1bd367",
+      "css": "cw",
+      "code": 59405,
+      "src": "elusive"
     }
   ]
 }

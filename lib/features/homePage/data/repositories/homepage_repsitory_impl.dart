@@ -12,6 +12,7 @@ import 'package:friends/features/homePage/data/data_sources/homepage_local_data_
 import 'package:friends/features/homePage/data/data_sources/homepage_remote_data_source.dart';
 import 'package:friends/features/homePage/domain/entities/offer.dart';
 import 'package:friends/features/homePage/domain/repositories/home_page_repository.dart';
+import 'package:friends/features/homePage/presentation/manager/homepage_offer_bloc.dart';
 import 'package:friends/features/login/domain/entities/user_entity.dart';
 
 class HomepageRepositoryImpl extends HomePageRepository {
@@ -135,9 +136,9 @@ class HomepageRepositoryImpl extends HomePageRepository {
   }
 
   @override
-  Either<Failure, void> navigateToDetailsPage({required BuildContext context,required OfferEntity offer}) {
+  Either<Failure, void> navigateToDetailsPage({required BuildContext context,required OfferEntity offer,required HomepageBloc bloc}) {
    try{
-     Go.to(context, Routes.offerDetails,arguments: offer,);
+     Go.to(context, Routes.offerDetails,arguments: {"offers":offer,"bloc":bloc},);
      return const Right(null);
    }catch(e){
      debugPrint(e.toString());

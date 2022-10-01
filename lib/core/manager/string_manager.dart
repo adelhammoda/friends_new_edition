@@ -76,6 +76,7 @@ class StringManager {
   static const mode = "Mode";
   static const deleteAccount = "Delete account";
   static const logout = "Logout";
+  static const description = "Description";
 
 }
 
@@ -148,6 +149,7 @@ class AssetsManager {
   static const String mediumLogo = "$_mainPath/medium_logo.png";
   static const String smallLogo = "$_mainPath/small_logo.png";
   static const String userImagePlaceHolder = "$_mainPath/user.png";
+  static const String userPlaceHolderIcon = "$_mainPath/user_placeholder_icon.png";
 
   ///fonts
   static const String roboto = "roboto";
@@ -157,4 +159,6 @@ class AssetsManager {
   static const String loader = "assets/lottie/loader.json";
   static const String successAnimation = "assets/lottie/success.json";
   static const String wrongAnimation = "assets/lottie/error.json";
+  static const String offerPlaceHolder = "assets/lottie/offer_placeholder.json";
+  static const String shiningAnimation = "assets/lottie/shining.json";
 }

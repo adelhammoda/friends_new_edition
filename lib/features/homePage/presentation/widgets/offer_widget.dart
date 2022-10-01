@@ -28,7 +28,8 @@ class _OfferWidgetState extends State<OfferWidget> {
       onTap: () {
         BlocProvider.of<HomepageBloc>(context).navigateToDetailsUseCases(
           context: context,
-          offer: widget.offer
+          offer: widget.offer,
+          bloc: BlocProvider.of<HomepageBloc>(context)
         );
       },
       child: Padding(

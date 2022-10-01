@@ -35,7 +35,7 @@ class HomePageRemoteDataSourceImpl extends HomePageRemoteDataSource{
         convertedJson.addAll({ConstantManager.offerId:id});
         offers.add(OfferModel.fromJson(convertedJson));
       }
-      offers.sort((offer1,offer2)=>offer1.value.compareTo(offer2.value));
+      offers.sort((offer1,offer2)=>offer1.name.toLowerCase().compareTo(offer2.name.toLowerCase()));
       return offers;
     } else if (data!= null && data is Map){
       List<OfferModel> result = [];
@@ -56,12 +56,8 @@ class HomePageRemoteDataSourceImpl extends HomePageRemoteDataSource{
         ConstantManager.usersRef).child(userId).get();
     var data = snapshot.value;
     if (data != null && data is Map){
-      Map json = { };
-      data.forEach((key, value) {
-        json = value as Map;
-        json.addAll({ConstantManager.userId : key});
-      });
-      return UserModel.fromJson(json);
+      data.addAll({ConstantManager.userId:userId});
+      return UserModel.fromJson(data);
     }else{
       throw BadFormatException();
     }

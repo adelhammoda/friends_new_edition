@@ -9,7 +9,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:friends/core/exception/exception.dart';
 
-extension stringEx on String{
+extension StringEx on String{
 
 
   DateTime toDateTime(){
@@ -27,11 +27,11 @@ extension stringEx on String{
      return res!;
    }
   }
-  int toInt({bool canBeNull = false}){
+  int? toInt({bool canBeNull = false}){
     int? res =  int.tryParse(this);
-    if(res == null && !canBeNull){
+    if(res == null && canBeNull){
       debugPrint('$this to int extension');
-      throw BadFormatException();
+      return null;
     }else if(res == null && canBeNull){
       return 0;
   } else{

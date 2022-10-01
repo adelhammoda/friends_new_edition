@@ -4,6 +4,8 @@ import 'package:friends/core/common_widget/app_bar.dart';
 import 'package:friends/core/common_widget/drawer.dart';
 import 'package:friends/core/common_widget/loader.dart';
 import 'package:friends/core/common_widget/snackbar_widget.dart';
+import 'package:friends/core/manager/color_manager.dart';
+import 'package:friends/core/manager/icon_manager.dart';
 import 'package:friends/core/manager/status_code_manager.dart';
 import 'package:friends/core/manager/string_manager.dart';
 import 'package:friends/features/homePage/presentation/manager/homepage_offer_bloc.dart';
@@ -141,10 +143,16 @@ class _HomePageState extends State<HomePage>
             favoritesOffersId: (state).favorite);
 
       case HomepageErrorState:
-        return const SizedBox(
+        return  SizedBox(
             width: double.infinity,
             height: double.infinity,
-            child: Center(child: Text(StringManager.noDataErrorMessage)));
+            child:Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+             const Center(child: Text(StringManager.noDataErrorMessage)),
+            IconButton(onPressed: (){}, icon: const Icon(MyFlutterApp.cw,color: ColorManager.red,))
+          ],
+        ));
       default:
         return const SizedBox(
             height: double.infinity,

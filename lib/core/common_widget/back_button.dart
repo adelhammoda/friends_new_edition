@@ -4,7 +4,8 @@ import 'package:friends/core/manager/size_manager.dart';
 import 'package:responsive_s/responsive_s.dart';
 
 class FriendsBackButton extends StatelessWidget {
-  const FriendsBackButton({Key? key}) : super(key: key);
+  final bool isGrey;
+  const FriendsBackButton({Key? key, required this.isGrey}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class FriendsBackButton extends StatelessWidget {
         alignment: Alignment.center,
         decoration:  BoxDecoration(
           border: Border.all(
-            color: ColorManager.grey.withOpacity(0.4),
+            color: isGrey?ColorManager.grey.withOpacity(0.7):ColorManager.black.withOpacity(0.7),
             width: SizeManager.s2
           ),
           shape: BoxShape.circle,
@@ -32,7 +33,7 @@ class FriendsBackButton extends StatelessWidget {
             },
             icon:  Icon(
               Icons.arrow_back,
-              color: ColorManager.grey.withOpacity(0.4),
+              color: isGrey?ColorManager.grey.withOpacity(0.7):ColorManager.black.withOpacity(0.7),
             )),
       ),
     );
