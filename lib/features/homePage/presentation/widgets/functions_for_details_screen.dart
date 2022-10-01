@@ -96,17 +96,17 @@ List<Widget> buildInfo(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              map.keys.first,
+              map.keys.first.toString(),
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium!
-                  .copyWith(fontSize: 17),
+                  .copyWith(fontSize: 17,fontWeight: FontWeight.bold),
             ),
             Padding(
               padding: EdgeInsets.only(
                   left: responsive.responsiveWidth(forUnInitialDevices: 10)),
               child: Text(
-                map.values.first,
+                map.values.first.toString(),
               ),
             ),
           ],
