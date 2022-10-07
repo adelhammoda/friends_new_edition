@@ -1,15 +1,15 @@
 import 'package:friends/core/device_info/device_info.dart';
 import 'package:friends/core/network/network_info.dart';
-import 'package:friends/features/homePage/data/data_sources/homepage_local_data_source.dart';
-import 'package:friends/features/homePage/data/data_sources/homepage_remote_data_source.dart';
-import 'package:friends/features/homePage/data/repositories/homepage_repsitory_impl.dart';
-import 'package:friends/features/homePage/domain/repositories/home_page_repository.dart';
-import 'package:friends/features/homePage/domain/use_cases/fetch_all_offers_usecase.dart';
-import 'package:friends/features/homePage/domain/use_cases/get_user_data_use_case.dart';
-import 'package:friends/features/homePage/domain/use_cases/navigate_to_details_page_usecases.dart';
-import 'package:friends/features/homePage/domain/use_cases/remove_from_fovorite_usecase.dart';
-import 'package:friends/features/homePage/domain/use_cases/search_offers_use_case.dart';
-import 'package:friends/features/homePage/presentation/manager/homepage_offer_bloc.dart';
+import 'package:friends/features/offer/data/data_sources/offerpage_local_data_source.dart';
+import 'package:friends/features/offer/data/data_sources/offerpage_remote_data_source.dart';
+import 'package:friends/features/offer/data/repositories/offerpage_repsitory_impl.dart';
+import 'package:friends/features/offer/domain/repositories/home_page_repository.dart';
+import 'package:friends/features/offer/domain/use_cases/fetch_all_offers_usecase.dart';
+import 'package:friends/features/offer/domain/use_cases/get_user_data_use_case.dart';
+import 'package:friends/features/offer/domain/use_cases/navigate_to_details_page_usecases.dart';
+import 'package:friends/features/offer/domain/use_cases/remove_from_fovorite_usecase.dart';
+import 'package:friends/features/offer/domain/use_cases/search_offers_use_case.dart';
+import 'package:friends/features/offer/presentation/manager/offerpage_offer_bloc.dart';
 import 'package:friends/features/login/data/data_sources/login_local_data_source.dart';
 import 'package:friends/features/login/data/data_sources/login_remote_data_source.dart';
 import 'package:friends/features/login/data/repositories/login_repositories_impl.dart';
@@ -33,8 +33,8 @@ import 'package:friends/features/register/presentation/manager/register_bloc.dar
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-import 'package:friends/features/homePage/domain/use_cases/add_to_favorite_use_case.dart';
-import 'package:friends/features/homePage/domain/use_cases/load_favorite_use_cases.dart';
+import 'package:friends/features/offer/domain/use_cases/add_to_favorite_use_case.dart';
+import 'package:friends/features/offer/domain/use_cases/load_favorite_use_cases.dart';
 import 'package:friends/features/register/domain/repositories/register_repositories.dart';
 
 GetIt sl = GetIt.asNewInstance();
@@ -57,7 +57,7 @@ Future<void> init() async {
       registerWithFacebookUseCase: sl(),
       registerWithGoogleUseCase: sl()));
   //home page
-  sl.registerFactory<HomepageBloc>(() => HomepageBloc(
+  sl.registerFactory<OfferpageBloc>(() => OfferpageBloc(
         searchOffersUseCase: sl(),
         getUserDataUseCases: sl(),
         fetchAllOffersUseCase: sl(),
@@ -119,7 +119,7 @@ Future<void> init() async {
       deviceInfo: sl(),
       networkInfo: sl()));
   //home page repository
-  sl.registerLazySingleton<HomePageRepository>(() =>
+  sl.registerLazySingleton<OfferPageRepository>(() =>
       HomepageRepositoryImpl(remote: sl(), local: sl(), networkInfo: sl()));
 
   ///data source
@@ -133,9 +133,9 @@ Future<void> init() async {
       () => RegisterRemoteDataSourceImpl());
   sl.registerLazySingleton<RegisterLocalDataSource>(
       () => RegisterLocalDataSourceImpl());
-  sl.registerLazySingleton<HomePageRemoteDataSource>(
+  sl.registerLazySingleton<OfferPageRemoteDataSource>(
       () => HomePageRemoteDataSourceImpl());
-  sl.registerLazySingleton<HomepageLocalDataSource>(
+  sl.registerLazySingleton<OfferpageLocalDataSource>(
       () => HomePageLocalDataSourceImpl());
 
   ///core

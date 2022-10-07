@@ -4,10 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friends/features/forget_password/presentation/pages/forget_password_page.dart';
-import 'package:friends/features/homePage/presentation/manager/homepage_offer_bloc.dart';
-import 'package:friends/features/homePage/presentation/pages/offer_details_page.dart';
+import 'package:friends/features/offer/presentation/manager/offerpage_offer_bloc.dart';
+import 'package:friends/features/offer/presentation/pages/offer_details_page.dart';
 import 'package:friends/features/login/presentation/pages/login_page.dart';
-import 'package:friends/features/homePage/presentation/pages/home_page.dart';
+import 'package:friends/features/offer/presentation/pages/offer_page.dart';
 import 'package:friends/features/register/presentation/pages/register_page.dart';
 import 'package:friends/injection_container.dart' as dl;
 
@@ -27,7 +27,7 @@ class RoutesManager{
  static Widget routesWhere(String routeName){
     switch(routeName){
       case Routes.homePage:
-        return  BlocProvider<HomepageBloc>(
+        return  BlocProvider<OfferpageBloc>(
             create: (c) => dl.sl(),
             child:const HomePage());
       case Routes.login:
