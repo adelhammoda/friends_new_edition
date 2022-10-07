@@ -3,16 +3,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:friends/features/forget_password/presentation/pages/forget_password_page.dart';
+import 'package:friends/features/home_page/presentation/pages/home_page.dart';
 import 'package:friends/features/login/presentation/pages/login_page.dart';
 
-import '../../features/homePage/presentation/pages/home_page.dart';
+
 import '../../features/register/presentation/pages/register_page.dart';
 
 class RoutesManager{
 
   static Map<String,Widget Function(BuildContext context)> routes(){
     return {
-      Routes.homePage:(c)=>routesWhere(Routes.register),
+      Routes.homePage:(c)=>routesWhere(Routes.homePage),
       Routes.login:(c)=>routesWhere(Routes.login),
 
     };

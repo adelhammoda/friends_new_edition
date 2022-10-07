@@ -12,6 +12,8 @@ dependencies:
 
 
   cupertino_icons: ^1.0.2
+#navigation bar
+  curved_navigation_bar: ^1.0.3
 #for getting device id
   device_info_plus: ^4.1.2
 #for animation icons
