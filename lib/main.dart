@@ -7,12 +7,13 @@ import 'package:friends/injection_container.dart' as di;
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'core/app.dart';
+import 'package:friends/core/app.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await initApp();
   runApp(App.instance);
+  
 }
 
 

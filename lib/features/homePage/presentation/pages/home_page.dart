@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friends/core/common_widget/app_bar.dart';
@@ -52,6 +53,16 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive(context);
     return Scaffold(
+      bottomNavigationBar: CurvedNavigationBar(
+
+        items: [
+          Icon(Icons.abc),
+          Icon(Icons.abc),
+          Icon(Icons.abc),
+          Icon(Icons.abc),
+        ],
+        backgroundColor: ColorManager.white,
+      ),
       drawerEnableOpenDragGesture: true,
       drawer: FriendsDrawer(
         user: UserEntity(

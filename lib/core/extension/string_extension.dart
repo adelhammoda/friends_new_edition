@@ -40,4 +40,10 @@ extension StringEx on String{
   }
 
 
+  // String tr(){
+  //   return AppLocalizations.of(context)?.translate(this)??this;
+  //
+  // }
+
+
 }

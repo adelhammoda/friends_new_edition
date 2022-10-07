@@ -1,7 +1,9 @@
 
+
+
 class StringManager {
   ///errors
-  static const navigatorErrorMessage =
+  static const  navigatorErrorMessage =
       "Some error happened while trying to navigate to another page";
   static const networkErrorMessage =
       "You don't have connection to the internet.Please make sure to connect your device";
