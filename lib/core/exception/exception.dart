@@ -9,7 +9,6 @@ abstract class ExceptionBase implements Exception {
 }
 
 class CashException extends ExceptionBase {
-  //TODO: pass const string from string manager with error message.
   CashException({
     String message = StringManager.cashErrorMessage,
     int code = StatusCode.cash,
@@ -48,11 +47,12 @@ class BadFormatException extends ExceptionBase{
 }
 
 
-class NoDataException extends ExceptionBase{
+class NoDataException extends ExceptionBase {
   NoDataException({
     String message = StringManager.noDataErrorMessage,
     int code = StatusCode.noData
-  }):super(message,code);
+  }) :super(message, code);
+}
 
 class AutoLoginException extends ExceptionBase{
   AutoLoginException({

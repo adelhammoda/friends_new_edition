@@ -31,7 +31,7 @@ class OnBoardingRemoteDataSourceImpl extends OnBoardingRemoteDataSource {
         throw AutoLoginException(message: StringManager.userIsNotAuthenticated);
       }
       DataSnapshot snapshot = await FirebaseDatabase.instance
-          .ref(ConstantManager.userRef)
+          .ref(ConstantManager.usersRef)
           .child(userDeviceId)
           .get();
       if (snapshot.value == null) {

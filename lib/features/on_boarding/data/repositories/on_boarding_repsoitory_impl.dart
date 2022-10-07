@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:friends/core/device_info/device_info.dart';
 import 'package:friends/core/exception/exception.dart';
 import 'package:friends/core/failure/failure.dart';
-import 'package:friends/core/manager/statuse_code_manager.dart';
+import 'package:friends/core/manager/status_code_manager.dart';
 import 'package:friends/core/manager/string_manager.dart';
 import 'package:friends/core/navigation/navigator.dart';
 import 'package:friends/core/network/network_info.dart';
@@ -32,7 +32,8 @@ class OnBoardingRepositoryImpl extends OnBoardingRepository {
       Go.to(context, Routes.login);
       return const Right(null);
     } on Exception catch (_) {
-      return const Left(NavigationFailure(
+      return  const Left(
+          NavigationFailure(
           message: StringManager.navigatorErrorMessage,
           statusCode: StatusCode.navigation));
     }
@@ -95,7 +96,7 @@ class OnBoardingRepositoryImpl extends OnBoardingRepository {
       ));
     }on Exception catch(e){
       debugPrint(e.toString());
-      return const Left(AutoLoginFailure(
+      return  Left(const AutoLoginFailure(
         message: StringManager.autoLoginUnknownErrorMessage,
         statusCode: StatusCode.autoLogin
       ));

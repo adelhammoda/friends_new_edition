@@ -81,12 +81,6 @@ static  ThemeData getAllThemeData(){
               ),
             ]
           ),
-          titleMedium: const TextStyle(
-              fontSize: 20,
-              color: ColorManager.black,
-              fontFamily: AssetsManager.firaCode,
-              fontWeight: FontWeight.w400
-          ),
           titleSmall:  const TextStyle(
               fontSize: 18,
               color: ColorManager.white,

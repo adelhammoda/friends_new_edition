@@ -62,7 +62,7 @@ class OnBoardingLocalDataSourceImpl extends OnBoardingLocalDataSource{
   @override
   Future<bool> isUserExists() async{
     SharedPreferences sharedPreferences =await SharedPreferences.getInstance();
-    String? cashedData = sharedPreferences.getString(ConstantManager.userRef);
+    String? cashedData = sharedPreferences.getString(ConstantManager.usersRef);
     if(cashedData.isNullOrEmpty()){
       return false;
     }else{

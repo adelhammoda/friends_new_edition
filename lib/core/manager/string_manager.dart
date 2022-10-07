@@ -30,6 +30,27 @@ class StringManager {
   "Can not find user in cash to delete it.This maybe led to some problems";
   static const noUserRegistered =
   "There is no user registered on this device to complete this process";
+  static const noDataErrorMessage =
+  "There is no no data";
+  static const localStoringErrorMessage =
+  "There is some error in local storing.";
+  static const autoLoginErrorMessage =
+  "There is some error in auto login.";
+  static const userNotFoundErrorMessage =
+  "We can't find user in database.";
+  static const badFormatErrorMessage =
+  "Bad format in received data.";
+  static const userIsNotAuthenticated =
+  "This user is not authenticated.";
+  static const missingDataErrorMessage =
+  "Some data is missing.";
+  static const autoLoginUnknownErrorMessage =
+  "There some error in auto login please login manually.";
+  static const addingToCashFailedErrorMessage =
+  "We can't add any data to cash.";
+  static const cantFetchUserErrorMessage =
+  "We can't fetch the owner of this offer.";
+
   //validation message
   static const requiredField = "This Field must be filled with data";
   static const shortPassword = "This Password is too short.It must be more than 7 character";

@@ -121,7 +121,7 @@ Future<void> init() async {
       NavigateToRegisterUseCase(sl()));
   sl.registerLazySingleton<TryAutoLoginUseCase>(() =>
       TryAutoLoginUseCase(sl()));
-      () => RegisterWithEmailAndPasswordUseCase(repo: sl()));
+      () => RegisterWithEmailAndPasswordUseCase(repo: sl());
   //home page use cases
   sl.registerLazySingleton<SearchOffersUseCase>(
       () => SearchOffersUseCase(sl()));

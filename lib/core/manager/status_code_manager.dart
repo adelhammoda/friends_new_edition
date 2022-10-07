@@ -11,4 +11,7 @@ class StatusCode {
   static const int badFormat = 26;
   static const int noData = 27;
   static const int deviceInfo = 30;
+  static const int autoLogin = 11;
+  static const int userNotFound = 12;
+
 }
