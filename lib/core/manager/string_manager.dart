@@ -1,9 +1,6 @@
-
-
-
 class StringManager {
   ///errors
-  static const  navigatorErrorMessage =
+  static const navigatorErrorMessage =
       "Some error happened while trying to navigate to another page";
   static const networkErrorMessage =
       "You don't have connection to the internet.Please make sure to connect your device";
@@ -33,16 +30,6 @@ class StringManager {
   "Can not find user in cash to delete it.This maybe led to some problems";
   static const noUserRegistered =
   "There is no user registered on this device to complete this process";
-  static const badFormatErrorMessage =
-  "Bad format.The data we received is formatted badly";
-  static const addingToCashFailedErrorMessage =
-  "Can't add to storage it seems we face some error.";
-  static const noDataErrorMessage =
-  "There is no data.";
-  static const cantFetchUserErrorMessage =
-  "Can not find this user deo to some error";
-  static const localStoringErrorMessage =
-  "Can not save your choice.";
   //validation message
   static const requiredField = "This Field must be filled with data";
   static const shortPassword = "This Password is too short.It must be more than 7 character";
@@ -80,6 +67,7 @@ class StringManager {
   static const logout = "Logout";
   static const description = "Description";
 
+  static const or = "or";
 }
 
 class ConstantManager {
@@ -110,6 +98,8 @@ class ConstantManager {
   static const String offersRef = "offers";
   ///public
   static const String syrianNumber = "+963";
+  ///map keys
+ static const String passwordKeyForMap = "Password";
   ///map keys
   ///offers
   static const String offerId = "offer_id";
@@ -150,6 +140,7 @@ class AssetsManager {
   static const String bigLogo = "$_mainPath/big_logo.png";
   static const String mediumLogo = "$_mainPath/medium_logo.png";
   static const String smallLogo = "$_mainPath/small_logo.png";
+  static const String onBoardingBackground = "$_mainPath/on_boarding_image.png";
   static const String userImagePlaceHolder = "$_mainPath/user.png";
   static const String userPlaceHolderIcon = "$_mainPath/user_placeholder_icon.png";
 

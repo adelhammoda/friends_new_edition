@@ -3,22 +3,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friends/core/common_widget/another_login_option.dart';
 import 'package:friends/core/common_widget/app_bar.dart';
 import 'package:friends/core/common_widget/background_widget.dart';
+import 'package:friends/core/common_widget/footer.dart';
 import 'package:friends/core/common_widget/friends_button.dart';
 import 'package:friends/core/common_widget/input_field.dart';
 import 'package:friends/core/common_widget/loader.dart';
 import 'package:friends/core/common_widget/snackbar_widget.dart';
 import 'package:friends/core/manager/icon_manager.dart';
+import 'package:friends/core/manager/string_manager.dart';
 import 'package:friends/core/navigation/navigator.dart';
 import 'package:friends/core/routes/routes.dart';
 import 'package:friends/core/validator/validator.dart';
+import 'package:friends/features/login/presentation/widgets/build_options_buttons.dart';
 import 'package:friends/features/register/data/models/user_model.dart';
 import 'package:friends/features/register/presentation/manager/register_bloc.dart';
 import 'package:responsive_s/responsive_s.dart';
-
-import '../../../../core/common_widget/footer.dart';
-import '../../../../core/manager/string_manager.dart';
-import '../../../login/presentation/widgets/build_options_buttons.dart';
-import '../../../../injection_container.dart' as di;
+import 'package:friends/injection_container.dart' as di;
 
 class RegisterPage extends StatelessWidget {
   ///controllers
