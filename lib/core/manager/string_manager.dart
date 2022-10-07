@@ -23,18 +23,35 @@ class StringManager {
   static const unsupportedPlatformError =
       "Unsupported platform.It seems your platform have some issue.So we can't get important data";
   static const signupWithFacebookErrorMessage =
-  "Error while trying to sign in with Facebook";
+      "Error while trying to sign in with Facebook";
   static const cantFindUserInCashErrorMessage =
-  "Can not find user in cash to delete it.This maybe led to some problems";
+      "Can not find user in cash to delete it.This maybe led to some problems";
   static const noUserRegistered =
-  "There is no user registered on this device to complete this process";
+      "There is no user registered on this device to complete this process";
+  static const autoLoginErrorMessage =
+      "Auto login failed please login manually";
+  static const userNotFoundErrorMessage =
+      "User Not found pleas try login again or contact us if you still facing this problem";
+  static const userIsNotAuthenticated =
+      "It seems user is not authenticated.Please login or create new account";
+  static const autoLoginUnknownErrorMessage =
+      "We trying to auto login but it seems some data missing around.";
+  static const missingDataErrorMessage =
+      "We missing some data to continue this process.";
+
   //validation message
   static const requiredField = "This Field must be filled with data";
-  static const shortPassword = "This Password is too short.It must be more than 7 character";
-  static const passwordIsRequired = "You must have password and confirm it in this field";
-  static const passwordsDoseNotMatch = "Your password and this password dons not match";
-  static const badEmailFormat = "Your email is formatted badly.Make sure you write it in the correct way";
-  static const onlyNumbers = "This field do not accept letter or symbol.only numbers is allowed";
+  static const shortPassword =
+      "This Password is too short.It must be more than 7 character";
+  static const passwordIsRequired =
+      "You must have password and confirm it in this field";
+  static const passwordsDoseNotMatch =
+      "Your password and this password dons not match";
+  static const badEmailFormat =
+      "Your email is formatted badly.Make sure you write it in the correct way";
+  static const onlyNumbers =
+      "This field do not accept letter or symbol.only numbers is allowed";
+
   ///
   static const emailHint = "Email";
   static const passwordHint = "Password";
@@ -53,10 +70,10 @@ class StringManager {
   static const signupWithFacebook = "Signup with Facebook";
   static const signupWithApple = "Signup with Apple";
   static const signupWithEmail = "Signup with Email";
-  static const phoneNumber  = "Phone number";
-  static const optional  = "(Optional)";
+  static const phoneNumber = "Phone number";
+  static const optional = "(Optional)";
   static const alreadyHaveAccount = "Already have an account?";
-
+  static const or = "or";
 }
 
 class ConstantManager {
@@ -84,8 +101,11 @@ class ConstantManager {
 
   // firebase constant
   static const String userRef = "users";
+
   ///public
   static const String syrianNumber = "+963";
+  ///map keys
+ static const String passwordKeyForMap = "Password";
 }
 
 class AssetsManager {
@@ -105,6 +125,7 @@ class AssetsManager {
   static const String bigLogo = "$_mainPath/big_logo.png";
   static const String mediumLogo = "$_mainPath/medium_logo.png";
   static const String smallLogo = "$_mainPath/small_logo.png";
+  static const String onBoardingBackground = "$_mainPath/on_boarding_image.png";
 
   ///fonts
   static const String roboto = "roboto";

@@ -41,3 +41,9 @@ class CreateUserFailure extends Failure{
   const CreateUserFailure({required super.message, required super.statusCode});
 
 }
+
+class AutoLoginFailure extends Failure{
+  const AutoLoginFailure({required super.message, required super.statusCode});
+
+}
+

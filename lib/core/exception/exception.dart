@@ -38,3 +38,19 @@ class DeviceInfoException extends ExceptionBase{
     int code = StatusCode.deviceInfo
   }):super(message,code);
 }
+
+class AutoLoginException extends ExceptionBase{
+  AutoLoginException({
+    String message = StringManager.autoLoginErrorMessage,
+    int code = StatusCode.autoLogin
+  }):super(message,code);
+
+}
+
+
+class UserNotFoundException extends ExceptionBase{
+  UserNotFoundException({
+    String message = StringManager.userNotFoundErrorMessage,
+    int code = StatusCode.userNotFound
+  }):super(message,code);
+}
