@@ -22,6 +22,7 @@ class OnBoardingRemoteDataSourceImpl extends OnBoardingRemoteDataSource {
       required String password,
       required String userDeviceId}) async {
     User? user = FirebaseAuth.instance.currentUser;
+    //null user
     if (user == null) {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(

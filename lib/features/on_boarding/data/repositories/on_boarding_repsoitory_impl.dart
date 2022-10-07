@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:friends/core/device_info/device_info.dart';
 import 'package:friends/core/exception/exception.dart';
 import 'package:friends/core/failure/failure.dart';
 import 'package:friends/core/manager/statuse_code_manager.dart';
@@ -13,7 +14,6 @@ import 'package:friends/features/on_boarding/data/data_sources/on_boarding_local
 import 'package:friends/features/on_boarding/data/data_sources/onboarding_remote_datasource.dart';
 import 'package:friends/features/on_boarding/domain/repositories/on_boarding_repository.dart';
 
-import '../../../../core/device_info/device_info.dart';
 
 class OnBoardingRepositoryImpl extends OnBoardingRepository {
   final OnBoardingRemoteDataSource remoteDataSource;

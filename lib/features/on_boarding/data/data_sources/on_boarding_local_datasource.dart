@@ -12,8 +12,6 @@ import 'package:friends/features/login/data/models/user_model.dart';
 abstract class OnBoardingLocalDataSource {
   ///override getCashedUser method from parent class
   ///this method get user from local storage using [SharedPreferences]
-  ///on any error happened it will throw [CashException].
-  ///the user key is form [ConstantManager]
   Future<UserModel> getCashedUser();
   ///check if user is exists in local storage.
   ///In false case we will try to get user email and password.
@@ -23,7 +21,6 @@ abstract class OnBoardingLocalDataSource {
   Future<bool> isUserExists();
   ///get email and password storing in local storage
   ///and convert them into map.
-  ///It will throw [CashException] in error case.
   Future<Map<String,String>> getUserEmailAndPassword();
 }
 
@@ -33,10 +30,10 @@ class OnBoardingLocalDataSourceImpl extends OnBoardingLocalDataSource{
   Future<UserModel> getCashedUser() async{
     SharedPreferences sharedPreferences =await SharedPreferences.getInstance();
     String? cashedUserString = sharedPreferences.getString(ConstantManager.cashedUser);
-    if(cashedUserString == null){
+    if(cashedUserString.isNullOrEmpty()){
       throw UserNotFoundException();
     }else {
-      var cashedUserJson = jsonDecode(cashedUserString);
+      var cashedUserJson = jsonDecode(cashedUserString!);
       if(cashedUserString is Map){
         return UserModel.fromJson(cashedUserJson);
       }else{
@@ -53,6 +50,7 @@ class OnBoardingLocalDataSourceImpl extends OnBoardingLocalDataSource{
       throw UserNotFoundException();
     }else{
       var emailAndPasswordJson = jsonDecode(emailAndPasswordString!);
+      //is map condition used in this page only.
       if(emailAndPasswordJson is Map){
         return emailAndPasswordJson as Map<String,String>;
       }else{

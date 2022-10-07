@@ -2,12 +2,13 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friends/core/common_widget/friends_button.dart';
+import 'package:friends/core/manager/string_manager.dart';
 import 'package:friends/features/on_boarding/presentation/manager/on_boarding_bloc.dart';
+import 'package:friends/features/on_boarding/presentation/widgets/line.dart';
 import 'package:responsive_s/responsive_s.dart';
-import '../widgets/line.dart';
-import '../../../../core/common_widget/friends_button.dart';
-import '../../../../core/manager/string_manager.dart';
-import '../../../../injection_container.dart' as di;
+import 'package:friends/injection_container.dart' as di;
+
 
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({Key? key}) : super(key: key);
@@ -39,18 +40,17 @@ class _OnBoardingPageState extends State<OnBoardingPage>
   @override
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive(context);
+    final topPosition = responsive.responsiveHeight(forUnInitialDevices: _alignmentAnimation.value);
+    final topPadding = responsive.responsiveHeight(forUnInitialDevices: 20);
     return BlocProvider<OnBoardingBloc>(
         create: (s) => di.sl(),
         child: BlocBuilder<OnBoardingBloc, OnBoardingState>(
           builder: (context, state) {
             if (state is OnBoardingInitial) {
-              print(state.runtimeType);
-              print("calling auto login event");
               BlocProvider.of<OnBoardingBloc>(context)
                   .add(OnBoardingAutoLoginEvent());
             } else if (state is OnBoardingError) {
                 debugPrint(state.failure.message);
-                print("Animation starting ");
                 _controller.forward();
             }
             return Scaffold(
@@ -73,14 +73,14 @@ class _OnBoardingPageState extends State<OnBoardingPage>
                       alignment: Alignment.center,
                       children: [
                         Padding(
-                          padding:  EdgeInsets.only(top: responsive.responsiveHeight(forUnInitialDevices: 20)),
+                          padding:  EdgeInsets.only(top:topPadding),
                           child: AnimatedOpacity(
                             duration: const Duration(milliseconds: 700),
                             opacity: _opacityAnimation.value,
                               child: widget!),
                         ),
                         Positioned(
-                          top: responsive.responsiveHeight(forUnInitialDevices: _alignmentAnimation.value),
+                          top: topPosition,
                             child: Padding(
                           padding: EdgeInsets.only(
                               top: responsive.responsiveHeight(
