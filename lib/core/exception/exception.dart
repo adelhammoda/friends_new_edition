@@ -1,4 +1,4 @@
-import 'package:friends/core/manager/statuse_code_manager.dart';
+import 'package:friends/core/manager/status_code_manager.dart';
 import 'package:friends/core/manager/string_manager.dart';
 
 abstract class ExceptionBase implements Exception {
@@ -9,7 +9,6 @@ abstract class ExceptionBase implements Exception {
 }
 
 class CashException extends ExceptionBase {
-  //TODO: pass const string from string manager with error message.
   CashException({
     String message = StringManager.cashErrorMessage,
     int code = StatusCode.cash,
@@ -37,6 +36,22 @@ class DeviceInfoException extends ExceptionBase{
     String message = StringManager.deviceInfoErrorMessage,
     int code = StatusCode.deviceInfo
   }):super(message,code);
+}
+
+class BadFormatException extends ExceptionBase{
+  BadFormatException({
+    String message = StringManager.badFormatErrorMessage,
+    int code = StatusCode.badFormat
+  }):super(message,code);
+
+}
+
+
+class NoDataException extends ExceptionBase {
+  NoDataException({
+    String message = StringManager.noDataErrorMessage,
+    int code = StatusCode.noData
+  }) :super(message, code);
 }
 
 class AutoLoginException extends ExceptionBase{

@@ -193,7 +193,7 @@ class RegisterPage extends StatelessWidget {
                               hint: StringManager.passwordHint,
                               icon: const Padding(
                                 padding: EdgeInsets.all(14),
-                                child: Icon(MyFlutterApp.open_lock),
+                                child: Icon(MyFlutterApp.openLock),
                               ),
                               controller: _passwordController),
                         ),

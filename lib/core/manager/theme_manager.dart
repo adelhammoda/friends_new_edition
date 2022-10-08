@@ -36,7 +36,6 @@ static  ThemeData getAllThemeData(){
             fontFamily: AssetsManager.firaCode,
             fontWeight: FontWeight.w400,
             color: ColorManager.black.withOpacity(0.4),
-
           ) ,
           labelMedium: const TextStyle(
             fontSize: FontManager.fontSizeMediumPlus,
@@ -82,6 +81,12 @@ static  ThemeData getAllThemeData(){
               ),
             ]
           ),
+          titleSmall:  const TextStyle(
+              fontSize: 18,
+              color: ColorManager.white,
+              fontFamily: AssetsManager.roboto,
+              fontWeight: FontWeight.w500
+          ),
           bodySmall: const TextStyle(
             color: ColorManager.lightGreen,
             fontWeight: FontWeight.w400,
@@ -115,7 +120,15 @@ static  ThemeData getAllThemeData(){
           shadowColor:ColorManager.white.withOpacity(0),
           backgroundColor: ColorManager.white.withOpacity(0),
           elevation: 0,
-        )
+          iconTheme: const IconThemeData(
+            color: ColorManager.black
+          )
+        ),
+      drawerTheme: DrawerThemeData(
+        backgroundColor: ColorManager.drawerColor,
+        elevation: 10,
+        scrimColor: ColorManager.white.withOpacity(0.5)
+      ),
     );
   }
 }

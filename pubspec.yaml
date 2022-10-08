@@ -9,11 +9,26 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+#for localization
+  flutter_localizations:
+    sdk: flutter
 
 
   cupertino_icons: ^1.0.2
+#navigation bar
+  curved_navigation_bar: ^1.0.3
+#to format time
+  intl:
+#custom refresh indicator
+  custom_refresh_indicator: ^1.2.1
+#to request permission
+  permission_handler: ^10.0.2
+#to get access to directory
+  path_provider: ^2.0.11
 #for getting device id
   device_info_plus: ^4.1.2
+#for sliding image
+  carousel_slider: ^4.1.1
 #for animation icons
   lottie: ^1.4.2
 #dependency injection package
@@ -30,6 +45,8 @@ dependencies:
   flutter_bloc: ^8.1.1
 #to store all data in local storage
   shared_preferences: ^2.0.15
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
 #to check network connection
   internet_connection_checker: ^0.0.1+4
 #value equality
@@ -48,10 +65,15 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+#for hive package
+  hive_generator: ^1.1.3
+  build_runner: ^2.2.1
 flutter:
   uses-material-design: true
 #all assets in app
   assets:
+    - assets/lang/en.json
+    - assets/lang/ar.json
     - assets/images/
     - assets/lottie/
   fonts:
