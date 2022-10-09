@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:friends/core/manager/font_manager.dart';
 import 'package:friends/core/manager/string_manager.dart';
 
 import 'color_manager.dart';
@@ -31,20 +32,19 @@ static  ThemeData getAllThemeData(){
         ),
         textTheme:  TextTheme(
           labelSmall: TextStyle(
-            fontSize: 15,
+            fontSize:FontManager.fontSizeMedium,
             fontFamily: AssetsManager.firaCode,
             fontWeight: FontWeight.w400,
             color: ColorManager.black.withOpacity(0.4),
-
           ) ,
           labelMedium: const TextStyle(
-            fontSize: 18,
+            fontSize: FontManager.fontSizeMediumPlus,
             fontFamily: AssetsManager.firaCode,
             fontWeight: FontWeight.w400,
             color: ColorManager.black,
           ),
           labelLarge: const TextStyle(
-            fontSize: 18,
+            fontSize: FontManager.fontSizeMediumPlus,
             fontFamily: AssetsManager.roboto,
             fontWeight: FontWeight.bold,
             color: ColorManager.black
@@ -57,13 +57,19 @@ static  ThemeData getAllThemeData(){
                   blurRadius:12,
               ),
             ],
-            fontSize:35,
+            fontSize:FontManager.fontSizeLargeLabel,
             color:ColorManager.white,
             fontFamily: AssetsManager.firaCode,
             fontWeight: FontWeight.w400,
           ),
+          titleMedium: const TextStyle(
+            fontSize: FontManager.fontSizeLarge,
+            color: ColorManager.white,
+            fontFamily: AssetsManager.roboto,
+            fontWeight: FontWeight.bold
+          ),
           titleLarge: TextStyle(
-            fontSize: 60,
+            fontSize: FontManager.fontSizeBigTitle,
             color: ColorManager.black,
             fontFamily: AssetsManager.roboto,
             fontWeight: FontWeight.bold,
@@ -75,11 +81,17 @@ static  ThemeData getAllThemeData(){
               ),
             ]
           ),
+          titleSmall:  const TextStyle(
+              fontSize: 18,
+              color: ColorManager.white,
+              fontFamily: AssetsManager.roboto,
+              fontWeight: FontWeight.w500
+          ),
           bodySmall: const TextStyle(
             color: ColorManager.lightGreen,
             fontWeight: FontWeight.w400,
             fontFamily: AssetsManager.firaCode,
-            fontSize: 13
+            fontSize: FontManager.fontSizeSmallBody
           ),
         ),
         inputDecorationTheme: InputDecorationTheme(
@@ -108,7 +120,15 @@ static  ThemeData getAllThemeData(){
           shadowColor:ColorManager.white.withOpacity(0),
           backgroundColor: ColorManager.white.withOpacity(0),
           elevation: 0,
-        )
+          iconTheme: const IconThemeData(
+            color: ColorManager.black
+          )
+        ),
+      drawerTheme: DrawerThemeData(
+        backgroundColor: ColorManager.drawerColor,
+        elevation: 10,
+        scrimColor: ColorManager.white.withOpacity(0.5)
+      ),
     );
   }
 }

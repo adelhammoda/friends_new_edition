@@ -16,6 +16,8 @@ class StringManager {
       .if this error continue happening, please contact us and give us your feedback''';
   static const registerUnknownErrorMessage =
       "Unknown error happened while trying to register";
+  static const unknownErrorMessage =
+      "Unknown error happened.Sorry for that";
   static const deviceInfoErrorMessage =
       "Can't getting some info form your device.We need this info to continue our process";
   static const createErrorDataMissing =
@@ -28,6 +30,27 @@ class StringManager {
   "Can not find user in cash to delete it.This maybe led to some problems";
   static const noUserRegistered =
   "There is no user registered on this device to complete this process";
+  static const noDataErrorMessage =
+  "There is no no data";
+  static const localStoringErrorMessage =
+  "There is some error in local storing.";
+  static const autoLoginErrorMessage =
+  "There is some error in auto login.";
+  static const userNotFoundErrorMessage =
+  "We can't find user in database.";
+  static const badFormatErrorMessage =
+  "Bad format in received data.";
+  static const userIsNotAuthenticated =
+  "This user is not authenticated.";
+  static const missingDataErrorMessage =
+  "Some data is missing.";
+  static const autoLoginUnknownErrorMessage =
+  "There some error in auto login please login manually.";
+  static const addingToCashFailedErrorMessage =
+  "We can't add any data to cash.";
+  static const cantFetchUserErrorMessage =
+  "We can't fetch the owner of this offer.";
+
   //validation message
   static const requiredField = "This Field must be filled with data";
   static const shortPassword = "This Password is too short.It must be more than 7 character";
@@ -56,7 +79,16 @@ class StringManager {
   static const phoneNumber  = "Phone number";
   static const optional  = "(Optional)";
   static const alreadyHaveAccount = "Already have an account?";
+  static const search = "Search";
+  static const home = "Home";
+  static const favorite = "Favorite";
+  static const setting = "Setting";
+  static const mode = "Mode";
+  static const deleteAccount = "Delete account";
+  static const logout = "Logout";
+  static const description = "Description";
 
+  static const or = "or";
 }
 
 class ConstantManager {
@@ -83,9 +115,33 @@ class ConstantManager {
   static const String studentType = "Student";
 
   // firebase constant
-  static const String userRef = "users";
+  static const String usersRef = "users";
+  static const String offersRef = "offers";
   ///public
   static const String syrianNumber = "+963";
+  ///map keys
+ static const String passwordKeyForMap = "Password";
+  ///map keys
+  ///offers
+  static const String offerId = "offer_id";
+  static const String offerName="offer_name";
+  static const String offerStartDate="start_date";
+  static const String offerEndDate="end_date";
+  static const String offerDescription="description";
+  static const String offerInfo="info";
+  static const String offerOwnerId="owner_id";
+  static const String offerTotalCapacity="total_capacity";
+  static const String offerValue="value";
+  static const String offerImages="images";
+  static const String offerDiscount="discount";
+  ///users
+  static const String userId = "user_id";
+  ///hive
+  static const String hivePath = "./hive";
+  static const String hiveDatabaseName = "offers_database";
+  static const String hiveBoxNameForOffer = "offers_box";
+  static const String hiveCollectionName = "friends_collection";
+  static const Set<String> hiveBoxesName = {hiveBoxNameForOffer};
 }
 
 class AssetsManager {
@@ -105,6 +161,9 @@ class AssetsManager {
   static const String bigLogo = "$_mainPath/big_logo.png";
   static const String mediumLogo = "$_mainPath/medium_logo.png";
   static const String smallLogo = "$_mainPath/small_logo.png";
+  static const String onBoardingBackground = "$_mainPath/on_boarding_image.png";
+  static const String userImagePlaceHolder = "$_mainPath/user.png";
+  static const String userPlaceHolderIcon = "$_mainPath/user_placeholder_icon.png";
 
   ///fonts
   static const String roboto = "roboto";
@@ -114,4 +173,6 @@ class AssetsManager {
   static const String loader = "assets/lottie/loader.json";
   static const String successAnimation = "assets/lottie/success.json";
   static const String wrongAnimation = "assets/lottie/error.json";
+  static const String offerPlaceHolder = "assets/lottie/offer_placeholder.json";
+  static const String shiningAnimation = "assets/lottie/shining.json";
 }
