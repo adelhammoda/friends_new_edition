@@ -72,12 +72,6 @@ Future<void> init() async {
           navigateToLoginUseCase: sl(),
           navigateToRegisterUseCase: sl(),
           tryAutoLoginUseCase: sl()));
-  sl.registerFactory(() => RegisterBloc(
-      alreadyHaveAccountNavigator: sl(),
-      registerWithAppleUseCase: sl(),
-      registerWithEmailAndPasswordUseCase: sl(),
-      registerWithFacebookUseCase: sl(),
-      registerWithGoogleUseCase: sl()));
   //home page
   sl.registerFactory<OfferpageBloc>(() => OfferpageBloc(
         searchOffersUseCase: sl(),
@@ -155,11 +149,6 @@ Future<void> init() async {
           localDataSource: sl(),
           deviceInfo: sl(),
           networkConnection: sl()));
-  sl.registerLazySingleton<RegisterRepositories>(() => RegisterRepositoriesImpl(
-      remoteDataSource: sl(),
-      localDataSource: sl(),
-      deviceInfo: sl(),
-      networkInfo: sl()));
   //home page repository
   sl.registerLazySingleton<OfferPageRepository>(() =>
       HomepageRepositoryImpl(remote: sl(), local: sl(), networkInfo: sl()));
@@ -178,10 +167,7 @@ Future<void> init() async {
 //on boarding
   sl.registerLazySingleton<OnBoardingLocalDataSource>(() => OnBoardingLocalDataSourceImpl());
   sl.registerLazySingleton<OnBoardingRemoteDataSource>(() => OnBoardingRemoteDataSourceImpl());
-  sl.registerLazySingleton<RegisterRemoteDataSource>(
-      () => RegisterRemoteDataSourceImpl());
-  sl.registerLazySingleton<RegisterLocalDataSource>(
-      () => RegisterLocalDataSourceImpl());
+ //offer
   sl.registerLazySingleton<OfferPageRemoteDataSource>(
       () => HomePageRemoteDataSourceImpl());
   sl.registerLazySingleton<OfferpageLocalDataSource>(

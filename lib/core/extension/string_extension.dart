@@ -31,7 +31,6 @@ extension StringEx on String{
   int? toInt({bool canBeNull = false}) {
     int? res = int.tryParse(this);
     if (res == null && canBeNull) {
-      debugPrint('$this to int extension');
       return null;
     } else if (res == null && canBeNull) {
       return 0;

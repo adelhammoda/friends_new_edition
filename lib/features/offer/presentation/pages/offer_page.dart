@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:friends/core/common_widget/app_bar.dart';
-import 'package:friends/core/common_widget/drawer.dart';
 import 'package:friends/core/common_widget/loader.dart';
 import 'package:friends/core/common_widget/snackbar_widget.dart';
 import 'package:friends/core/manager/color_manager.dart';
@@ -13,17 +11,16 @@ import 'package:friends/features/offer/presentation/widgets/favorite_tab.dart';
 import 'package:friends/features/offer/presentation/widgets/offer_tab.dart';
 import 'package:friends/features/offer/presentation/widgets/offer_tab_bar.dart';
 import 'package:friends/features/offer/presentation/widgets/search_bar.dart';
-import 'package:friends/features/login/domain/entities/user_entity.dart';
 import 'package:responsive_s/responsive_s.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class OfferPage extends StatefulWidget {
+  const OfferPage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<OfferPage> createState() => _OfferPageState();
 }
 
-class _HomePageState extends State<HomePage>
+class _OfferPageState extends State<OfferPage>
     with SingleTickerProviderStateMixin {
   final TextEditingController controller = TextEditingController();
   ValueNotifier<int> index = ValueNotifier(0);
@@ -52,21 +49,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive(context);
     return Scaffold(
-      drawerEnableOpenDragGesture: true,
-      drawer: FriendsDrawer(
-        user: UserEntity(
-          email: "test@gmail.com",
-          imageUrl: null,
-          name: "Test",
-          user: "Student",
-          address: {},
-          subscribeId: '',
-        ),
-      ),
-      appBar: FriendsAppbar(
-        backButton: false,
-        containLogo: true,
-      ),
+
       body: Column(
         children: [
           SearchBar(
