@@ -1,36 +1,36 @@
 part of 'offerpage_offer_bloc.dart';
 
 @immutable
-abstract class HomepageState extends Equatable{}
+abstract class OfferPageState extends Equatable{}
 
 
 
-class HomepageInitialState extends HomepageState{
+class OfferPageInitialState extends OfferPageState{
   @override
   List<Object?> get props => [];
 }
 
 
-class HomepageLoadingState extends HomepageState{
+class OfferPageLoadingState extends OfferPageState{
   @override
   List<Object?> get props => [];
 }
 
 
-class HomepageLoadedState extends HomepageState{
+class OfferPageLoadedState extends OfferPageState{
   final List<OfferEntity> offers;
   final Set<String> favorite;
 
-  HomepageLoadedState(this.offers, this.favorite);
+  OfferPageLoadedState(this.offers, this.favorite);
   @override
   List<Object?> get props => [offers,favorite];
 }
 
 
-class HomepageErrorState extends HomepageState{
+class OfferPageErrorState extends OfferPageState{
   final Failure failure;
 
-  HomepageErrorState(this.failure);
+  OfferPageErrorState(this.failure);
   @override
   List<Object?> get props => [failure];
 }

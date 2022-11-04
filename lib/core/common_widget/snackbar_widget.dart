@@ -5,10 +5,18 @@ import 'package:lottie/lottie.dart';
 import 'package:responsive_s/responsive_s.dart';
 
 class MessageSnackBar extends SnackBar {
-  final bool success;
   final Responsive responsive;
   final String errorMessage;
-   MessageSnackBar(BuildContext context, {Key? key,required this.responsive,required this.success,required this.errorMessage})
+  final Color borderColor;
+  final Color textHeaderColor;
+  final String textHeader;
+   MessageSnackBar(BuildContext context,
+       {Key? key,required this.responsive,
+         this.borderColor =ColorManager.error ,
+         this.textHeaderColor =ColorManager.error ,
+         this.textHeader =ConstantManager.error,
+         required this.errorMessage,
+          String animationString= AssetsManager.wrongAnimation})
       : super(key: key,
      content: SingleChildScrollView(
        child: Column(
@@ -25,7 +33,7 @@ class MessageSnackBar extends SnackBar {
                      padding: const EdgeInsets.only(right: 8.0),
                      child: SizedBox(
                        width: responsive.responsiveWidth(forUnInitialDevices: 15),
-                       child: Lottie.asset(success?AssetsManager.successAnimation:AssetsManager.wrongAnimation,fit: BoxFit.fill),
+                       child: Lottie.asset(animationString,fit: BoxFit.fill),
                      ),
                    ),
                  ],
@@ -37,8 +45,8 @@ class MessageSnackBar extends SnackBar {
                    crossAxisAlignment: CrossAxisAlignment.start,
                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                    children: [
-                     Text(success?ConstantManager.success:ConstantManager.error,
-                       style: Theme.of(context).textTheme.labelLarge?.copyWith(color: success?ColorManager.darkGreen:ColorManager.error),),
+                     Text(textHeader,
+                       style: Theme.of(context).textTheme.labelLarge?.copyWith(color: textHeaderColor),),
                      Text(errorMessage,
                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
                          color: ColorManager.black
@@ -63,7 +71,7 @@ class MessageSnackBar extends SnackBar {
      shape: RoundedRectangleBorder(
        borderRadius: BorderRadius.circular(15),
        side: BorderSide(
-         color: success ? ColorManager.lightGreen:ColorManager.error,
+         color: borderColor,
          width: 2
        )
      ),

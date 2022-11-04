@@ -16,4 +16,5 @@ class  ColorManager{
   static const Color darkGrey = Color(0xff707070);
   static const Color drawerColor = Color(0xff323940);
   static const Color favoriteColor = Color(0xFFFFE600);
+  static const Color bellColor = Color(0xFFFABE7C);
 }

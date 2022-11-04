@@ -26,10 +26,10 @@ class _OfferWidgetState extends State<OfferWidget> {
     final Responsive responsive = Responsive(context);
     return InkWell(
       onTap: () {
-        BlocProvider.of<OfferpageBloc>(context).navigateToDetailsUseCases(
+        BlocProvider.of<OfferPageBloc>(context).navigateToDetailsUseCases(
           context: context,
           offer: widget.offer,
-          bloc: BlocProvider.of<OfferpageBloc>(context)
+          bloc: BlocProvider.of<OfferPageBloc>(context)
         );
       },
       child: Padding(
@@ -82,10 +82,10 @@ class _OfferWidgetState extends State<OfferWidget> {
                     IconButton(
                         onPressed: () {
                           !widget.isFavorite
-                              ? BlocProvider.of<OfferpageBloc>(context).add(
-                                  HomepageAddToFavoriteEvent(widget.offer.id))
-                              : BlocProvider.of<OfferpageBloc>(context).add(
-                                  HomepageRemoverFromFavoriteEvent(
+                              ? BlocProvider.of<OfferPageBloc>(context).add(
+                                  OfferPageAddToFavoriteEvent(widget.offer.id))
+                              : BlocProvider.of<OfferPageBloc>(context).add(
+                                  OfferPageRemoverFromFavoriteEvent(
                                       widget.offer.id,));
                           setState(() {
                             widget.isFavorite = !widget.isFavorite;

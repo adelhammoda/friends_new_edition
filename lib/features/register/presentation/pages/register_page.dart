@@ -296,7 +296,6 @@ class RegisterPage extends StatelessWidget {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     MessageSnackBar(context,
                                         responsive: responsive,
-                                        success: false,
                                         errorMessage: state.failure.message));
                               });
                               return button;

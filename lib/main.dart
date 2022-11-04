@@ -21,7 +21,7 @@ void main() async{
 
 Future<void> initApp()async{
   await Firebase.initializeApp();
-  await di.init();
+  di.init();
   Directory root = await getApplicationDocumentsDirectory();
   Hive.init(root.path+ConstantManager.hivePath);
 }

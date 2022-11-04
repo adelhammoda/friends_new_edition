@@ -73,3 +73,8 @@ class AutoLoginFailure extends Failure{
 }
 
 
+class UserNotFoundInLocalStorageFailure extends Failure{
+  const UserNotFoundInLocalStorageFailure({required super.message, required super.statusCode});
+}
+
+

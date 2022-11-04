@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:friends/features/login/domain/entities/user_entity.dart';
+import 'package:friends/core/common_entity/user_entity.dart';
 
 import '../../../../core/exception/exception.dart';
 import '../../../../core/manager/string_manager.dart';

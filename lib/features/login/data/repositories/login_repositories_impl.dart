@@ -8,11 +8,10 @@ import 'package:friends/core/manager/string_manager.dart';
 import 'package:friends/core/routes/routes.dart';
 import 'package:friends/features/login/data/data_sources/login_local_data_source.dart';
 import 'package:friends/features/login/data/data_sources/login_remote_data_source.dart';
+import 'package:friends/features/login/data/models/user_model.dart';
 import 'package:friends/features/login/domain/repositories/login_repositories.dart';
-
-import '../../../../core/navigation/navigator.dart';
-import '../../../../core/network/network_info.dart';
-
+import 'package:friends/core/navigation/navigator.dart';
+import 'package:friends/core/network/network_info.dart';
 
 class LoginRepositoriesImpl implements LoginRepositories {
   LoginRemoteDataSource remote;
@@ -63,7 +62,7 @@ class LoginRepositoriesImpl implements LoginRepositories {
       required String email,
       required String password}) {
     try {
-      Go.to(context,Routes.register);
+      Go.to(context, Routes.register);
       return const Right(null);
     } catch (e) {
       debugPrint(e.toString());
@@ -87,23 +86,40 @@ class LoginRepositoriesImpl implements LoginRepositories {
   }
 
   @override
-  Future<Either<Failure, UserCredential>> loginWithApple() => _signIn(()=>remote.loginWithApple());
+  Future<Either<Failure, UserCredential>> loginWithApple() =>
+      _signIn(() async {
+        UserCredential u = await remote.loginWithApple();
+        UserModel userModel = UserModel.fromUserCredential(userCredential: u);
+        local.cashUser(user: userModel);
+        return u;
+      });
 
   @override
   Future<Either<Failure, UserCredential>> loginWithEmailAndPassword(
-      {required String email, required String password})  => _signIn(() async {
-      UserCredential u = await remote.loginWithEmailAndPassword(email: email, password: password);
-      local.cashUserEmailAndPassword(email: email, password: password);
-      return u;
-    });
+          {required String email, required String password}) =>
+      _signIn(() async {
+        UserCredential u = await remote.loginWithEmailAndPassword(
+            email: email, password: password);
+        local.cashUserEmailAndPassword(email: email, password: password);
+        return u;
+      });
 
   @override
-  Future<Either<Failure, UserCredential>> loginWithFacebook()  => _signIn(() =>
-       remote.loginWithFacebook());
+  Future<Either<Failure, UserCredential>> loginWithFacebook() =>
+      _signIn(() async {
+        UserCredential u = await remote.loginWithFacebook();
+      UserModel userModel = UserModel.fromUserCredential(userCredential: u);
+      local.cashUser(user: userModel);
+        return u;
+      }
+  );
 
   @override
-  Future<Either<Failure, UserCredential>> loginWithGoogle() => _signIn(() =>
-        remote.loginWithGoogle());
-
-
+  Future<Either<Failure, UserCredential>> loginWithGoogle() =>
+      _signIn(() async {
+        UserCredential u = await remote.loginWithGoogle();
+        UserModel userModel = UserModel.fromUserCredential(userCredential: u);
+        local.cashUser(user: userModel);
+        return u;
+      });
 }

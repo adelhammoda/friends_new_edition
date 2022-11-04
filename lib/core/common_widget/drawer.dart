@@ -3,12 +3,11 @@ import 'package:friends/core/manager/color_manager.dart';
 import 'package:friends/core/manager/icon_manager.dart';
 import 'package:friends/core/manager/size_manager.dart';
 import 'package:friends/core/manager/string_manager.dart';
-import 'package:friends/features/login/domain/entities/user_entity.dart';
+import 'package:friends/core/common_entity/user_entity.dart';
 import 'package:responsive_s/responsive_s.dart';
 
 class FriendsDrawer extends StatelessWidget {
-  final UserEntity user;
-
+  final UserEntity? user;
   const FriendsDrawer({Key? key, required this.user}) : super(key: key);
 
   @override
@@ -43,7 +42,7 @@ class FriendsDrawer extends StatelessWidget {
                 color: ColorManager.white,
                 thickness: 1,
               ),
-              Row(
+              user!=null?Row(
                 children: <Widget>[
                   const Padding(
                     padding: EdgeInsets.only(
@@ -61,13 +60,13 @@ class FriendsDrawer extends StatelessWidget {
                         ),
                   )
                 ],
-              ),
-              const Divider(
+              ):const SizedBox(),
+              user!=null?const Divider(
                 color: ColorManager.white,
                 thickness: 1,
-              ),
+              ):const SizedBox(),
               const Spacer(),
-              TextButton(
+              user!=null?TextButton(
                   onPressed: () {},
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -87,7 +86,7 @@ class FriendsDrawer extends StatelessWidget {
                             .copyWith(fontSize: SizeManager.listTileTitle),
                       )
                     ],
-                  )),
+                  )):const SizedBox(),
             ],
           ),
         ),
@@ -99,21 +98,19 @@ class FriendsDrawer extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(
           top: responsive.responsiveHeight(forUnInitialDevices: 6)),
-      child: CircleAvatar(
-        backgroundColor: ColorManager.white,
-        radius: 80,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(80),
-          child: FadeInImage(
-            image: NetworkImage(user.imageUrl ?? ""),
-            placeholder: const AssetImage(AssetsManager.userImagePlaceHolder),
-            imageErrorBuilder: (c, _, __) => Image.asset(
-              AssetsManager.userImagePlaceHolder,
-              fit: BoxFit.fill,
-            ),
-            placeholderFit: BoxFit.fill,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(80),
+        child: FadeInImage(
+          image: NetworkImage(user?.imageUrl ?? ""),
+          placeholder: const AssetImage(AssetsManager.userImagePlaceHolder),
+          imageErrorBuilder: (c, _, __) => Image.asset(
+            AssetsManager.userImagePlaceHolder,
             fit: BoxFit.fill,
           ),
+          placeholderFit: BoxFit.fill,
+          fit: BoxFit.fill,
+          width: responsive.responsiveWidth(forUnInitialDevices: 35),
+          height:responsive.responsiveWidth(forUnInitialDevices: 35) ,
         ),
       ),
     );
@@ -123,7 +120,7 @@ class FriendsDrawer extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: Text(
-        user.name,
+        user?.name??ConstantManager.stackHolderName,
         style: Theme.of(context)
             .textTheme
             .titleLarge!
@@ -136,7 +133,7 @@ class FriendsDrawer extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 10, bottom: 25),
       child: Text(
-        user.email,
+        user?.email??ConstantManager.stackHolderEmail,
         style: Theme.of(context).textTheme.labelMedium!.copyWith(
               fontSize: SizeManager.titleMedium,
               color: ColorManager.white,

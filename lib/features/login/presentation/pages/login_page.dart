@@ -5,6 +5,7 @@ import 'package:friends/core/common_widget/app_bar.dart';
 import 'package:friends/core/common_widget/background_widget.dart';
 import 'package:friends/core/common_widget/friends_button.dart';
 import 'package:friends/core/common_widget/input_field.dart';
+import 'package:friends/core/manager/color_manager.dart';
 import 'package:friends/core/manager/string_manager.dart';
 import 'package:friends/features/login/presentation/manager/login_bloc.dart';
 import 'package:friends/features/login/presentation/widgets/build_options_buttons.dart';
@@ -186,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                           ScaffoldMessenger.of(context).clearSnackBars();
                           ScaffoldMessenger.of(context).showSnackBar(
                               MessageSnackBar(context,
-                                responsive: _responsive,errorMessage: state.failure.message,success: false,));
+                                responsive: _responsive,errorMessage: state.failure.message));
                         });
                       }
                         final loginOption = FriendsButton(
@@ -218,7 +219,12 @@ class _LoginPageState extends State<LoginPage> {
                             ScaffoldMessenger.of(context).clearSnackBars();
                             ScaffoldMessenger.of(context).showSnackBar(
                                 MessageSnackBar(context,
-                                  responsive: _responsive,errorMessage: ConstantManager.success,success: true,));
+                                  responsive: _responsive,errorMessage: ConstantManager.success,
+                                  borderColor: ColorManager.lightGreen,
+                                  textHeader: StringManager.success,
+                                  animationString: AssetsManager.wrongAnimation,
+                                  textHeaderColor: ColorManager.darkGrey,
+                                ));
                           });
                           return loginOption;
                         }

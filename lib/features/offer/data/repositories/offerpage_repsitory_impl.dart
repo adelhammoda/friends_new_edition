@@ -10,17 +10,17 @@ import 'package:friends/core/network/network_info.dart';
 import 'package:friends/features/offer/data/data_sources/offerpage_local_data_source.dart';
 import 'package:friends/features/offer/data/data_sources/offerpage_remote_data_source.dart';
 import 'package:friends/features/offer/domain/entities/offer.dart';
-import 'package:friends/features/offer/domain/repositories/home_page_repository.dart';
+import 'package:friends/features/offer/domain/repositories/offer_page_repository.dart';
 import 'package:friends/features/offer/presentation/manager/offerpage_offer_bloc.dart';
-import 'package:friends/features/login/domain/entities/user_entity.dart';
+import 'package:friends/core/common_entity/user_entity.dart';
 import 'package:friends/features/offer/presentation/pages/offer_details_page.dart';
 
-class HomepageRepositoryImpl extends OfferPageRepository {
+class OfferPageRepositoryImpl extends OfferPageRepository {
   final OfferPageRemoteDataSource remote;
-  final OfferpageLocalDataSource local;
+  final OfferPageLocalDataSource local;
   final NetworkInfo networkInfo;
 
-  HomepageRepositoryImpl({
+  OfferPageRepositoryImpl({
     required this.remote,
     required this.local,
     required this.networkInfo,
@@ -136,7 +136,7 @@ class HomepageRepositoryImpl extends OfferPageRepository {
   Either<Failure, void> navigateToDetailsPage(
       {required BuildContext context,
       required OfferEntity offer,
-      required OfferpageBloc bloc}) {
+      required OfferPageBloc bloc}) {
     try {
       Navigator.of(context).push(
         MaterialPageRoute(
