@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_s/responsive_s.dart';
-
-import '../../../../core/common_widget/another_login_option.dart';
-import '../../../../core/common_widget/loader.dart';
-import '../../../../core/common_widget/snackbar_widget.dart';
-import '../manager/login_bloc.dart';
-import '../../../register/presentation/manager/register_bloc.dart' as register;
+import 'package:friends/core/common_widget/another_login_option.dart';
+import 'package:friends/core/common_widget/loader.dart';
+import 'package:friends/core/common_widget/snackbar_widget.dart';
+import 'package:friends/features/login/presentation/manager/login_bloc.dart';
+import 'package:friends/features/register/presentation/manager/register_bloc.dart' as register;
 
 Widget buildAuthOptionButton<bloc extends Bloc<blocEvent, blocState>, blocState,
     blocEvent>({
@@ -28,7 +27,6 @@ Widget buildAuthOptionButton<bloc extends Bloc<blocEvent, blocState>, blocState,
               context,
               responsive: responsive,
               errorMessage: state.failure.message,
-              success: false,
             ));
           });
           }
@@ -41,7 +39,6 @@ Widget buildAuthOptionButton<bloc extends Bloc<blocEvent, blocState>, blocState,
               context,
               responsive: responsive,
               errorMessage: state.failure.message,
-              success: false,
             ));
           });
         }

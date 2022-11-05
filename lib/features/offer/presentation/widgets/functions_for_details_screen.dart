@@ -4,14 +4,14 @@ import 'package:friends/core/manager/size_manager.dart';
 import 'package:friends/core/manager/string_manager.dart';
 import 'package:friends/features/offer/domain/entities/offer.dart';
 import 'package:friends/features/offer/presentation/manager/offerpage_offer_bloc.dart';
-import 'package:friends/features/login/domain/entities/user_entity.dart';
+import 'package:friends/core/common_entity/user_entity.dart';
 import 'package:responsive_s/responsive_s.dart';
 
 Widget buildUserSection(
-        OfferpageBloc homeBloc, OfferEntity offer, Responsive responsive) =>
+        OfferPageBloc homeBloc, OfferEntity offer, Responsive responsive) =>
     FutureBuilder<UserEntity?>(
         future: homeBloc
-            .loadUserDetails(HomepageLoadUserDetailsEvent(offer.offerOwnerId)),
+            .loadUserDetails(OfferPageLoadUserDetailsEvent(offer.offerOwnerId)),
         builder: (BuildContext context, AsyncSnapshot<UserEntity?> snapshot) {
           if (snapshot.hasData && snapshot.data != null) {
             return Row(

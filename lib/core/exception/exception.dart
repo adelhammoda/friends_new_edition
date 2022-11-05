@@ -69,3 +69,10 @@ class UserNotFoundException extends ExceptionBase{
     int code = StatusCode.userNotFound
   }):super(message,code);
 }
+
+class UserNotFoundInLocalStorageException extends ExceptionBase{
+  UserNotFoundInLocalStorageException({
+    String message = StringManager.noUserInLocalStorage,
+    int code = StatusCode.localStorage
+  }):super(message,code);
+}

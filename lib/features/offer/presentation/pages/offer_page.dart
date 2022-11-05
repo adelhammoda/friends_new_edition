@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:friends/core/common_widget/app_bar.dart';
-import 'package:friends/core/common_widget/drawer.dart';
 import 'package:friends/core/common_widget/loader.dart';
 import 'package:friends/core/common_widget/snackbar_widget.dart';
 import 'package:friends/core/manager/color_manager.dart';
@@ -13,17 +11,16 @@ import 'package:friends/features/offer/presentation/widgets/favorite_tab.dart';
 import 'package:friends/features/offer/presentation/widgets/offer_tab.dart';
 import 'package:friends/features/offer/presentation/widgets/offer_tab_bar.dart';
 import 'package:friends/features/offer/presentation/widgets/search_bar.dart';
-import 'package:friends/features/login/domain/entities/user_entity.dart';
 import 'package:responsive_s/responsive_s.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class OfferPage extends StatefulWidget {
+  const OfferPage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<OfferPage> createState() => _OfferPageState();
 }
 
-class _HomePageState extends State<HomePage>
+class _OfferPageState extends State<OfferPage>
     with SingleTickerProviderStateMixin {
   final TextEditingController controller = TextEditingController();
   ValueNotifier<int> index = ValueNotifier(0);
@@ -52,21 +49,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive(context);
     return Scaffold(
-      drawerEnableOpenDragGesture: true,
-      drawer: FriendsDrawer(
-        user: UserEntity(
-          email: "test@gmail.com",
-          imageUrl: null,
-          name: "Test",
-          user: "Student",
-          address: {},
-          subscribeId: '',
-        ),
-      ),
-      appBar: FriendsAppbar(
-        backButton: false,
-        containLogo: true,
-      ),
+
       body: Column(
         children: [
           SearchBar(
@@ -82,11 +65,11 @@ class _HomePageState extends State<HomePage>
                     index: index,
                   )),
           Expanded(
-              child: BlocConsumer<OfferpageBloc, HomepageState>(
+              child: BlocConsumer<OfferPageBloc, OfferPageState>(
                 buildWhen: (oldState,currentState){
                   return oldState!=currentState;
                 },
-                listenWhen: (oldState,currentState)=>currentState is HomepageInitialState||currentState is HomepageErrorState,
+                listenWhen: (oldState,currentState)=>currentState is OfferPageInitialState||currentState is OfferPageErrorState,
                 listener: (context, state) {
                   stateListener(state, responsive);
                 },
@@ -100,11 +83,11 @@ class _HomePageState extends State<HomePage>
                         FavoriteTab(
                             favorite:
                             BlocProvider
-                                .of<OfferpageBloc>(context)
+                                .of<OfferPageBloc>(context)
                                 .favorite,
                             listOfFavorite:
                             BlocProvider
-                                .of<OfferpageBloc>(context)
+                                .of<OfferPageBloc>(context)
                                 .offers
                                 ),
                       ],
@@ -117,12 +100,12 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Widget stateSwitcherForOffersTab(HomepageState state,
+  Widget stateSwitcherForOffersTab(OfferPageState state,
       Responsive responsive,) {
     switch (state.runtimeType) {
-      case HomepageInitialState:
+      case OfferPageInitialState:
         WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-          BlocProvider.of<OfferpageBloc>(context).add(HomepageLoadOffersEvent());
+          BlocProvider.of<OfferPageBloc>(context).add(OfferPageLoadOffersEvent());
         });
         return Center(
             child: SizedBox(
@@ -130,19 +113,19 @@ class _HomePageState extends State<HomePage>
               height: responsive.responsiveWidth(forUnInitialDevices: 20),
               child: const Loader(),
             ));
-      case HomepageLoadingState:
+      case OfferPageLoadingState:
         return Center(
             child: SizedBox(
               width: responsive.responsiveWidth(forUnInitialDevices: 20),
               height: responsive.responsiveWidth(forUnInitialDevices: 20),
               child: const Loader(),
             ));
-      case HomepageLoadedState:
+      case OfferPageLoadedState:
         return OfferTab(
-            offers: (state as HomepageLoadedState).offers,
+            offers: (state as OfferPageLoadedState).offers,
             favoritesOffersId: (state).favorite);
 
-      case HomepageErrorState:
+      case OfferPageErrorState:
         return  SizedBox(
             width: double.infinity,
             height: double.infinity,
@@ -161,16 +144,15 @@ class _HomePageState extends State<HomePage>
     }
   }
 
-  void stateListener(HomepageState state, Responsive responsive) {
+  void stateListener(OfferPageState state, Responsive responsive) {
     switch (state.runtimeType) {
-      case HomepageErrorState:
-        if ((state as HomepageErrorState).failure.statusCode ==
+      case OfferPageErrorState:
+        if ((state as OfferPageErrorState).failure.statusCode ==
             StatusCode.noData) {
           break;
         }
         ScaffoldMessenger.of(context).showSnackBar(MessageSnackBar(context,
             responsive: responsive,
-            success: false,
             errorMessage: state.failure.message));
         break;
     }

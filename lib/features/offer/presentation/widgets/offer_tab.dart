@@ -18,7 +18,7 @@ class OfferTab extends StatelessWidget {
       child: CustomRefreshIndicator(
 
         onRefresh: () async{
-         await BlocProvider.of<OfferpageBloc>(context).refreshOffers(HomepageRefreshEvent());
+         await BlocProvider.of<OfferPageBloc>(context).refreshOffers(OfferPageRefreshEvent());
         },
         builder: (BuildContext context, Widget child, IndicatorController controller) {
 

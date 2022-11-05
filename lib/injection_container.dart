@@ -1,9 +1,13 @@
 import 'package:friends/core/device_info/device_info.dart';
 import 'package:friends/core/network/network_info.dart';
+import 'package:friends/features/home_page/data/repositories/home_page_repository_impl.dart';
+import 'package:friends/features/home_page/domain/repositories/home_page_repository.dart';
+import 'package:friends/features/home_page/domain/use_cases/get_current_user.dart';
+import 'package:friends/features/home_page/presentation/manager/homepage_bloc.dart';
 import 'package:friends/features/offer/data/data_sources/offerpage_local_data_source.dart';
 import 'package:friends/features/offer/data/data_sources/offerpage_remote_data_source.dart';
 import 'package:friends/features/offer/data/repositories/offerpage_repsitory_impl.dart';
-import 'package:friends/features/offer/domain/repositories/home_page_repository.dart';
+import 'package:friends/features/offer/domain/repositories/offer_page_repository.dart';
 import 'package:friends/features/offer/domain/use_cases/fetch_all_offers_usecase.dart';
 import 'package:friends/features/offer/domain/use_cases/get_user_data_use_case.dart';
 import 'package:friends/features/offer/domain/use_cases/navigate_to_details_page_usecases.dart';
@@ -40,46 +44,37 @@ import 'package:friends/features/register/domain/use_cases/register_with_google_
 import 'package:friends/features/register/presentation/manager/register_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-
 import 'package:friends/features/offer/domain/use_cases/add_to_favorite_use_case.dart';
 import 'package:friends/features/offer/domain/use_cases/load_favorite_use_cases.dart';
 import 'package:friends/features/register/domain/repositories/register_repositories.dart';
+import 'package:friends/features/home_page/data/data_sources/home_page_local_data_source.dart';
 
-GetIt sl = GetIt.asNewInstance();
+GetIt sl = GetIt.I;
 
 Future<void> init() async {
   ///Features
   //login:
-  sl.registerFactory(() =>
-      LoginBloc(
-          createAccount: sl(),
-          forgetPassword: sl(),
-          loginWithEmailAndPassword: sl(),
-          loginWithGoogle: sl(),
-          loginWithFacebook: sl(),
-          loginWithApple: sl()));
+  sl.registerFactory<LoginBloc>(() => LoginBloc(
+      createAccount: sl(),
+      forgetPassword: sl(),
+      loginWithEmailAndPassword: sl(),
+      loginWithGoogle: sl(),
+      loginWithFacebook: sl(),
+      loginWithApple: sl()));
   //register
-  sl.registerFactory(() =>
-      RegisterBloc(
-          alreadyHaveAccountNavigator: sl(),
-          registerWithAppleUseCase: sl(),
-          registerWithEmailAndPasswordUseCase: sl(),
-          registerWithFacebookUseCase: sl(),
-          registerWithGoogleUseCase: sl()));
-  //on boarding
-  sl.registerFactory(() =>
-      OnBoardingBloc(
-          navigateToLoginUseCase: sl(),
-          navigateToRegisterUseCase: sl(),
-          tryAutoLoginUseCase: sl()));
-  sl.registerFactory(() => RegisterBloc(
+  sl.registerFactory<RegisterBloc>(() => RegisterBloc(
       alreadyHaveAccountNavigator: sl(),
       registerWithAppleUseCase: sl(),
       registerWithEmailAndPasswordUseCase: sl(),
       registerWithFacebookUseCase: sl(),
       registerWithGoogleUseCase: sl()));
-  //home page
-  sl.registerFactory<OfferpageBloc>(() => OfferpageBloc(
+  //on boarding
+  sl.registerFactory<OnBoardingBloc>(() => OnBoardingBloc(
+      navigateToLoginUseCase: sl(),
+      navigateToRegisterUseCase: sl(),
+      tryAutoLoginUseCase: sl()));
+  //offer page
+  sl.registerFactory<OfferPageBloc>(() => OfferPageBloc(
         searchOffersUseCase: sl(),
         getUserDataUseCases: sl(),
         fetchAllOffersUseCase: sl(),
@@ -88,41 +83,43 @@ Future<void> init() async {
         navigateToDetailsUseCases: sl(),
         removerFromFavoriteUseCases: sl(),
       ));
+  sl.registerFactory<HomepageBloc>(() => HomepageBloc(getCurrentUserUseCases: sl<GetCurrentUserUseCases>()));
+
 
   ///use cases
   // login use cases
   sl.registerLazySingleton<CreateAccountUseCases>(
-          () => CreateAccountUseCases(sl()));
+      () => CreateAccountUseCases(sl()));
   sl.registerLazySingleton<ForgetPasswordUseCases>(
-          () => ForgetPasswordUseCases(sl()));
+      () => ForgetPasswordUseCases(sl()));
   sl.registerLazySingleton<LoginWithEmailAndPasswordUseCases>(
-          () => LoginWithEmailAndPasswordUseCases(sl()));
+      () => LoginWithEmailAndPasswordUseCases(sl()));
   sl.registerLazySingleton<LoginWithGoogleUseCases>(
-          () => LoginWithGoogleUseCases(sl()));
+      () => LoginWithGoogleUseCases(sl()));
   sl.registerLazySingleton<LoginWithAppleUseCases>(
-          () => LoginWithAppleUseCases(sl()));
+      () => LoginWithAppleUseCases(sl()));
   sl.registerLazySingleton<LoginWithFacebookUseCases>(
-          () => LoginWithFacebookUseCases(sl()));
+      () => LoginWithFacebookUseCases(sl()));
   //register use cases
   sl.registerLazySingleton<AlreadyHaveAccountUseCase>(
-          () => AlreadyHaveAccountUseCase(repo: sl()));
+      () => AlreadyHaveAccountUseCase(repo: sl()));
   sl.registerLazySingleton<RegisterWithGoogleUseCase>(
-          () => RegisterWithGoogleUseCase(repo: sl()));
+      () => RegisterWithGoogleUseCase(repo: sl()));
   sl.registerLazySingleton<RegisterWithFacebookUseCase>(
-          () => RegisterWithFacebookUseCase(repo: sl()));
+      () => RegisterWithFacebookUseCase(repo: sl()));
   sl.registerLazySingleton<RegisterWithAppleUseCase>(
-          () => RegisterWithAppleUseCase(repo: sl()));
+      () => RegisterWithAppleUseCase(repo: sl()));
   sl.registerLazySingleton<RegisterWithEmailAndPasswordUseCase>(
-          () => RegisterWithEmailAndPasswordUseCase(repo: sl()));
+      () => RegisterWithEmailAndPasswordUseCase(repo: sl()));
 //on boarding use cases
-  sl.registerLazySingleton<NavigateToLoginUseCase>(() =>
-      NavigateToLoginUseCase(sl()));
-  sl.registerLazySingleton<NavigateToRegisterUseCase>(() =>
-      NavigateToRegisterUseCase(sl()));
-  sl.registerLazySingleton<TryAutoLoginUseCase>(() =>
-      TryAutoLoginUseCase(sl()));
-      () => RegisterWithEmailAndPasswordUseCase(repo: sl());
-  //home page use cases
+  sl.registerLazySingleton<NavigateToLoginUseCase>(
+      () => NavigateToLoginUseCase(sl()));
+  sl.registerLazySingleton<NavigateToRegisterUseCase>(
+      () => NavigateToRegisterUseCase(sl()));
+  sl.registerLazySingleton<TryAutoLoginUseCase>(
+      () => TryAutoLoginUseCase(sl()));
+  () => RegisterWithEmailAndPasswordUseCase(repo: sl());
+  //offer page use cases
   sl.registerLazySingleton<SearchOffersUseCase>(
       () => SearchOffersUseCase(sl()));
   sl.registerLazySingleton<GetUserDataUseCases>(
@@ -137,61 +134,56 @@ Future<void> init() async {
       () => NavigateToDetailsUseCases(sl()));
   sl.registerLazySingleton<RemoveFromFavoriteUseCase>(
       () => RemoveFromFavoriteUseCase(sl()));
-
+  //home page use cases
+  sl.registerLazySingleton(() => GetCurrentUserUseCases(sl<HomePageRepository>()));
   ///repositories
   //login repositories
   sl.registerLazySingleton<LoginRepositories>(() =>
       LoginRepositoriesImpl(remote: sl(), local: sl(), networkInfo: sl()));
   //register repositories
-  sl.registerLazySingleton<RegisterRepositories>(() =>
-      RegisterRepositoriesImpl(
-          remoteDataSource: sl(),
-          localDataSource: sl(),
-          deviceInfo: sl(),
-          networkInfo: sl()));
-  //on boarding use cases
-  sl.registerLazySingleton<OnBoardingRepository>(() =>
-      OnBoardingRepositoryImpl(remoteDataSource: sl(),
-          localDataSource: sl(),
-          deviceInfo: sl(),
-          networkConnection: sl()));
   sl.registerLazySingleton<RegisterRepositories>(() => RegisterRepositoriesImpl(
       remoteDataSource: sl(),
       localDataSource: sl(),
       deviceInfo: sl(),
       networkInfo: sl()));
-  //home page repository
+  //on boarding use cases
+  sl.registerLazySingleton<OnBoardingRepository>(() => OnBoardingRepositoryImpl(
+      remoteDataSource: sl(),
+      localDataSource: sl(),
+      deviceInfo: sl(),
+      networkConnection: sl()));
+  //offer page repository
   sl.registerLazySingleton<OfferPageRepository>(() =>
-      HomepageRepositoryImpl(remote: sl(), local: sl(), networkInfo: sl()));
-
+      OfferPageRepositoryImpl(remote: sl(), local: sl(), networkInfo: sl()));
+  //home page repository
+  sl.registerLazySingleton<HomePageRepository>(() => HomePageRepositoryImpl(sl<HomePageLocalDataSource>()));
   ///data source
   //login
   sl.registerLazySingleton<LoginRemoteDataSource>(
-          () => LoginRemoteDataSourceImpl());
+      () => LoginRemoteDataSourceImpl());
   sl.registerLazySingleton<LoginLocalDataSource>(
-          () => LoginLocalDataSourceImpl());
+      () => LoginLocalDataSourceImpl());
 //register
-  sl.registerLazySingleton<RegisterRemoteDataSource>(
-          () => RegisterRemoteDataSourceImpl());
-  sl.registerLazySingleton<RegisterLocalDataSource>(
-          () => RegisterLocalDataSourceImpl());
-//on boarding
-  sl.registerLazySingleton<OnBoardingLocalDataSource>(() => OnBoardingLocalDataSourceImpl());
-  sl.registerLazySingleton<OnBoardingRemoteDataSource>(() => OnBoardingRemoteDataSourceImpl());
   sl.registerLazySingleton<RegisterRemoteDataSource>(
       () => RegisterRemoteDataSourceImpl());
   sl.registerLazySingleton<RegisterLocalDataSource>(
       () => RegisterLocalDataSourceImpl());
+//on boarding
+  sl.registerLazySingleton<OnBoardingLocalDataSource>(
+      () => OnBoardingLocalDataSourceImpl());
+  sl.registerLazySingleton<OnBoardingRemoteDataSource>(
+      () => OnBoardingRemoteDataSourceImpl());
+  //offer
   sl.registerLazySingleton<OfferPageRemoteDataSource>(
-      () => HomePageRemoteDataSourceImpl());
-  sl.registerLazySingleton<OfferpageLocalDataSource>(
-      () => HomePageLocalDataSourceImpl());
-
+      () => OfferPageRemoteDataSourceImpl());
+  sl.registerLazySingleton<OfferPageLocalDataSource>(
+      () => OfferPageLocalDataSourceImpl());
+  sl.registerLazySingleton<HomePageLocalDataSource>(() => HomePageLocalDataSourceImpl());
   ///core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
   sl.registerLazySingleton<DeviceInfo>(() => DeviceInfoImpl());
 
   ///External
   sl.registerLazySingleton<InternetConnectionChecker>(
-          () => InternetConnectionChecker());
+      () => InternetConnectionChecker());
 }

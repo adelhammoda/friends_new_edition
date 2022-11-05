@@ -1,68 +1,68 @@
 part of 'offerpage_offer_bloc.dart';
 
 @immutable
-abstract class HomepageEvent extends Equatable {}
+abstract class OfferPageEvent extends Equatable {}
 
-class HomepageLoadOffersEvent extends HomepageEvent {
-  HomepageLoadOffersEvent();
+class OfferPageLoadOffersEvent extends OfferPageEvent {
+  OfferPageLoadOffersEvent();
 
   @override
   List<Object?> get props => [];
 }
 
-class HomepageRefreshEvent extends HomepageEvent {
+class OfferPageRefreshEvent extends OfferPageEvent {
   @override
   List<Object?> get props => [];
 }
 
-class HomepageSearchEvent extends HomepageEvent{
+class OfferPageSearchEvent extends OfferPageEvent{
   final String searchKey;
 
-  HomepageSearchEvent(this.searchKey);
+  OfferPageSearchEvent(this.searchKey);
   @override
   List<Object?> get props => [searchKey];
 }
 
 
-class HomepageLoadFavoriteEvent extends HomepageEvent{
+class OfferPageLoadFavoriteEvent extends OfferPageEvent{
 
-  HomepageLoadFavoriteEvent( );
+  OfferPageLoadFavoriteEvent( );
   @override
   List<Object?> get props =>[];
 }
-class HomepageAddToFavoriteEvent extends HomepageEvent{
+class OfferPageAddToFavoriteEvent extends OfferPageEvent{
   final  String offerId;
 
-  HomepageAddToFavoriteEvent(this.offerId);
+  OfferPageAddToFavoriteEvent(this.offerId);
 
 
   @override
   List<Object?> get props => [];
 
 }
-class HomepageNavigateToDetailsEvent extends HomepageEvent{
+class OfferPageNavigateToDetailsEvent extends OfferPageEvent{
   final BuildContext context;
   final OfferEntity offer;
-  final OfferpageBloc blocValue;
+  final OfferPageBloc blocValue;
 
-  HomepageNavigateToDetailsEvent(this.offer, this.context, this.blocValue);
+  OfferPageNavigateToDetailsEvent(this.offer, this.context, this.blocValue);
 
   @override
   List<Object?> get props => [offer];
 }
 
-class HomepageLoadUserDetailsEvent extends HomepageEvent{
+class OfferPageLoadUserDetailsEvent extends OfferPageEvent{
   final String userId;
 
-  HomepageLoadUserDetailsEvent(this.userId);
+  OfferPageLoadUserDetailsEvent(this.userId);
   @override
   List<Object?> get props => [userId];
 }
 
-class HomepageRemoverFromFavoriteEvent extends HomepageEvent{
+class OfferPageRemoverFromFavoriteEvent extends OfferPageEvent{
   final String offerId;
 
-  HomepageRemoverFromFavoriteEvent(this.offerId);
+  OfferPageRemoverFromFavoriteEvent(this.offerId);
   @override
   List<Object?> get props => [offerId];
 

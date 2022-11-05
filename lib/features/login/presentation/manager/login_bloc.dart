@@ -6,12 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:friends/core/failure/failure.dart';
 import 'package:friends/core/manager/string_manager.dart';
 import 'package:friends/features/login/domain/use_cases/create_account_usecase.dart';
-
-import '../../domain/use_cases/forget_password_usecase.dart';
-import '../../domain/use_cases/login_with_apple_usecase.dart';
-import '../../domain/use_cases/login_with_email_usecase.dart';
-import '../../domain/use_cases/login_with_facebook_usecase.dart';
-import '../../domain/use_cases/login_with_google_usecase.dart';
+import 'package:friends/features/login/domain/use_cases/forget_password_usecase.dart';
+import 'package:friends/features/login/domain/use_cases/login_with_apple_usecase.dart';
+import 'package:friends/features/login/domain/use_cases/login_with_email_usecase.dart';
+import 'package:friends/features/login/domain/use_cases/login_with_facebook_usecase.dart';
+import 'package:friends/features/login/domain/use_cases/login_with_google_usecase.dart';
 
 part 'login_event.dart';
 

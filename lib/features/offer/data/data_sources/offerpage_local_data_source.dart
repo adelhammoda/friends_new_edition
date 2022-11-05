@@ -4,7 +4,7 @@ import 'package:friends/core/manager/string_manager.dart';
 import 'package:friends/features/offer/domain/entities/offer.dart';
 import 'package:hive/hive.dart';
 
-abstract class OfferpageLocalDataSource {
+abstract class OfferPageLocalDataSource {
   ///get all favorites from hive data base.
   Future<Set<String>> getAllFavorite();
 
@@ -20,7 +20,7 @@ abstract class OfferpageLocalDataSource {
   Future<void> removerFromFavorite({required String offerId}) ;
 }
 
-class HomePageLocalDataSourceImpl extends OfferpageLocalDataSource {
+class OfferPageLocalDataSourceImpl extends OfferPageLocalDataSource {
   @override
   Future<Set<String>> getAllFavorite() async {
     Box<String> box = await Hive.openBox<String>(

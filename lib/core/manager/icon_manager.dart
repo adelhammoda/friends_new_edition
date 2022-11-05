@@ -36,6 +36,3 @@ class MyFlutterApp {
   static const IconData favoriteEnabled = IconData(0xe80a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData cw = IconData(0xe80d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
-
-
-

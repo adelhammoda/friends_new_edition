@@ -95,7 +95,6 @@ static  ThemeData getAllThemeData(){
           ),
         ),
         inputDecorationTheme: InputDecorationTheme(
-
           enabledBorder: _inputBorder,
           focusedBorder:_inputBorder ,
           // focusColor: ColorManager.lightGreen,

@@ -16,7 +16,7 @@ class OfferDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive(context);
-    OfferpageBloc? homeBloc;
+    OfferPageBloc? homeBloc;
     OfferEntity? offer;
     RouteSettings settings = ModalRoute.of(context)!.settings;
     if (settings.arguments is Map &&
@@ -28,7 +28,7 @@ class OfferDetailsPage extends StatelessWidget {
       Go.back(context, null);
     }
 
-    return BlocProvider<OfferpageBloc>.value(
+    return BlocProvider<OfferPageBloc>.value(
       value: homeBloc!,
       child: Scaffold(
         appBar: FriendsAppbar(
@@ -50,7 +50,7 @@ class OfferDetailsPage extends StatelessWidget {
     );
   }
   Widget _buildBody(Responsive responsive,BuildContext context,OfferEntity offer,
-      OfferpageBloc homeBloc)=> Padding(
+      OfferPageBloc homeBloc)=> Padding(
     padding: EdgeInsets.symmetric(
       horizontal:
       responsive.responsiveWidth(forUnInitialDevices: 10),

@@ -19,7 +19,7 @@ abstract class OfferPageRemoteDataSource{
 
 
 
-class HomePageRemoteDataSourceImpl extends OfferPageRemoteDataSource{
+class OfferPageRemoteDataSourceImpl extends OfferPageRemoteDataSource{
   @override
   Future<List<OfferModel>> fetchOffers() async{
     DataSnapshot snapshot = await FirebaseDatabase.instance.ref(

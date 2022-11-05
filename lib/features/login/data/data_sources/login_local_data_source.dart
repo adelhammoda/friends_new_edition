@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:friends/core/exception/exception.dart';
 import 'package:friends/core/manager/string_manager.dart';
+import 'package:friends/features/login/data/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class LoginLocalDataSource {
@@ -19,6 +20,8 @@ abstract class LoginLocalDataSource {
   ///{'email' : email,'password':password}
   ///throw [CashException] when having any problem
   Future<Map<String, String>> getCashedEmailAndPassword();
+  ///cash user in local storage
+  Future<void> cashUser({required UserModel user});
 }
 ///implement class [LoginLocalDataSource] to define methods
 ///content.
@@ -58,5 +61,12 @@ class LoginLocalDataSourceImpl implements LoginLocalDataSource {
         throw const FormatException(StringManager.decodedCashedDataMessage);
       }
     }
+  }
+
+  @override
+  Future<void> cashUser({required UserModel user})async {
+    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    final String cashedString = jsonEncode(user.toJson());
+    sharedPreferences.setString(ConstantManager.cashedUser, cashedString);
   }
 }

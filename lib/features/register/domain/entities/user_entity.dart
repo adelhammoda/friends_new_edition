@@ -1,3 +1,3 @@
 
 
-export '../../../login/domain/entities/user_entity.dart';
+export '../../../../core/common_entity/user_entity.dart';

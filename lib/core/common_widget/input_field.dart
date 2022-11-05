@@ -53,8 +53,8 @@ class FriendInputField extends StatelessWidget {
         minLines: 1,
         maxLines: maxLines,
         cursorColor: ColorManager.darkGreen,
+        style: Theme.of(context).textTheme.labelMedium,
         decoration: InputDecoration(
-
           errorMaxLines: 3,
           suffixText: suffixText,
           prefixText: prefixText,

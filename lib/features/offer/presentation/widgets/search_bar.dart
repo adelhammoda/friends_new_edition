@@ -24,8 +24,8 @@ class SearchBar extends StatelessWidget {
       child: FriendInputField(
         onChanges: (val) {
           if (val != null) {
-            BlocProvider.of<OfferpageBloc>(context)
-                .add(HomepageSearchEvent(val));
+            BlocProvider.of<OfferPageBloc>(context)
+                .add(OfferPageSearchEvent(val));
           }
         },
         icon: const Icon(Icons.search),

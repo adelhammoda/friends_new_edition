@@ -50,6 +50,10 @@ class StringManager {
   "We can't add any data to cash.";
   static const cantFetchUserErrorMessage =
   "We can't fetch the owner of this offer.";
+  static const noUserInLocalStorage =
+  "There is no user found in local storage. please login again or register.If this failure still appearing report us";
+    static const youAreNotLoggedIn =
+  "You are not logged in.You can browse the app.but some feature will still missing";
 
   //validation message
   static const requiredField = "This Field must be filled with data";
@@ -87,6 +91,7 @@ class StringManager {
   static const deleteAccount = "Delete account";
   static const logout = "Logout";
   static const description = "Description";
+  static const success = "Success";
 
   static const or = "or";
 }
@@ -113,6 +118,7 @@ class ConstantManager {
   ///
   /// users type
   static const String studentType = "Student";
+  static const String centerType = "Center";
 
   // firebase constant
   static const String usersRef = "users";
@@ -142,6 +148,9 @@ class ConstantManager {
   static const String hiveBoxNameForOffer = "offers_box";
   static const String hiveCollectionName = "friends_collection";
   static const Set<String> hiveBoxesName = {hiveBoxNameForOffer};
+  ///stackHolder
+  static const String stackHolderEmail= "test@gmail.com";
+  static const String stackHolderName = "User";
 }
 
 class AssetsManager {
@@ -175,4 +184,5 @@ class AssetsManager {
   static const String wrongAnimation = "assets/lottie/error.json";
   static const String offerPlaceHolder = "assets/lottie/offer_placeholder.json";
   static const String shiningAnimation = "assets/lottie/shining.json";
+  static const String bellAnimation = "assets/lottie/bell.json";
 }
