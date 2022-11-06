@@ -76,3 +76,12 @@ class UserNotFoundInLocalStorageException extends ExceptionBase{
     int code = StatusCode.localStorage
   }):super(message,code);
 }
+
+
+class FetchSubscriptionException extends ExceptionBase{
+  FetchSubscriptionException({
+    String message = StringManager.fetchSubscriptionException,
+    int code = StatusCode.firebase
+  }):super(message,code);
+}
+
