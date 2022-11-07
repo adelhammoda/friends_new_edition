@@ -16,19 +16,52 @@ abstract class SubscriptionLocalDataSource {
 }
 
 
-class SubscriptionLocalDataSourceImpl implements SubscriptionLocalDataSource{
+class SubscriptionLocalDataSourceImpl implements SubscriptionLocalDataSource {
 
-  final Box<String> _hiveBox = Hive.box(ConstantManager.hiveBoxNameForSubscription);
+
   @override
-  Future<List<SubscriptionEntity>> getCashedSubscriptions() async{
-    List<String> stringList = _hiveBox.values.toList();
-    List<Map> jsonList = stringList.map((string) => jsonDecode(string) as Map).toList();
-    List<SubscriptionEntity> subscriptionList = jsonList.map((json) => SubscriptionModel.fromJson(json)).toList();
-    return subscriptionList;
+  Future<List<SubscriptionEntity>> getCashedSubscriptions() async {
+    if(Hive.isBoxOpen(ConstantManager.hiveBoxNameForSubscription)) {
+      final Box<String> hiveBox = Hive.box(
+          ConstantManager.hiveBoxNameForSubscription);
+      List<String> stringList = hiveBox.values.toList();
+      List<Map> jsonList = stringList.map((string) => jsonDecode(string) as Map)
+          .toList();
+      List<SubscriptionEntity> subscriptionList = jsonList.map((json) =>
+          SubscriptionModel.fromJson(json)).toList();
+      return subscriptionList;
+    }else{
+      final Box<String> hiveBox =await Hive.openBox(ConstantManager.hiveBoxNameForSubscription);
+      hiveBox.clear();
+      List<String> stringList = hiveBox.values.toList();
+      List<Map> jsonList = stringList.map((string) => jsonDecode(string) as Map)
+          .toList();
+      List<SubscriptionEntity> subscriptionList = jsonList.map((json) =>
+          SubscriptionModel.fromJson(json)).toList();
+      return subscriptionList;
+    }
   }
 
   @override
-  Future<void> cashSubscriptions({required List<SubscriptionEntity> subscriptions}) async{
-    await _hiveBox.addAll(subscriptions.map((e) => jsonEncode((e as SubscriptionModel).toJson())));
+  Future<void> cashSubscriptions(
+      {required List<SubscriptionEntity> subscriptions}) async {
+    if(!Hive.isBoxOpen(ConstantManager.hiveBoxNameForSubscription)){
+      final Box<String> hiveBox=await Hive.openBox<String>(ConstantManager.hiveBoxNameForSubscription);
+      final setOfSubscription = await getCashedSubscriptions();
+      for(SubscriptionEntity cashed in setOfSubscription){
+        for(SubscriptionEntity remote in subscriptions){
+          if(remote.id==cashed.id){
+            await hiveBox.add(jsonEncode((remote as SubscriptionModel).toJson()));
+          }
+        }
+      }
+    }else{
+      final Box<String> hiveBox =  Hive.box<String>(ConstantManager.hiveBoxNameForSubscription);
+      await hiveBox.addAll(subscriptions.map((e) =>
+          jsonEncode((e as SubscriptionModel).toJson())));
+      Hive.close();
+    }
+
+
   }
 }

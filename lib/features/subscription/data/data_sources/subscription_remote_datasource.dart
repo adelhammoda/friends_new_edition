@@ -29,9 +29,9 @@ class SubscriptionRemoteDataSourceImpl implements SubscriptionRemoteDataSource{
       });
       return res;
     }else if(data == null ){
-      throw FetchSubscriptionException();
+      throw NoDataException();
     }else {
-      throw Exception();
+      throw FetchSubscriptionException();
     }
   }
 }

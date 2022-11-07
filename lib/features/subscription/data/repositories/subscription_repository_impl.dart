@@ -34,7 +34,11 @@ class SubscriptionRepositoryImpl extends SubscriptionRepository {
     } on NetworkException catch (e) {
       debugPrint(e.message);
       return Left(NetworkFailure(message: e.message));
-    } catch (e) {
+    }on NoDataException catch(e){
+      debugPrint(e.message);
+      return const Left(NoDataFailure());
+    }
+    catch (e) {
       debugPrint(e.toString());
       return const Left(UnKnownFailure());
     }
@@ -47,6 +51,7 @@ class SubscriptionRepositoryImpl extends SubscriptionRepository {
       final list = await local.getCashedSubscriptions();
       return Right(list);
     } catch (e) {
+      debugPrint(e.toString());
       return const Left(CashFailure());
     }
   }

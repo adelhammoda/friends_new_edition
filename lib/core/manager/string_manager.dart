@@ -94,8 +94,10 @@ class StringManager {
   static const logout = "Logout";
   static const description = "Description";
   static const success = "Success";
-
   static const or = "or";
+  static const from = "from";
+  static const to = "to";
+  static const scannedBy = "ScannedBy";
 }
 
 class ConstantManager {
@@ -200,4 +202,5 @@ class AssetsManager {
   static const String offerPlaceHolder = "assets/lottie/offer_placeholder.json";
   static const String shiningAnimation = "assets/lottie/shining.json";
   static const String bellAnimation = "assets/lottie/bell.json";
+  static const String noNetworkAnimation = "assets/lottie/no_network.json";
 }

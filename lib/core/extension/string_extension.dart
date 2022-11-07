@@ -40,6 +40,11 @@ extension StringEx on String{
   }
 
 
+  String capitalizeTheFirstCharacter(){
+    return this[0].toUpperCase()+substring(1);
+  }
+
+
 // String tr(){
 //   return AppLocalizations.of(context)?.translate(this)??this;
 //

@@ -98,8 +98,10 @@ class OfferPageBloc extends Bloc<OfferPageEvent, OfferPageState> {
               // ignore: invalid_use_of_visible_for_testing_member
               emit(OfferPageErrorState(failure)), (favoriteOffers) {
         favorite = favoriteOffers;
-        // ignore: invalid_use_of_visible_for_testing_member
-        emit(OfferPageLoadedState(offers, favoriteOffers));
+        if(!isClosed) {
+          // ignore: invalid_use_of_visible_for_testing_member
+          emit(OfferPageLoadedState(offers, favoriteOffers));
+        }
       });
     });
   }

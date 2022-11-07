@@ -42,6 +42,13 @@ import 'package:friends/features/register/domain/use_cases/register_with_apple_u
 import 'package:friends/features/register/domain/use_cases/register_with_facebook_usecase.dart';
 import 'package:friends/features/register/domain/use_cases/register_with_google_usecase.dart';
 import 'package:friends/features/register/presentation/manager/register_bloc.dart';
+import 'package:friends/features/subscription/data/data_sources/subscription_local_datasource.dart';
+import 'package:friends/features/subscription/data/data_sources/subscription_remote_datasource.dart';
+import 'package:friends/features/subscription/data/repositories/subscription_repository_impl.dart';
+import 'package:friends/features/subscription/domain/repositories/subscription_repostiory.dart';
+import 'package:friends/features/subscription/domain/use_cases/fetch_all_packages.dart';
+import 'package:friends/features/subscription/domain/use_cases/get_packages_from_cash.dart';
+import 'package:friends/features/subscription/presentation/manager/subscription_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:friends/features/offer/domain/use_cases/add_to_favorite_use_case.dart';
@@ -83,8 +90,11 @@ Future<void> init() async {
         navigateToDetailsUseCases: sl(),
         removerFromFavoriteUseCases: sl(),
       ));
-  sl.registerFactory<HomepageBloc>(() => HomepageBloc(getCurrentUserUseCases: sl<GetCurrentUserUseCases>()));
-
+  sl.registerFactory<HomepageBloc>(
+      () => HomepageBloc(getCurrentUserUseCases: sl<GetCurrentUserUseCases>()));
+  //subscriptions
+  sl.registerFactory<SubscriptionBloc>(() => SubscriptionBloc(
+      fetchAllPackagesUseCases: sl(), getPackagesFromCashUseCases: sl()));
 
   ///use cases
   // login use cases
@@ -135,7 +145,14 @@ Future<void> init() async {
   sl.registerLazySingleton<RemoveFromFavoriteUseCase>(
       () => RemoveFromFavoriteUseCase(sl()));
   //home page use cases
-  sl.registerLazySingleton(() => GetCurrentUserUseCases(sl<HomePageRepository>()));
+  sl.registerLazySingleton(
+      () => GetCurrentUserUseCases(sl<HomePageRepository>()));
+  //subscriptions
+  sl.registerLazySingleton<FetchAllPackagesUseCases>(
+      () => FetchAllPackagesUseCases(sl()));
+  sl.registerLazySingleton<GetPackagesFromCashUseCases>(
+      () => GetPackagesFromCashUseCases(repository: sl()));
+
   ///repositories
   //login repositories
   sl.registerLazySingleton<LoginRepositories>(() =>
@@ -156,7 +173,12 @@ Future<void> init() async {
   sl.registerLazySingleton<OfferPageRepository>(() =>
       OfferPageRepositoryImpl(remote: sl(), local: sl(), networkInfo: sl()));
   //home page repository
-  sl.registerLazySingleton<HomePageRepository>(() => HomePageRepositoryImpl(sl<HomePageLocalDataSource>()));
+  sl.registerLazySingleton<HomePageRepository>(
+      () => HomePageRepositoryImpl(sl<HomePageLocalDataSource>()));
+  //subscriptions
+  sl.registerLazySingleton<SubscriptionRepository>(() =>
+      SubscriptionRepositoryImpl(remote: sl(), local: sl(), networkInfo: sl()));
+
   ///data source
   //login
   sl.registerLazySingleton<LoginRemoteDataSource>(
@@ -178,7 +200,12 @@ Future<void> init() async {
       () => OfferPageRemoteDataSourceImpl());
   sl.registerLazySingleton<OfferPageLocalDataSource>(
       () => OfferPageLocalDataSourceImpl());
-  sl.registerLazySingleton<HomePageLocalDataSource>(() => HomePageLocalDataSourceImpl());
+  sl.registerLazySingleton<HomePageLocalDataSource>(
+      () => HomePageLocalDataSourceImpl());
+  //subscription
+  sl.registerLazySingleton<SubscriptionRemoteDataSource>(() => SubscriptionRemoteDataSourceImpl());
+  sl.registerLazySingleton<SubscriptionLocalDataSource>(() => SubscriptionLocalDataSourceImpl());
+
   ///core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
   sl.registerLazySingleton<DeviceInfo>(() => DeviceInfoImpl());
