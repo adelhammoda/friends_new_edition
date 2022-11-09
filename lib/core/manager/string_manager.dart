@@ -54,6 +54,8 @@ class StringManager {
   "There is no user found in local storage. please login again or register.If this failure still appearing report us";
     static const youAreNotLoggedIn =
   "You are not logged in.You can browse the app.but some feature will still missing";
+    static const fetchSubscriptionException =
+  "We faced some problem in fetching packages.";
 
   //validation message
   static const requiredField = "This Field must be filled with data";
@@ -92,8 +94,10 @@ class StringManager {
   static const logout = "Logout";
   static const description = "Description";
   static const success = "Success";
-
   static const or = "or";
+  static const from = "from";
+  static const to = "to";
+  static const scannedBy = "ScannedBy";
 }
 
 class ConstantManager {
@@ -120,9 +124,10 @@ class ConstantManager {
   static const String studentType = "Student";
   static const String centerType = "Center";
 
-  // firebase constant
+  /// firebase constant
   static const String usersRef = "users";
   static const String offersRef = "offers";
+  static const String subscriptionRef = "subscription";
   ///public
   static const String syrianNumber = "+963";
   ///map keys
@@ -140,12 +145,24 @@ class ConstantManager {
   static const String offerValue="value";
   static const String offerImages="images";
   static const String offerDiscount="discount";
+  ///subscription
+  static const String subscriptionName = "s_name";
+  static const String subscriptionID = "s_id";
+  static const String subscriptionImageUrl = "s_imageUrl";
+  static const String subscriptionBorderColor = "s_bordColor";
+  static const String subscriptionEndDate = "s_endDate";
+  static const String subscriptionStartDate = "s_StartDate";
+  static const String subscriptionBackGroundColor = "s_backGroundColor";
+  static const String subscriptionCurrency = "s_Currency";
+  static const String subscriptionPrice = "s_price";
+  static const String subscriptionDescription = "s_description";
   ///users
   static const String userId = "user_id";
   ///hive
   static const String hivePath = "./hive";
   static const String hiveDatabaseName = "offers_database";
   static const String hiveBoxNameForOffer = "offers_box";
+  static const String hiveBoxNameForSubscription = "subscription_box";
   static const String hiveCollectionName = "friends_collection";
   static const Set<String> hiveBoxesName = {hiveBoxNameForOffer};
   ///stackHolder
@@ -185,4 +202,5 @@ class AssetsManager {
   static const String offerPlaceHolder = "assets/lottie/offer_placeholder.json";
   static const String shiningAnimation = "assets/lottie/shining.json";
   static const String bellAnimation = "assets/lottie/bell.json";
+  static const String noNetworkAnimation = "assets/lottie/no_network.json";
 }

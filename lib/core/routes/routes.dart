@@ -8,12 +8,15 @@ import 'package:friends/features/offer/presentation/manager/offerpage_offer_bloc
 import 'package:friends/features/login/presentation/pages/login_page.dart';
 import 'package:friends/features/offer/presentation/pages/offer_page.dart';
 import 'package:friends/features/register/presentation/pages/register_page.dart';
+import 'package:friends/features/subscription/presentation/manager/subscription_bloc.dart';
+import 'package:friends/features/subscription/presentation/pages/subscription_page.dart';
 import 'package:friends/injection_container.dart' as dl;
 import 'package:friends/features/on_boarding/presentation/pages/onboarding_page.dart';
 
 class RoutesManager {
   static Map<String, Widget Function(BuildContext context)> routes() {
     return {
+      Routes.subscriptionsPackages:(c)=>routesWhere(Routes.subscriptionsPackages),
       Routes.homePage: (c) => routesWhere(Routes.homePage),
       Routes.login: (c) => routesWhere(Routes.login),
       Routes.offerDetails: (c) => routesWhere(Routes.offerDetails),
@@ -24,6 +27,11 @@ class RoutesManager {
 
   static Widget routesWhere(String routeName) {
     switch (routeName) {
+      case Routes.subscriptionsPackages:
+        return BlocProvider<SubscriptionBloc>(
+          create: (c) => dl.sl<SubscriptionBloc>(),
+          child: const SubscriptionPage(),
+        );
       case Routes.offer:
         return BlocProvider<OfferPageBloc>(
             create: (c) => dl.sl<OfferPageBloc>(), child: const OfferPage());
@@ -56,4 +64,5 @@ class Routes {
   static const forgetPassword = '/forgetPassword';
   static const onBoarding = "/onBoarding";
   static const offerDetails = '/offer_details';
+  static const subscriptionsPackages = '/subscriptions_packages';
 }

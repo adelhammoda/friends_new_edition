@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
       Icon(MyFlutterApp.home),
       Icon(MyFlutterApp.cash),
       RoutesManager.routesWhere(Routes.offer),
-      Icon(MyFlutterApp.bell),
+      RoutesManager.routesWhere(Routes.subscriptionsPackages),
       Icon(MyFlutterApp.bell),
     ];
     return icons;
