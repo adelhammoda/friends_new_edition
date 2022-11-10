@@ -43,7 +43,9 @@ class NetworkFailure extends Failure {
 }
 
 class DeviceInfoFailure extends Failure {
-  const DeviceInfoFailure({required super.message, required super.statusCode});
+  const DeviceInfoFailure(
+      {super.message = StringManager.deviceInfoErrorMessage,
+      super.statusCode = StatusCode.deviceInfo});
 }
 
 class CreateUserFailure extends Failure {
@@ -67,14 +69,19 @@ class LocalStoringFailure extends Failure {
       super.statusCode = StatusCode.localStorage});
 }
 
-class AutoLoginFailure extends Failure{
+class AutoLoginFailure extends Failure {
   const AutoLoginFailure({required super.message, required super.statusCode});
-
 }
 
+class UserNotFoundInLocalStorageFailure extends Failure {
+  const UserNotFoundInLocalStorageFailure(
+      {required super.message, required super.statusCode});
+}
 
-class UserNotFoundInLocalStorageFailure extends Failure{
-  const UserNotFoundInLocalStorageFailure({required super.message, required super.statusCode});
+class ThisUserIsNotStudentFailure extends Failure {
+  const ThisUserIsNotStudentFailure(
+      {super.message = StringManager.thisUserIsNotStudent,
+        super.statusCode = StatusCode.userIsNotStudent});
 }
 
 

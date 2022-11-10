@@ -85,3 +85,11 @@ class FetchSubscriptionException extends ExceptionBase{
   }):super(message,code);
 }
 
+
+class ThisUserIsNotStudentException extends ExceptionBase{
+  ThisUserIsNotStudentException({
+    String message = StringManager.thisUserIsNotStudent,
+    int code = StatusCode.firebase
+  }):super(message,code);
+}
+
