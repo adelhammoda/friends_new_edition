@@ -100,6 +100,9 @@ class StringManager {
   static const from = "from";
   static const to = "to";
   static const scannedBy = "ScannedBy";
+  static const pleaseScanHere = "Please scan here";
+  static const generate = "Generate";
+  static const itWillDisappearIn2Minutes = "It will disappear in 2 minutes";
 }
 
 class ConstantManager {

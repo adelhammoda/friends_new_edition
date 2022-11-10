@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friends/features/QRGenerator/presentation/manager/qr_generator_bloc.dart';
+import 'package:friends/features/QRGenerator/presentation/pages/qr_generator_page.dart';
 import 'package:friends/features/forget_password/presentation/pages/forget_password_page.dart';
 import 'package:friends/features/home_page/presentation/manager/homepage_bloc.dart';
 import 'package:friends/features/home_page/presentation/pages/home_page.dart';
@@ -16,7 +18,8 @@ import 'package:friends/features/on_boarding/presentation/pages/onboarding_page.
 class RoutesManager {
   static Map<String, Widget Function(BuildContext context)> routes() {
     return {
-      Routes.subscriptionsPackages:(c)=>routesWhere(Routes.subscriptionsPackages),
+      Routes.subscriptionsPackages: (c) =>
+          routesWhere(Routes.subscriptionsPackages),
       Routes.homePage: (c) => routesWhere(Routes.homePage),
       Routes.login: (c) => routesWhere(Routes.login),
       Routes.offerDetails: (c) => routesWhere(Routes.offerDetails),
@@ -27,6 +30,11 @@ class RoutesManager {
 
   static Widget routesWhere(String routeName) {
     switch (routeName) {
+      case Routes.qrGenerator:
+        return BlocProvider<QrGeneratorBloc>(
+          create: (c) => dl.sl<QrGeneratorBloc>(),
+          child:  const QrGeneratorPage(),
+        );
       case Routes.subscriptionsPackages:
         return BlocProvider<SubscriptionBloc>(
           create: (c) => dl.sl<SubscriptionBloc>(),
@@ -65,4 +73,5 @@ class Routes {
   static const onBoarding = "/onBoarding";
   static const offerDetails = '/offer_details';
   static const subscriptionsPackages = '/subscriptions_packages';
+  static const qrGenerator = '/qr_generator';
 }

@@ -31,6 +31,12 @@ static  ThemeData getAllThemeData(){
           )
         ),
         textTheme:  TextTheme(
+          bodyLarge:TextStyle(
+            fontSize:FontManager.fontSizeLargeLabel,
+            fontFamily: AssetsManager.firaCode,
+            fontWeight: FontWeight.w400,
+            color: ColorManager.black.withOpacity(0.4),
+          ) ,
           labelSmall: TextStyle(
             fontSize:FontManager.fontSizeMedium,
             fontFamily: AssetsManager.firaCode,

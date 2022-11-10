@@ -11,6 +11,7 @@ class SizeManager{
   static const double dateSize = 17;
   static const double listTileTitle = 20;
   static const double subTitle = 30;
+  static const double bigIcon = 35;
 
 }
 

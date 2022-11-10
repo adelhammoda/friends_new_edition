@@ -10,7 +10,4 @@ abstract class QRGeneratorRepository {
   ///generate qr depending on user
   Future<Either<Failure, QrImage>> generateQrCode(
       {required HomepageBloc homeBlocProvider, required BuildContext context});
-
-  ///start timer to hide generate qr code
-  Either<Failure, Timer> startTimer(Function() hideQr);
 }

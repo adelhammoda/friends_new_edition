@@ -22,37 +22,27 @@ class QrGeneratorRepositoryImpl implements QRGeneratorRepository {
 
   @override
   Future<Either<Failure, QrImage>> generateQrCode(
-      {required HomepageBloc homeBlocProvider,required BuildContext context}) async {
+      {required HomepageBloc homeBlocProvider, required BuildContext context}) async {
     try {
       final user = await homeBlocProvider.getCurrentUserUseCases();
       return user.fold((failure) {
         Go.to(context, Routes.register);
         return left(failure);
-      }, (user)async {
+      }, (user) async {
         if (user.user == ConstantManager.studentType) {
           final phoneId = await deviceInfo.getDeviceId();
           return Right(local.generateQrCode(data: phoneId));
-        }else{
+        } else {
           throw ThisUserIsNotStudentException();
         }
       });
-    }on DeviceInfoException catch(e){
+    } on DeviceInfoException catch (e) {
       debugPrint(e.message);
-      return  const Left(DeviceInfoFailure());
-    }on ThisUserIsNotStudentException catch(e){
+      return const Left(DeviceInfoFailure());
+    } on ThisUserIsNotStudentException catch (e) {
       debugPrint(e.message);
       return const Left(ThisUserIsNotStudentFailure());
     } catch (e) {
-      debugPrint(e.toString());
-      return const Left( UnKnownFailure());
-    }
-  }
-
-  @override
-  Either<Failure, Timer> startTimer(Function() hideQr) {
-    try{
-      return Right(Timer(const Duration(minutes: 2),hideQr));
-    }catch(e){
       debugPrint(e.toString());
       return const Left(UnKnownFailure());
     }
