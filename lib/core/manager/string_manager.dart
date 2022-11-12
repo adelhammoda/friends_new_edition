@@ -56,6 +56,8 @@ class StringManager {
   "You are not logged in.You can browse the app.but some feature will still missing";
     static const fetchSubscriptionException =
   "We faced some problem in fetching packages.";
+    static const thisUserIsNotStudent =
+  "This user is not registered  as student.Some feature will be disabled for him .";
 
   //validation message
   static const requiredField = "This Field must be filled with data";
@@ -98,6 +100,9 @@ class StringManager {
   static const from = "from";
   static const to = "to";
   static const scannedBy = "ScannedBy";
+  static const pleaseScanHere = "Please scan here";
+  static const generate = "Generate";
+  static const itWillDisappearIn2Minutes = "It will disappear in 2 minutes";
 }
 
 class ConstantManager {

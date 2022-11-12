@@ -1,5 +1,10 @@
 import 'package:friends/core/device_info/device_info.dart';
 import 'package:friends/core/network/network_info.dart';
+import 'package:friends/features/QRGenerator/data/data_sources/qr_generator_local_data_source.dart';
+import 'package:friends/features/QRGenerator/data/repositories/qr_generator_repository_impl.dart';
+import 'package:friends/features/QRGenerator/domain/repositories/qr_generator_repository.dart';
+import 'package:friends/features/QRGenerator/domain/use_cases/generate_qr_code.dart';
+import 'package:friends/features/QRGenerator/presentation/manager/qr_generator_bloc.dart';
 import 'package:friends/features/home_page/data/repositories/home_page_repository_impl.dart';
 import 'package:friends/features/home_page/domain/repositories/home_page_repository.dart';
 import 'package:friends/features/home_page/domain/use_cases/get_current_user.dart';
@@ -95,6 +100,9 @@ Future<void> init() async {
   //subscriptions
   sl.registerFactory<SubscriptionBloc>(() => SubscriptionBloc(
       fetchAllPackagesUseCases: sl(), getPackagesFromCashUseCases: sl()));
+  //qr generator
+  sl.registerFactory<QrGeneratorBloc>(
+      () => QrGeneratorBloc(generateQrCode: sl<GenerateQRCodeUseCase>()));
 
   ///use cases
   // login use cases
@@ -152,6 +160,9 @@ Future<void> init() async {
       () => FetchAllPackagesUseCases(sl()));
   sl.registerLazySingleton<GetPackagesFromCashUseCases>(
       () => GetPackagesFromCashUseCases(repository: sl()));
+  //qr generator
+  sl.registerLazySingleton<GenerateQRCodeUseCase>(
+      () => GenerateQRCodeUseCase(sl()));
 
   ///repositories
   //login repositories
@@ -178,6 +189,9 @@ Future<void> init() async {
   //subscriptions
   sl.registerLazySingleton<SubscriptionRepository>(() =>
       SubscriptionRepositoryImpl(remote: sl(), local: sl(), networkInfo: sl()));
+  //qr generator
+  sl.registerLazySingleton<QRGeneratorRepository>(
+      () => QrGeneratorRepositoryImpl(local: sl(), deviceInfo: sl()));
 
   ///data source
   //login
@@ -203,8 +217,13 @@ Future<void> init() async {
   sl.registerLazySingleton<HomePageLocalDataSource>(
       () => HomePageLocalDataSourceImpl());
   //subscription
-  sl.registerLazySingleton<SubscriptionRemoteDataSource>(() => SubscriptionRemoteDataSourceImpl());
-  sl.registerLazySingleton<SubscriptionLocalDataSource>(() => SubscriptionLocalDataSourceImpl());
+  sl.registerLazySingleton<SubscriptionRemoteDataSource>(
+      () => SubscriptionRemoteDataSourceImpl());
+  sl.registerLazySingleton<SubscriptionLocalDataSource>(
+      () => SubscriptionLocalDataSourceImpl());
+  //qr generator
+  sl.registerLazySingleton<QrGeneratorLocalDataSource>(
+      () => QrGeneratorLocalDataSourceImpl());
 
   ///core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
