@@ -127,7 +127,9 @@ class ConstantManager {
   ///
   /// users type
   static const String studentType = "Student";
-  static const String centerType = "Center";
+  static const String offerOwnerType = "Offer_Owner";
+  static const String subscriptionCenterType = "Subscription_center";
+  static const String adminType = "admin";
 
   /// firebase constant
   static const String usersRef = "users";
