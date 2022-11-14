@@ -163,6 +163,12 @@ class ConstantManager {
   static const String subscriptionCurrency = "s_Currency";
   static const String subscriptionPrice = "s_price";
   static const String subscriptionDescription = "s_description";
+  ///subscribe
+  static const String subscribeId = "subscribe_id";
+  static const String subscribeUserId = "subscribe_user_id";
+  static const String subscribeSubscriptionTypeID = "subscription_type_id";
+  static const String subscribeDate = "subscribe_date";
+  static const String subscribeCenterId = "subscribe_center_id";
   ///users
   static const String userId = "user_id";
   ///hive
