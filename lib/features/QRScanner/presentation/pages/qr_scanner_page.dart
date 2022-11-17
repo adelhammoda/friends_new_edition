@@ -47,16 +47,6 @@ class _QrScannerPageState extends State<QrScannerPage> {
   @override
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive(context);
-    final qrView= QRView(
-      key: _qrKey,
-      onQRViewCreated: _onQRViewCreated,
-      overlay: QrScannerOverlayShape(
-        borderRadius: 30,
-        borderColor: ColorManager.lightGreen,
-        borderLength: 50,
-      ),
-      formatsAllowed: const [BarcodeFormat.qrcode],
-    );
     return BlocConsumer<CameraBloc, CameraState>(
         listener: (context, state) {
           if (state is CameraErrorState) {
@@ -116,7 +106,16 @@ class _QrScannerPageState extends State<QrScannerPage> {
                   height: responsive.responsiveHeight(forUnInitialDevices: 90),
                   child: Stack(
                     children: <Widget>[
-                      qrView,
+                      QRView(
+                        key: _qrKey,
+                        onQRViewCreated: _onQRViewCreated,
+                        overlay: QrScannerOverlayShape(
+                          borderRadius: 30,
+                          borderColor: ColorManager.lightGreen,
+                          borderLength: 50,
+                        ),
+                        formatsAllowed: const [BarcodeFormat.qrcode],
+                      ),
                       Align(
                         alignment: Alignment.topLeft,
                         child: CloseButton(

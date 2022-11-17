@@ -50,7 +50,7 @@ class QrScannerRemoteDataSourceImpl implements QrScannerRemoteDataSource {
   Future<UserEntity> getCenterInfo({required String centerId}) async {
     DatabaseEvent event = await FirebaseDatabase.instance
         .ref(ConstantManager.usersRef)
-        .orderByChild(ConstantManager.userId)
+        .child(centerId)
         .once();
     var value = event.snapshot.value;
     if (value is Map && value.isNotEmpty && value.length > 1) {

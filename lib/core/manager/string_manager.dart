@@ -117,6 +117,8 @@ class StringManager {
 
   static const String subscribed = "Subscribed";
   static const String unsubscribed = "Unsubscribed";
+
+  static const String unknown = "Unknown";
 }
 
 class ConstantManager {

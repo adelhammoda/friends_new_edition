@@ -100,7 +100,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                               price: state.subscriptionEntity[index].price,
                               id: state.subscriptionEntity[index].id,
                               startDate:
-                                  state.subscriptionEntity[index].endDate,
+                                  state.subscriptionEntity[index].startDate,
                               description:
                                   state.subscriptionEntity[index].description),
                           scannedByValue: state.centerInfo[index],

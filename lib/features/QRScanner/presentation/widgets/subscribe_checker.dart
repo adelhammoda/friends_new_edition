@@ -12,7 +12,8 @@ class SubscribeChecker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isSubscribed = subscriptionEntity.endDate.isAfter(DateTime.now()) ||
+    bool isSubscribed = (subscriptionEntity.endDate.isAfter(DateTime.now()) &&
+            subscriptionEntity.startDate.isBefore(DateTime.now())) ||
         subscriptionEntity.endDate.isAtSameMomentAs(DateTime.now());
     final Responsive responsive = Responsive(context);
     return Container(
@@ -31,8 +32,7 @@ class SubscribeChecker extends StatelessWidget {
         child: Text(
           isSubscribed ? StringManager.subscribed : StringManager.unsubscribed,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: isSubscribed? ColorManager.lightGreen:ColorManager.red
-          ),
+              color: isSubscribed ? ColorManager.lightGreen : ColorManager.red),
         ),
       ),
     );
