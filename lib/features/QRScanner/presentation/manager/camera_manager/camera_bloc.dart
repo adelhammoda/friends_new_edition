@@ -29,7 +29,6 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
       switch (event.runtimeType) {
         case OpenCameraEvent:
           {
-            emit(CameraLoadingState());
             final Either<Failure, void> res = await openCameraUseCase();
             res.fold((failure) => emit(CameraErrorState(failure: failure)),
                 (r) =>

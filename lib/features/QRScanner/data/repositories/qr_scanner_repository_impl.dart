@@ -86,7 +86,7 @@ class QrScannerRepositoryImpl extends QrScannerRepository {
   Future<Either<Failure, void>> openCamera() async {
     try {
       await permissionManager.requestCameraPermission();
-      local.openCamera();
+      await local.openCamera();
       return const Right(null);
     } on PermissionDeniedException catch (e) {
       debugPrint(e.message);

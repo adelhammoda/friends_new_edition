@@ -29,7 +29,7 @@ class QrScannerLocalDataSourceImpl extends QrScannerLocalDataSource{
     if(qrViewController==null){
       throw OpenCameraException();
     }else {
-      return await qrViewController!.resumeCamera();
+      return await qrViewController?.resumeCamera();
     }
   }
 
