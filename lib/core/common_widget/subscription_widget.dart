@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:friends/core/extension/string_extension.dart';
 import 'package:friends/core/manager/color_manager.dart';
@@ -11,8 +9,8 @@ import 'package:responsive_s/responsive_s.dart';
 
 class SubscriptionWidget extends StatefulWidget {
   final SubscriptionEntity subscriptionEntity;
-  final bool haveScannedBy ;
-  const SubscriptionWidget({Key? key, required this.subscriptionEntity,this.haveScannedBy = false})
+  final String? scannedByValue;
+  const SubscriptionWidget({Key? key, required this.subscriptionEntity,this.scannedByValue})
       : super(key: key);
 
   @override
@@ -78,15 +76,15 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
                     color: ColorManager.black,
                     fontSize: SizeManager.dateSize
                 )),),
-          Padding(padding: EdgeInsets.only(top: 4),
+          Padding(padding: const EdgeInsets.only(top: 4),
             child: Text("${StringManager.to}: ${DateFormat.yMMMMd().format(widget.subscriptionEntity.endDate)}",
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: ColorManager.black,
                     fontSize: SizeManager.dateSize
                 )),),
           const Spacer(),
-          if(widget.haveScannedBy)Padding(padding: const EdgeInsets.only(top: 10),
-            child: Text(StringManager.scannedBy,
+          if(!widget.scannedByValue.isNullOrEmpty())Padding(padding: const EdgeInsets.only(top: 10,bottom: 16),
+            child: Text("${StringManager.scannedBy}: ${widget.scannedByValue}",
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: ColorManager.black,
                     fontSize: SizeManager.dateSize

@@ -9,19 +9,15 @@ import 'package:path_provider/path_provider.dart';
 
 import 'package:friends/core/app.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initApp();
   runApp(App.instance);
-  
 }
 
-
-
-
-Future<void> initApp()async{
+Future<void> initApp() async {
   await Firebase.initializeApp();
   di.init();
   Directory root = await getApplicationDocumentsDirectory();
-  Hive.init(root.path+ConstantManager.hivePath);
+  Hive.init(root.path + ConstantManager.hivePath);
 }

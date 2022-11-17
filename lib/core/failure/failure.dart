@@ -83,5 +83,10 @@ class ThisUserIsNotStudentFailure extends Failure {
       {super.message = StringManager.thisUserIsNotStudent,
         super.statusCode = StatusCode.userIsNotStudent});
 }
+class PermissionDeniedFailure extends Failure {
+  const PermissionDeniedFailure(
+      {required super.message ,
+        super.statusCode = StatusCode.permissions});
+}
 
 

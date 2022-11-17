@@ -1,6 +1,7 @@
 
 
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:friends/core/common_entity/user_entity.dart';
 import 'package:friends/core/failure/failure.dart';
 import 'package:friends/features/QRScanner/domain/entities/subscribe_entity.dart';
@@ -15,4 +16,10 @@ abstract class QrScannerRepository{
   Future<Either<Failure,UserEntity>> getSubscriptionCenterInfo({required String centerId});
   ///get all subscriptions packages details.
   Future<Either<Failure,List<SubscriptionEntity>>> getAllSubscriptionsInfo({required List<String> subscriptionsPackagesId});
+  ///open camera.
+  Future<Either<Failure,void>> openCamera();
+  ///close camera.
+  Future<Either<Failure,void>> closeCamera();
+  ///navigate to user details page
+  Either<Failure,void> navigateToUserDetailsPage({required BuildContext context,required String userId});
 }
