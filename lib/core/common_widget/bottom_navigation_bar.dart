@@ -63,7 +63,7 @@ class NVBButton extends StatefulWidget {
   final Function(int index)? onTap;
   final Duration duration;
   final Color iconActiveColor;
-  final Color iconDisabledColor;
+  final Color? iconDisabledColor;
   final int index;
   final double iconSize;
   final int initialIndex;
@@ -76,7 +76,7 @@ class NVBButton extends StatefulWidget {
       this.onTap,
       this.duration = const Duration(milliseconds: 200),
       this.iconActiveColor = ColorManager.lightGreen,
-      this.iconDisabledColor = ColorManager.black,
+      this.iconDisabledColor,
       required this.index,
       required this.iconSize,  this.initialIndex =0})
       : super(key: key);
@@ -116,14 +116,14 @@ class _NVBButtonState extends State<NVBButton> {
                   fit: StackFit.loose,
                   children: <Widget>[
                     Container(
-                      decoration: const BoxDecoration(
+                      decoration:  BoxDecoration(
                         color: Colors.transparent,
                         boxShadow: [
                           BoxShadow(
                               color: ColorManager.grey,
                               blurRadius: 1,
                               spreadRadius: 0,
-                              offset: Offset(0, -1),
+                              offset: const Offset(0, -1),
                               blurStyle: BlurStyle.inner),
                         ],
                       ),
@@ -133,7 +133,7 @@ class _NVBButtonState extends State<NVBButton> {
                             halfContainerWidth: 25,
                             animate: state.index == widget.index),
                         child: Container(
-                          decoration: const BoxDecoration(
+                          decoration:  BoxDecoration(
                             color: ColorManager.white,
                           ),
                           width: widget.buttonWidth,
@@ -171,7 +171,7 @@ class _NVBButtonState extends State<NVBButton> {
                           size: widget.iconSize,
                           color: state.index == widget.index
                               ? widget.iconActiveColor
-                              : widget.iconDisabledColor,
+                              : widget.iconDisabledColor??ColorManager.darkGrey,
                         ),
                       ),
                     )
@@ -197,7 +197,7 @@ class _NVBButtonState extends State<NVBButton> {
                         clipper: _ButtonClipper(
                             halfContainerWidth: 25, animate: false,widgetHeight: widget.buttonHigh),
                         child: Container(
-                          decoration: const BoxDecoration(
+                          decoration:  BoxDecoration(
                             color: ColorManager.white,
                             // color: Colors.transparent
                           ),

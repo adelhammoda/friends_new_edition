@@ -124,10 +124,13 @@ class StringManager {
 class ConstantManager {
   ///app constant
   static const appTitle = "Friends";
+  static const defaultLanguage = "default_language";
 
   ///cashed keys.
   static const cashedEmailAndPasswordKey = "user_data";
   static const cashedUser = "user";
+  static const local = "local_for_user";
+  static const theme = "theme_for_user";
 
   ///login loading state keys.
   static const loadingStatusForAuth = "Login";

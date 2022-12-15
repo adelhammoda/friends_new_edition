@@ -56,7 +56,7 @@ class MessageSnackBar extends SnackBar {
                ),
                const Spacer(),
                IconButton(
-                 icon: const Icon(Icons.close,color: ColorManager.black,),
+                 icon:  Icon(Icons.close,color: ColorManager.black,),
                  onPressed: (){
                    ScaffoldMessenger.of(context).clearSnackBars();
                  },

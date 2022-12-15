@@ -43,7 +43,7 @@ class FriendsBackgroundWidget extends StatelessWidget {
                       right: rightPadding,
                       top: responsive.responsiveHeight(forUnInitialDevices: 30)),
                   alignment: Alignment.topCenter,
-                  decoration: const BoxDecoration(
+                  decoration:  BoxDecoration(
                     color: ColorManager.grey,
                   ),
                   width: responsive.responsiveWidth(forUnInitialDevices: 100),

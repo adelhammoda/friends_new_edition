@@ -36,17 +36,22 @@ class _FriendsDrawerState extends State<FriendsDrawer> {
             buildUserName(responsive, context),
             buildUserEmail(responsive, context),
             DayNightSwitcher(
-              isDarkModeEnabled: ThemeManager.themeMode==ThemeMode.dark,
+              isDarkModeEnabled: ThemeManager.themeMode == ThemeMode.dark,
               onStateChanged: (isDarkModeEnabled) {
+                ThemeManager.themeMode =
+                    ThemeManager.themeMode == ThemeMode.dark
+                        ? ThemeMode.light
+                        : ThemeMode.dark;
                 PrintLog.call(
                     tag: "Switch theme",
                     message:
                         'the current value of dark is $isDarkModeEnabled \n theme manager value is ${ThemeManager.themeMode} ');
-                  ThemeManager.themeMode =
-                      isDarkModeEnabled ? ThemeMode.light : ThemeMode.dark;
+                isDarkModeEnabled
+                    ? ColorManager.switchToDark()
+                    : ColorManager.switchToLight();
               },
             ),
-            const Divider(
+            Divider(
               color: ColorManager.white,
               thickness: 1,
             ),
@@ -57,15 +62,15 @@ class _FriendsDrawerState extends State<FriendsDrawer> {
               child: buildNavigationTiles(
                   MyFlutterApp.setting, StringManager.setting, context),
             ),
-            const Divider(
+            Divider(
               color: ColorManager.white,
               thickness: 1,
             ),
             widget.user != null
                 ? Row(
                     children: <Widget>[
-                      const Padding(
-                        padding: EdgeInsets.only(
+                      Padding(
+                        padding: const EdgeInsets.only(
                             right: 25, left: 15, top: 20, bottom: 20),
                         child: Icon(
                           MyFlutterApp.delete,
@@ -84,7 +89,7 @@ class _FriendsDrawerState extends State<FriendsDrawer> {
                   )
                 : const SizedBox(),
             widget.user != null
-                ? const Divider(
+                ? Divider(
                     color: ColorManager.white,
                     thickness: 1,
                   )
@@ -98,8 +103,8 @@ class _FriendsDrawerState extends State<FriendsDrawer> {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.only(right: 10),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10),
                           child: Icon(
                             Icons.logout,
                             color: ColorManager.white,
@@ -187,7 +192,7 @@ class _FriendsDrawerState extends State<FriendsDrawer> {
             .displayMedium!
             .copyWith(fontSize: SizeManager.listTileTitle),
       ),
-      trailing: const Icon(
+      trailing: Icon(
         Icons.arrow_forward_ios_sharp,
         color: ColorManager.white,
       ),

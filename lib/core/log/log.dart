@@ -8,10 +8,10 @@ class PrintLog{
  static void call({
     required String tag,
     required String message,
-     bool? isError,
+     String? error,
 })=>
     dev.log(message,
       name: tag,
-      error: isError,
+      error: error,
       time: DateTime.now(),);
 }

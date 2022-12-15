@@ -8,7 +8,7 @@ import 'package:friends/core/manager/color_manager.dart';
 class ThemeManager{
  static final InputBorder _inputBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(60),
-      borderSide: const BorderSide(
+      borderSide:  BorderSide(
           color: ColorManager.grey,
           width:1,
           style: BorderStyle.solid
@@ -43,13 +43,13 @@ static  ThemeData getAllThemeData(){
             fontWeight: FontWeight.w400,
             color: ColorManager.black.withOpacity(0.4),
           ) ,
-          labelMedium: const TextStyle(
+          labelMedium:  TextStyle(
             fontSize: FontManager.fontSizeMediumPlus,
             fontFamily: AssetsManager.firaCode,
             fontWeight: FontWeight.w400,
             color: ColorManager.black,
           ),
-          labelLarge: const TextStyle(
+          labelLarge:  TextStyle(
             fontSize: FontManager.fontSizeMediumPlus,
             fontFamily: AssetsManager.roboto,
             fontWeight: FontWeight.bold,
@@ -68,7 +68,7 @@ static  ThemeData getAllThemeData(){
             fontFamily: AssetsManager.firaCode,
             fontWeight: FontWeight.w400,
           ),
-          titleMedium: const TextStyle(
+          titleMedium:  TextStyle(
             fontSize: FontManager.fontSizeLarge,
             color: ColorManager.white,
             fontFamily: AssetsManager.roboto,
@@ -87,7 +87,7 @@ static  ThemeData getAllThemeData(){
               ),
             ]
           ),
-          titleSmall:  const TextStyle(
+          titleSmall:   TextStyle(
               fontSize: 18,
               color: ColorManager.white,
               fontFamily: AssetsManager.roboto,
@@ -125,7 +125,7 @@ static  ThemeData getAllThemeData(){
           shadowColor:ColorManager.white.withOpacity(0),
           backgroundColor: ColorManager.white.withOpacity(0),
           elevation: 0,
-          iconTheme: const IconThemeData(
+          iconTheme:  IconThemeData(
             color: ColorManager.black
           )
         ),
