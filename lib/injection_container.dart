@@ -1,3 +1,4 @@
+import 'package:friends/core/common_bloc/user_details_manager/user_details_bloc.dart';
 import 'package:friends/core/device_info/device_info.dart';
 import 'package:friends/core/manager/permission_manager.dart';
 import 'package:friends/core/network/network_info.dart';
@@ -75,7 +76,7 @@ import 'package:friends/features/QRScanner/domain/use_cases/get_user_subscribes_
 import 'package:friends/features/QRScanner/domain/use_cases/navigate_to_user_details_page_use_case.dart';
 import 'package:friends/features/QRScanner/domain/use_cases/open_camera_use_case.dart';
 
-import 'features/QRScanner/presentation/manager/user_details_manager/user_details_bloc.dart';
+
 
 GetIt sl = GetIt.I;
 

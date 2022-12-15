@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friends/core/common_bloc/user_details_manager/user_details_bloc.dart';
 import 'package:friends/core/common_entity/user_entity.dart';
 import 'package:friends/core/exception/exception.dart';
 import 'package:friends/core/failure/failure.dart';
@@ -11,7 +12,7 @@ import 'package:friends/features/QRScanner/data/data_sources/qr_scanner_remote_d
 import 'package:friends/features/QRScanner/domain/entities/subscribe_entity.dart';
 import 'package:friends/features/QRScanner/domain/repositories/qr_scanner_repository.dart';
 import 'package:friends/features/QRScanner/presentation/manager/subscription_manager/subscription_bloc.dart';
-import 'package:friends/features/QRScanner/presentation/manager/user_details_manager/user_details_bloc.dart';
+
 import 'package:friends/features/QRScanner/presentation/pages/user_details_page.dart';
 import 'package:friends/features/subscription/domain/entities/subscription_entity.dart';
 import 'package:friends/injection_container.dart' as dl;

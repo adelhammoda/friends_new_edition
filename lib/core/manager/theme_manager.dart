@@ -3,8 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:friends/core/manager/font_manager.dart';
 import 'package:friends/core/manager/string_manager.dart';
-
-import 'color_manager.dart';
+import 'package:friends/core/manager/color_manager.dart';
 
 class ThemeManager{
  static final InputBorder _inputBorder = OutlineInputBorder(
@@ -15,6 +14,7 @@ class ThemeManager{
           style: BorderStyle.solid
       )
   );
+static ThemeMode themeMode = ThemeMode.system;
 
 static  ThemeData getAllThemeData(){
     return ThemeData(

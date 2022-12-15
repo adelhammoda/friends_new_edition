@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friends/core/common_bloc/user_details_manager/user_details_bloc.dart';
 import 'package:friends/features/QRGenerator/presentation/manager/qr_generator_bloc.dart';
 import 'package:friends/features/QRGenerator/presentation/pages/qr_generator_page.dart';
 import 'package:friends/features/QRScanner/presentation/manager/camera_manager/camera_bloc.dart';
 import 'package:friends/features/QRScanner/presentation/manager/subscription_manager/subscription_bloc.dart';
-import 'package:friends/features/QRScanner/presentation/manager/user_details_manager/user_details_bloc.dart';
 import 'package:friends/features/QRScanner/presentation/pages/qr_scanner_page.dart';
 import 'package:friends/features/forget_password/presentation/pages/forget_password_page.dart';
 import 'package:friends/features/home_page/presentation/manager/homepage_bloc.dart';

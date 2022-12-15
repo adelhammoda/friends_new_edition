@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friends/core/common_bloc/user_details_manager/user_details_bloc.dart';
 import 'package:friends/core/common_widget/friends_button.dart';
 import 'package:friends/core/common_widget/loader.dart';
 import 'package:friends/core/common_widget/snackbar_widget.dart';
@@ -9,7 +10,6 @@ import 'package:friends/core/manager/color_manager.dart';
 import 'package:friends/core/manager/string_manager.dart';
 import 'package:friends/features/QRScanner/presentation/manager/camera_manager/camera_bloc.dart';
 import 'package:friends/features/QRScanner/presentation/manager/subscription_manager/subscription_bloc.dart';
-import 'package:friends/features/QRScanner/presentation/manager/user_details_manager/user_details_bloc.dart';
 import 'package:friends/features/home_page/presentation/widgets/qr_scan_text.dart';
 import 'package:lottie/lottie.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';

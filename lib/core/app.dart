@@ -19,6 +19,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      themeMode: ThemeManager.themeMode,
       supportedLocales:const [
         Locale("en","US"),
         Locale("ar"),

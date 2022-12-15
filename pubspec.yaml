@@ -63,6 +63,8 @@ dependencies:
   firebase_core: ^1.21.1
   firebase_database: ^9.1.4
   flutter_facebook_auth: ^4.4.1+1
+#theme
+  day_night_switcher: ^0.2.0+1
 
 dev_dependencies:
   flutter_test:

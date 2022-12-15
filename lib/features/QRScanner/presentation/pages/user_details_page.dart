@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friends/core/common_bloc/user_details_manager/user_details_bloc.dart';
 import 'package:friends/core/common_widget/app_bar.dart';
 import 'package:friends/core/common_widget/loader.dart';
 import 'package:friends/core/common_widget/snackbar_widget.dart';
 import 'package:friends/core/common_widget/subscription_widget.dart';
 import 'package:friends/core/manager/string_manager.dart';
 import 'package:friends/features/QRScanner/presentation/manager/subscription_manager/subscription_bloc.dart';
-import 'package:friends/features/QRScanner/presentation/manager/user_details_manager/user_details_bloc.dart';
 import 'package:friends/features/QRScanner/presentation/widgets/subscribe_checker.dart';
 import 'package:friends/features/QRScanner/presentation/widgets/user_section.dart';
 import 'package:friends/features/subscription/domain/entities/subscription_entity.dart';

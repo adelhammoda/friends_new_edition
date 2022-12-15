@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friends/core/common_bloc/user_details_manager/user_details_bloc.dart';
 import 'package:friends/core/common_widget/snackbar_widget.dart';
 import 'package:friends/core/manager/color_manager.dart';
 import 'package:friends/core/manager/size_manager.dart';
 import 'package:friends/core/manager/string_manager.dart';
-import 'package:friends/features/QRScanner/presentation/manager/user_details_manager/user_details_bloc.dart';
 import 'package:friends/features/QRScanner/presentation/widgets/animated_loading_circle.dart';
 import 'package:responsive_s/responsive_s.dart';
 import 'package:friends/core/extension/string_extension.dart';
