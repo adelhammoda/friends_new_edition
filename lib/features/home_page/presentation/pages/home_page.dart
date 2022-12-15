@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
   //
   List<Widget> _buildItems() {
     List<Widget> icons = [
-      Icon(MyFlutterApp.home),
+      RoutesManager.routesWhere(Routes.qrScanner),
       RoutesManager.routesWhere(Routes.qrGenerator),
       RoutesManager.routesWhere(Routes.offer),
       RoutesManager.routesWhere(Routes.subscriptionsPackages),

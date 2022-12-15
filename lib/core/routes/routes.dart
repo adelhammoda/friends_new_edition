@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friends/core/common_bloc/user_details_manager/user_details_bloc.dart';
 import 'package:friends/features/QRGenerator/presentation/manager/qr_generator_bloc.dart';
 import 'package:friends/features/QRGenerator/presentation/pages/qr_generator_page.dart';
+import 'package:friends/features/QRScanner/presentation/manager/camera_manager/camera_bloc.dart';
+import 'package:friends/features/QRScanner/presentation/manager/subscription_manager/subscription_bloc.dart';
+import 'package:friends/features/QRScanner/presentation/pages/qr_scanner_page.dart';
 import 'package:friends/features/forget_password/presentation/pages/forget_password_page.dart';
 import 'package:friends/features/home_page/presentation/manager/homepage_bloc.dart';
 import 'package:friends/features/home_page/presentation/pages/home_page.dart';
@@ -30,10 +34,19 @@ class RoutesManager {
 
   static Widget routesWhere(String routeName) {
     switch (routeName) {
+      case Routes.qrScanner:
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider<CameraBloc>(create: (c)=>dl.sl<CameraBloc>()),
+            BlocProvider<SubscriptionQrScannerBloc>(create: (c)=>dl.sl<SubscriptionQrScannerBloc>()),
+            BlocProvider<UserDetailsBloc>(create: (c)=>dl.sl<UserDetailsBloc>()),
+          ],
+          child:  const QrScannerPage(),
+        );
       case Routes.qrGenerator:
         return BlocProvider<QrGeneratorBloc>(
           create: (c) => dl.sl<QrGeneratorBloc>(),
-          child:  const QrGeneratorPage(),
+          child: const QrGeneratorPage(),
         );
       case Routes.subscriptionsPackages:
         return BlocProvider<SubscriptionBloc>(
@@ -74,4 +87,5 @@ class Routes {
   static const offerDetails = '/offer_details';
   static const subscriptionsPackages = '/subscriptions_packages';
   static const qrGenerator = '/qr_generator';
+  static const qrScanner = '/qr_scanner';
 }

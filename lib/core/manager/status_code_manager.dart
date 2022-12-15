@@ -2,6 +2,8 @@
 
 class StatusCode {
   static const int unknown =1;
+  static const int permissions = 2;
+  static const int camera = 3;
   static const int cash = 5;
   static const int localStorage = 6;
   static const int firebase =10;

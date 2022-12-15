@@ -26,7 +26,7 @@ class HomepageBloc extends Bloc<HomepageEvent, HomepageState> {
                emit(UserNotLoadedState());
              }
            }, (user) {
-             if(user.user == ConstantManager.centerType){
+             if(user.user == ConstantManager.offerOwnerType){
                emit(CenterState(user));
              }else {
                emit(StudentState(user));

@@ -58,6 +58,14 @@ class StringManager {
   "We faced some problem in fetching packages.";
     static const thisUserIsNotStudent =
   "This user is not registered  as student.Some feature will be disabled for him .";
+    static const dontHavePermissions =
+  "We don't have the right permission.Please make sure you give us the right permissions";
+    static const permissionToCameraIdDeniedErrorMessage =
+  "We can't access to your camera because of permissions.";
+    static const cannotOpenCameraErrorMessage =
+  "Can't open camera due to some errors";
+    static const cannotCloseCameraErrorMessage =
+  "Can't close camera due to some errors";
 
   //validation message
   static const requiredField = "This Field must be filled with data";
@@ -103,6 +111,14 @@ class StringManager {
   static const pleaseScanHere = "Please scan here";
   static const generate = "Generate";
   static const itWillDisappearIn2Minutes = "It will disappear in 2 minutes";
+  static const placeYourDeviceOnQrCode = "Press on the button then scan the QR code using your camera";
+  static const openCamera = "open camera";
+  static const ownedPackages = "Owned Packages";
+
+  static const String subscribed = "Subscribed";
+  static const String unsubscribed = "Unsubscribed";
+
+  static const String unknown = "Unknown";
 }
 
 class ConstantManager {
@@ -127,12 +143,15 @@ class ConstantManager {
   ///
   /// users type
   static const String studentType = "Student";
-  static const String centerType = "Center";
+  static const String offerOwnerType = "Offer_Owner";
+  static const String subscriptionCenterType = "Subscription_center";
+  static const String adminType = "admin";
 
   /// firebase constant
   static const String usersRef = "users";
   static const String offersRef = "offers";
-  static const String subscriptionRef = "subscription";
+  static const String subscriptionRef = "subscriptions_packages";
+  static const String subscribeRef = "subscriptions";
   ///public
   static const String syrianNumber = "+963";
   ///map keys
@@ -161,6 +180,12 @@ class ConstantManager {
   static const String subscriptionCurrency = "s_Currency";
   static const String subscriptionPrice = "s_price";
   static const String subscriptionDescription = "s_description";
+  ///subscribe
+  static const String subscribeId = "subscribe_id";
+  static const String subscribeUserId = "subscribe_user_id";
+  static const String subscribeSubscriptionTypeID = "subscription_type_id";
+  static const String subscribeDate = "subscribe_date";
+  static const String subscribeCenterId = "subscribe_center_id";
   ///users
   static const String userId = "user_id";
   ///hive
@@ -208,4 +233,5 @@ class AssetsManager {
   static const String shiningAnimation = "assets/lottie/shining.json";
   static const String bellAnimation = "assets/lottie/bell.json";
   static const String noNetworkAnimation = "assets/lottie/no_network.json";
+  static const String scanQrAnimation = "assets/lottie/scan_code.json";
 }

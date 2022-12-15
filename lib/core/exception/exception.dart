@@ -93,3 +93,23 @@ class ThisUserIsNotStudentException extends ExceptionBase{
   }):super(message,code);
 }
 
+
+class PermissionDeniedException extends ExceptionBase{
+  PermissionDeniedException({
+    String message = StringManager.dontHavePermissions,
+    int code = StatusCode.permissions
+  }):super(message,code);
+}
+
+class CloseCameraException extends ExceptionBase{
+  CloseCameraException({
+    String message = StringManager.cannotOpenCameraErrorMessage,
+    int code = StatusCode.camera
+  }):super(message,code);
+}
+class OpenCameraException extends ExceptionBase{
+  OpenCameraException({
+    String message = StringManager.cannotCloseCameraErrorMessage,
+    int code = StatusCode.camera
+  }):super(message,code);
+}
