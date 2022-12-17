@@ -1,5 +1,7 @@
 import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friends/core/common_bloc/setting_bloc/setting_bloc.dart';
 import 'package:friends/core/log/log.dart';
 import 'package:friends/core/manager/color_manager.dart';
 import 'package:friends/core/manager/icon_manager.dart';
@@ -49,6 +51,7 @@ class _FriendsDrawerState extends State<FriendsDrawer> {
                 isDarkModeEnabled
                     ? ColorManager.switchToDark()
                     : ColorManager.switchToLight();
+                BlocProvider.of<SettingBloc>(context).add( RebuildTheAppEvent(event: "Switch the theme to $isDarkModeEnabled"));
               },
             ),
             Divider(

@@ -1,3 +1,4 @@
+import 'package:friends/core/common_bloc/setting_bloc/setting_bloc.dart';
 import 'package:friends/core/common_bloc/user_details_manager/user_details_bloc.dart';
 import 'package:friends/core/device_info/device_info.dart';
 import 'package:friends/core/manager/permission_manager.dart';
@@ -55,6 +56,14 @@ import 'package:friends/features/register/domain/use_cases/register_with_apple_u
 import 'package:friends/features/register/domain/use_cases/register_with_facebook_usecase.dart';
 import 'package:friends/features/register/domain/use_cases/register_with_google_usecase.dart';
 import 'package:friends/features/register/presentation/manager/register_bloc.dart';
+import 'package:friends/features/setting/data/data_sources/setting_local_data_source.dart';
+import 'package:friends/features/setting/data/data_sources/setting_remote_data_source.dart';
+import 'package:friends/features/setting/data/repositories/setting_repository_impl.dart';
+import 'package:friends/features/setting/domain/repositories/setting_repository.dart';
+import 'package:friends/features/setting/domain/use_cases/delete_account_use_case.dart';
+import 'package:friends/features/setting/domain/use_cases/logout_use_case.dart';
+import 'package:friends/features/setting/domain/use_cases/switch_theme_ues_case.dart';
+import 'package:friends/features/setting/domain/use_cases/swithc_language_use_case.dart';
 import 'package:friends/features/subscription/data/data_sources/subscription_local_datasource.dart';
 import 'package:friends/features/subscription/data/data_sources/subscription_remote_datasource.dart';
 import 'package:friends/features/subscription/data/repositories/subscription_repository_impl.dart';
@@ -75,8 +84,6 @@ import 'package:friends/features/QRScanner/domain/use_cases/get_user_info_use_ca
 import 'package:friends/features/QRScanner/domain/use_cases/get_user_subscribes_use_case.dart';
 import 'package:friends/features/QRScanner/domain/use_cases/navigate_to_user_details_page_use_case.dart';
 import 'package:friends/features/QRScanner/domain/use_cases/open_camera_use_case.dart';
-
-
 
 GetIt sl = GetIt.I;
 
@@ -129,8 +136,13 @@ Future<void> init() async {
       getUserSubscribesUseCase: sl(),
       getSubscriptionCenterInfo: sl(),
       getAllSubscriptionsInfoUseCase: sl()));
-  sl.registerFactory<UserDetailsBloc>(() => UserDetailsBloc( getUserInfo: sl()));
-
+  sl.registerFactory<UserDetailsBloc>(() => UserDetailsBloc(getUserInfo: sl()));
+  //setting
+  sl.registerFactory<SettingBloc>(() => SettingBloc(
+      switchThemeUseCase: sl(),
+      switchLanguageUseCase: sl(),
+      logoutUseCase: sl(),
+      deleteAccountUseCase: sl()));
 
   ///use cases
   // login use cases
@@ -203,7 +215,13 @@ Future<void> init() async {
   sl.registerLazySingleton<NavigateToUserDetailsPageUseCase>(
       () => NavigateToUserDetailsPageUseCase(sl()));
   sl.registerLazySingleton<OpenCameraUseCase>(() => OpenCameraUseCase(sl()));
-
+  //setting
+  sl.registerLazySingleton<SwitchThemeUseCase>(() => SwitchThemeUseCase(sl()));
+  sl.registerLazySingleton<SwitchLanguageUseCase>(
+      () => SwitchLanguageUseCase(sl()));
+  sl.registerLazySingleton<LogoutUseCase>(() => LogoutUseCase(sl()));
+  sl.registerLazySingleton<DeleteAccountUseCase>(
+      () => DeleteAccountUseCase(sl()));
 
   ///repositories
   //login repositories
@@ -235,11 +253,14 @@ Future<void> init() async {
       () => QrGeneratorRepositoryImpl(local: sl(), deviceInfo: sl()));
   //qr scanner
   sl.registerLazySingleton<QrScannerRepository>(() => QrScannerRepositoryImpl(
-      remote: sl(),
-      local: sl(),
-      networkInfo: sl(),
-      permissionManager: sl(),
-  ));
+        remote: sl(),
+        local: sl(),
+        networkInfo: sl(),
+        permissionManager: sl(),
+      ));
+  //setting
+  sl.registerLazySingleton<SettingRepository>(() =>
+      SettingRepositoryImpl(remote: sl(), local: sl(), networkInfo: sl()));
 
   ///data source
   //login
@@ -273,8 +294,15 @@ Future<void> init() async {
   sl.registerLazySingleton<QrGeneratorLocalDataSource>(
       () => QrGeneratorLocalDataSourceImpl());
   //qr scanner
-  sl.registerLazySingleton<QrScannerRemoteDataSource>(() => QrScannerRemoteDataSourceImpl());
-  sl.registerLazySingleton<QrScannerLocalDataSource>(() => QrScannerLocalDataSourceImpl());
+  sl.registerLazySingleton<QrScannerRemoteDataSource>(
+      () => QrScannerRemoteDataSourceImpl());
+  sl.registerLazySingleton<QrScannerLocalDataSource>(
+      () => QrScannerLocalDataSourceImpl());
+  //setting
+  sl.registerLazySingleton<SettingRemoteDataSource>(
+      () => SettingRemoteDataSourceImpl());
+  sl.registerLazySingleton<SettingLocalDataSource>(
+      () => SettingLocalDataSourceImpl());
 
   ///core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
