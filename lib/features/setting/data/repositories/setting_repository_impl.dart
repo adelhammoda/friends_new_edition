@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:friends/core/exception/exception.dart';
 import 'package:friends/core/failure/failure.dart';
 import 'package:friends/core/log/log.dart';
+import 'package:friends/core/manager/string_manager.dart';
 import 'package:friends/core/network/network_info.dart';
 import 'package:friends/features/setting/data/data_sources/setting_local_data_source.dart';
 import 'package:friends/features/setting/data/data_sources/setting_remote_data_source.dart';
@@ -95,6 +96,21 @@ class SettingRepositoryImpl implements SettingRepository {
       return const Right(null);
     }  catch (e) {
       PrintLog.call(tag: tag, message: "Unknown error happened",error: e.toString());
+      return const Left(UnKnownFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Map<String, dynamic>>> loadUserPreferences() async {
+    try{
+    String lang =  await  local.getLanguage();
+    ThemeMode theme = await local.getTheme();
+    Map<String , dynamic> res = {
+      ConstantManager.local:lang,
+      ConstantManager.theme:theme,
+    };
+    return Right(res);
+    }catch(e){
       return const Left(UnKnownFailure());
     }
   }

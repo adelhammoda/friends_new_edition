@@ -16,6 +16,7 @@ class ThemeManager{
   );
 static ThemeMode themeMode = ThemeMode.system;
 
+
 static  ThemeData getAllThemeData(){
     return ThemeData(
       colorScheme: ThemeData().colorScheme.copyWith(

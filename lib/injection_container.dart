@@ -61,6 +61,7 @@ import 'package:friends/features/setting/data/data_sources/setting_remote_data_s
 import 'package:friends/features/setting/data/repositories/setting_repository_impl.dart';
 import 'package:friends/features/setting/domain/repositories/setting_repository.dart';
 import 'package:friends/features/setting/domain/use_cases/delete_account_use_case.dart';
+import 'package:friends/features/setting/domain/use_cases/load_user_preferences_use_case.dart';
 import 'package:friends/features/setting/domain/use_cases/logout_use_case.dart';
 import 'package:friends/features/setting/domain/use_cases/switch_theme_ues_case.dart';
 import 'package:friends/features/setting/domain/use_cases/swithc_language_use_case.dart';
@@ -139,10 +140,12 @@ Future<void> init() async {
   sl.registerFactory<UserDetailsBloc>(() => UserDetailsBloc(getUserInfo: sl()));
   //setting
   sl.registerFactory<SettingBloc>(() => SettingBloc(
-      switchThemeUseCase: sl(),
-      switchLanguageUseCase: sl(),
-      logoutUseCase: sl(),
-      deleteAccountUseCase: sl()));
+        switchThemeUseCase: sl(),
+        switchLanguageUseCase: sl(),
+        logoutUseCase: sl(),
+        deleteAccountUseCase: sl(),
+        loadUserPreferencesUseCase: sl(),
+      ));
 
   ///use cases
   // login use cases
@@ -222,6 +225,8 @@ Future<void> init() async {
   sl.registerLazySingleton<LogoutUseCase>(() => LogoutUseCase(sl()));
   sl.registerLazySingleton<DeleteAccountUseCase>(
       () => DeleteAccountUseCase(sl()));
+  sl.registerLazySingleton<LoadUserPreferencesUseCase>(
+      () => LoadUserPreferencesUseCase(sl()));
 
   ///repositories
   //login repositories

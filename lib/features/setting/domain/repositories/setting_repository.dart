@@ -7,4 +7,5 @@ abstract class SettingRepository{
   Future<Either<Failure,void>> deleteAccount({required String userId,required BuildContext context});
   Future<Either<Failure,void>> switchTheme({required bool dark});
   Future<Either<Failure,void>> switchLanguage({required String local});
+  Future<Either<Failure,Map<String,dynamic>>> loadUserPreferences();
 }

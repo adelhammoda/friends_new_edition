@@ -66,6 +66,9 @@ class StringManager {
   "Can't open camera due to some errors";
     static const cannotCloseCameraErrorMessage =
   "Can't close camera due to some errors";
+    //success message
+  static const theUserDeletedSuccessfully= 'The user is deleted successfully';
+  static const theUserLogoutSuccessfully= 'The user logout successfully';
 
   //validation message
   static const requiredField = "This Field must be filled with data";
@@ -104,6 +107,8 @@ class StringManager {
   static const logout = "Logout";
   static const description = "Description";
   static const success = "Success";
+  static const warning = "Warning";
+  static const error = "Error";
   static const or = "or";
   static const from = "from";
   static const to = "to";

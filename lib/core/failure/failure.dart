@@ -89,4 +89,17 @@ class PermissionDeniedFailure extends Failure {
         super.statusCode = StatusCode.permissions});
 }
 
+class NoAuthenticationFoundFailure extends Failure{
+  const NoAuthenticationFoundFailure(
+      {required super.message ,
+        super.statusCode = StatusCode.authentication}
+      );
+}
+
+
+///enum class of failure type : warning or error.
+enum FailureType{
+  warning , error
+}
+
 
