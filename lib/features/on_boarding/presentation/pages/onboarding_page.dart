@@ -120,7 +120,7 @@ class _OnBoardingPageState extends State<OnBoardingPage>
                             children: [
                               const Line(),
                               Text(
-                                StringManager.or,
+                                StringManager.or(context),
                                 style: Theme.of(context)
                                     .textTheme
                                     .titleMedium!

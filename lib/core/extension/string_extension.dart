@@ -8,6 +8,7 @@
 
 import 'package:flutter/widgets.dart';
 import 'package:friends/core/exception/exception.dart';
+import 'package:friends/core/localization/app_localization.dart';
 
 extension StringEx on String{
 
@@ -45,10 +46,10 @@ extension StringEx on String{
   }
 
 
-// String tr(){
-//   return AppLocalizations.of(context)?.translate(this)??this;
-//
-// }
+String tr(BuildContext context){
+  return AppLocal.of(context).translate(this);
+
+}
 
 }
 extension StringNull on String? {

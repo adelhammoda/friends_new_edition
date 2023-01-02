@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:friends/core/extension/string_extension.dart';
+
 class StringManager {
   ///errors
   static const navigatorErrorMessage =
@@ -103,15 +106,15 @@ class StringManager {
   static const favorite = "Favorite";
   static const setting = "Setting";
   static const mode = "Mode";
-  static const deleteAccount = "Delete account";
-  static const logout = "Logout";
-  static const description = "Description";
-  static const success = "Success";
-  static const warning = "Warning";
-  static const error = "Error";
-  static const or = "or";
-  static const from = "from";
-  static const to = "to";
+  static  deleteAccount(BuildContext context) => "delete_account".tr(context);
+  static  logout(BuildContext context) => "logout".tr(context);
+  static  description(BuildContext context) => "description".tr(context);
+  static  success(BuildContext context) => "success".tr(context);
+  static  warning(BuildContext context) => "warning";
+  static  error(BuildContext context) => "error";
+  static  or(BuildContext context) => "or";
+  static  from(BuildContext context) => "from";
+  static  to(BuildContext context) => "to";
   static const scannedBy = "ScannedBy";
   static const pleaseScanHere = "Please scan here";
   static const generate = "Generate";
@@ -125,7 +128,9 @@ class StringManager {
 
   static const String unknown = "Unknown";
 
-  static const String languages="Languages";
+  static   String languages(BuildContext context)=>"language".tr(context);
+  static   String arabic(BuildContext context)=>"arabic".tr(context);
+  static   String english(BuildContext context)=>"english".tr(context);
 }
 
 class ConstantManager {
@@ -207,7 +212,7 @@ class ConstantManager {
   static const Set<String> hiveBoxesName = {hiveBoxNameForOffer};
   ///stackHolder
   static const String stackHolderEmail= "test@gmail.com";
-  static const String stackHolderName = "User";
+  static const String stackHolderName = "";
 }
 
 class AssetsManager {

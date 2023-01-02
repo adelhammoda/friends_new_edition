@@ -1,10 +1,8 @@
 
 
 
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 
 
@@ -13,7 +11,7 @@ import 'package:flutter/services.dart';
 
 class AppLocal {
 
-  final Locale locale;
+   Locale locale;
 
   AppLocal(this.locale);
 
@@ -28,7 +26,7 @@ class AppLocal {
 
 
   String translate(String key,{String nullCase = ""}){
-    return translateMap[key]??{}[languageCode]??nullCase;
+    return (translateMap[key]??{})[languageCode]??nullCase;
   }
 }
 
@@ -64,7 +62,44 @@ Map<String,Map<String,String>> translateMap= {
   "friends":{
     'en':'friends',
     'ar':'الأصدقاء'
+  },
+  "language":{
+    'en':'Language',
+    'ar':'اللغة'
+  },"delete_account":{
+    'en':'Delete account',
+    'ar':'حذف الحساب'
+  },
+  "logout":{
+    'en':'Logout',
+    'ar':'تسجيل الخروج'
+  },
+  "description":{
+    'en':'Description',
+    'ar':'التفاصيل'
   }
+  ,"success":{
+    'en':'Success',
+    'ar':'نجاح'
+  },"warning":{
+    'en':'Warning',
+    'ar':'تحذير'
+  },"error":{
+    'en':'Error',
+    'ar':'خطأ'
+  },"from":{
+    'en':'From',
+    'ar':'من'
+  },"to":{
+    'en':'to',
+    'ar':'إلى'
+  }, "arabic":{
+    'en':'Arabic',
+    'ar':'العربية'
+  },"english":{
+    'en':'English',
+    'ar':'الإنكليزية'
+  },
 };
 
 ///

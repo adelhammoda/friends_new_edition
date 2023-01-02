@@ -128,7 +128,7 @@ Widget buildDescription(BuildContext context,String? description){
     children: <Widget>[
       Padding(padding: const EdgeInsets.only(bottom: 8,
          ), child:
-      Text(StringManager.description,
+      Text(StringManager.description(context),
         style: Theme.of(context).textTheme.titleLarge!.copyWith(
           fontSize: SizeManager.subTitle,
           shadows: [],

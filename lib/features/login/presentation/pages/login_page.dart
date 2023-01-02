@@ -11,10 +11,10 @@ import 'package:friends/features/login/presentation/manager/login_bloc.dart';
 import 'package:friends/features/login/presentation/widgets/build_options_buttons.dart';
 import 'package:responsive_s/responsive_s.dart';
 
-import '../../../../core/common_widget/footer.dart';
-import '../../../../core/common_widget/loader.dart';
-import '../../../../core/common_widget/snackbar_widget.dart';
-import '../../../../injection_container.dart' as di;
+import 'package:friends/core/common_widget/footer.dart';
+import 'package:friends/core/common_widget/loader.dart';
+import 'package:friends/core/common_widget/snackbar_widget.dart';
+import 'package:friends/injection_container.dart' as di;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -221,7 +221,7 @@ class _LoginPageState extends State<LoginPage> {
                                 MessageSnackBar(context,
                                   responsive: _responsive,errorMessage: ConstantManager.success,
                                   borderColor: ColorManager.lightGreen,
-                                  textHeader: StringManager.success,
+                                  textHeader: StringManager.success(context),
                                   animationString: AssetsManager.wrongAnimation,
                                   textHeaderColor: ColorManager.darkGrey,
                                 ));

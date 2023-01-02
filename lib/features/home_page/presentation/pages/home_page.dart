@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
           resizeToAvoidBottomInset: true,
           drawerEnableOpenDragGesture: true,
           drawer: FriendsDrawer(
-            user: UserEntity(
+            user:user==null?null: UserEntity(
               email: user?.email??ConstantManager.stackHolderEmail,
               imageUrl:user?.imageUrl ,
               name: user?.name??ConstantManager.stackHolderName,
