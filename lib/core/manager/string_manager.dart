@@ -101,9 +101,9 @@ class StringManager {
   static const phoneNumber  = "Phone number";
   static const optional  = "(Optional)";
   static const alreadyHaveAccount = "Already have an account?";
-  static const search = "Search";
-  static const home = "Home";
-  static const favorite = "Favorite";
+  static  search (BuildContext context) => "search".tr(context);
+  static  home(BuildContext context) => "home".tr(context);
+  static  favorite(BuildContext context) => "favorite".tr(context);
   static const setting = "Setting";
   static const mode = "Mode";
   static  deleteAccount(BuildContext context) => "delete_account".tr(context);

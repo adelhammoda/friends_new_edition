@@ -27,7 +27,7 @@ class OfferTabBar extends StatelessWidget {
                  child:
              Padding(
                padding: const EdgeInsets.symmetric(horizontal: 20),
-               child: Text(StringManager.home,style: Theme.of(context).textTheme.titleMedium!.copyWith(
+               child: Text(StringManager.home(context),style: Theme.of(context).textTheme.titleMedium!.copyWith(
                    color:index==0? ColorManager.black:ColorManager.black.withOpacity(0.4)
                ),),
              )),
@@ -39,7 +39,7 @@ class OfferTabBar extends StatelessWidget {
                 onTap(1);
               }, child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(StringManager.favorite,style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                child: Text(StringManager.favorite(context),style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     color: index==1? ColorManager.black:ColorManager.black.withOpacity(0.4)
                 )),
               ))

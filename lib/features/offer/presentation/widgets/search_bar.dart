@@ -29,7 +29,7 @@ class SearchBar extends StatelessWidget {
           }
         },
         icon: const Icon(Icons.search),
-        hint: StringManager.search,
+        hint: StringManager.search(context),
         controller: controller,
       ),
     );

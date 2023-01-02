@@ -99,6 +99,15 @@ Map<String,Map<String,String>> translateMap= {
   },"english":{
     'en':'English',
     'ar':'الإنكليزية'
+  },"home":{
+    'en':'Home',
+    'ar':'العروض'
+  },"favorite":{
+    'en':'Favorite',
+    'ar':'المفضلة'
+  },"search":{
+    'en':'Search',
+    'ar':'بحث'
   },
 };
 
