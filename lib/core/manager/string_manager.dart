@@ -124,6 +124,8 @@ class StringManager {
   static const String unsubscribed = "Unsubscribed";
 
   static const String unknown = "Unknown";
+
+  static const String languages="Languages";
 }
 
 class ConstantManager {

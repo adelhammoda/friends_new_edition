@@ -6,11 +6,13 @@ abstract class SettingEvent extends Equatable {
 
 class RebuildTheAppEvent extends SettingEvent {
   final String event;
-  final bool isDark;
+  final bool? isDark;
+  final Locale? local;
 
-  const RebuildTheAppEvent({
+  const RebuildTheAppEvent( {
     this.event = "initial",
-    required this.isDark,
+     this.isDark,
+    this.local,
   });
 
   @override

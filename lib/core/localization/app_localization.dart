@@ -6,44 +6,65 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class AppLocalizations {
+
+
+
+
+
+class AppLocal {
 
   final Locale locale;
-  late Map<String , String> _localizationMap;
 
-  AppLocalizations(this.locale);
+  AppLocal(this.locale);
 
-  static AppLocalizations? of(BuildContext context)=>
-     Localizations.of<AppLocalizations>(context, AppLocalizations);
+  static List<String> languages() => ['en', 'ar'];
+  String get languageCode => locale.toString();
+  int get languageIndex => languages().contains(languageCode) ? languages().indexOf(languageCode) : 0;
 
-  static const  LocalizationsDelegate<AppLocalizations> delegate= _AppLocalizationDelegate();
+  static AppLocal of(BuildContext context)=>
+     Localizations.of<AppLocal>(context, AppLocal)!;
 
-  Future<void> load()async{
-    String jsonString =
-        await rootBundle.loadString("assets/lang/${locale.languageCode}.json");
-    Map convertedJson = jsonDecode(jsonString);
-    _localizationMap = convertedJson.map((key, value) => MapEntry(key.toString(), value.toString()));
-  }
+  static const  LocalizationsDelegate<AppLocal> delegate= _AppLocalizationDelegate();
+
 
   String translate(String key,{String nullCase = ""}){
-    return _localizationMap[key]??nullCase;
+    return translateMap[key]??{}[languageCode]??nullCase;
   }
 }
 
-class _AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations>{
+class _AppLocalizationDelegate extends LocalizationsDelegate<AppLocal>{
 
-  const _AppLocalizationDelegate();
+  const  _AppLocalizationDelegate();
   @override
   bool isSupported(Locale locale)=> ['en','ar'].contains(locale.languageCode);
 
 
   @override
-  Future<AppLocalizations> load(Locale locale) async{
-    AppLocalizations appLocalizations = AppLocalizations(locale);
-    await appLocalizations.load();
+  Future<AppLocal> load(Locale locale) async{
+    AppLocal appLocalizations = AppLocal(locale);
     return appLocalizations;
   }
 
   @override
-  bool shouldReload(covariant LocalizationsDelegate<AppLocalizations> old) =>this!=old;
+  bool shouldReload(covariant LocalizationsDelegate<AppLocal> old) =>this!=old;
+
+
 }
+
+
+  Locale createLocale(String language) => language.contains('_')
+      ? Locale.fromSubtags(
+    languageCode: language.split('_').first,
+    scriptCode: language.split('_').last,
+  )
+      : Locale(language);
+
+///global map for translate
+Map<String,Map<String,String>> translateMap= {
+  "friends":{
+    'en':'friends',
+    'ar':'الأصدقاء'
+  }
+};
+
+///

@@ -83,6 +83,7 @@ class _FriendsDrawerState extends State<FriendsDrawer> {
                   isDarkModeEnabled
                       ? ColorManager.switchToDark()
                       : ColorManager.switchToLight();
+
                   BlocProvider.of<SettingBloc>(context).add(RebuildTheAppEvent(
                       event: "Switch the theme to $isDarkModeEnabled",
                       isDark: isDark));
@@ -97,7 +98,53 @@ class _FriendsDrawerState extends State<FriendsDrawer> {
                   bottom: 13,
                 ),
                 child: buildNavigationTiles(
-                    MyFlutterApp.setting, StringManager.setting, context),
+                    MyFlutterApp.setting, StringManager.languages, context,
+                    onTap: () {
+                  showMenu(
+                      context: context,
+                      color: ColorManager.darkGrey,
+                      position: RelativeRect.fromLTRB(
+                          Localizations.localeOf(context).languageCode == 'ar'
+                              ? 0
+                              : responsive.responsiveWidth(
+                                  forUnInitialDevices: 10),
+                          responsive.responsiveHeight(forUnInitialDevices: 63),
+                          Localizations.localeOf(context).languageCode == 'en'
+                              ? 0
+                              : responsive.responsiveWidth(
+                                  forUnInitialDevices: 10),
+                          0),
+                      items: [
+                        PopupMenuItem(
+                            child: Text(
+                              "العربية",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displaySmall!
+                                  .copyWith(
+                                      fontSize: SizeManager.listTileTitle),
+                            ),
+                            onTap: () {
+                              BlocProvider.of<SettingBloc>(context).add(
+                                  const RebuildTheAppEvent(
+                                      local: Locale('ar')));
+                            }),
+                        PopupMenuItem(
+                            child: Text(
+                              "English",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displaySmall!
+                                  .copyWith(
+                                      fontSize: SizeManager.listTileTitle),
+                            ),
+                            onTap: () {
+                              BlocProvider.of<SettingBloc>(context).add(
+                                  const RebuildTheAppEvent(
+                                      local: Locale('en')));
+                            }),
+                      ]);
+                }),
               ),
               Divider(
                 color: ColorManager.white,
@@ -253,9 +300,10 @@ class _FriendsDrawerState extends State<FriendsDrawer> {
   }
 
   Widget buildNavigationTiles(
-      IconData iconData, String text, BuildContext context) {
+      IconData iconData, String text, BuildContext context,
+      {void Function()? onTap}) {
     return ListTile(
-      onTap: () {},
+      onTap: onTap,
       leading: Icon(
         iconData,
         color: ColorManager.white,

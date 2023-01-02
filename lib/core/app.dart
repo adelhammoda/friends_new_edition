@@ -31,26 +31,13 @@ class App extends StatelessWidget {
             message: "Rebuild the app .... using setting bloc with ${state
                 .props}");
         final material =MaterialApp(
+          locale: (state is ReBuildTheAppState)?state.locale:null,
           themeMode: ThemeManager.themeMode,
-          supportedLocales: const [
-            Locale("en", "US"),
-            Locale("ar"),
-          ],
-          localeResolutionCallback: (local, supportedLocal) {
-            if (local == null) {
-              return supportedLocal.first;
-            }
-            for (var spLocal in supportedLocal) {
-              if (spLocal.countryCode == local.countryCode &&
-                  spLocal.languageCode == local.languageCode) {
-                return spLocal;
-              }
-            }
-            return supportedLocal.first;
-          },
+          supportedLocales:  AppLocal.languages().map((e) => Locale(e)).toList(),
           localizationsDelegates: const [
-            AppLocalizations.delegate,
+            AppLocal.delegate,
             GlobalMaterialLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
           ],
           debugShowCheckedModeBanner: false,
@@ -58,11 +45,7 @@ class App extends StatelessWidget {
           routes: RoutesManager.routes(),
           theme: ThemeManager.getAllThemeData(),
         );
-        if(state is ReBuildTheAppState) {
-          return material;
-        }else{
-          return material;
-        }
+        return material;
       },
     );
   }

@@ -11,11 +11,12 @@ class SettingInitial extends SettingState {
 
 class ReBuildTheAppState extends SettingState{
   final String state;
+  final Locale? locale;
 
-  const ReBuildTheAppState({this.state='initial'});
+  const ReBuildTheAppState({this.state='initial',this.locale});
 
   @override
-  List<Object?> get props => [state];
+  List<Object?> get props => [state,locale];
 
 }
 

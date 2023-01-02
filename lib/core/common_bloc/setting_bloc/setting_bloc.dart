@@ -31,15 +31,28 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
   }) : super(SettingInitial()) {
     on<SettingEvent>((event, emit) async {
       if (event is RebuildTheAppEvent) {
-        Either<Failure, void> res =
-            await switchThemeUseCase(isDark: event.isDark);
-        res.fold(
-            (failure) => PrintLog.call(
-                tag: "SwitchTheme",
-                message: "Error in bloc event while switching the theme",
-                error: failure.message),
-            (r) => null);
-        emit(ReBuildTheAppState(state: event.event));
+        if(event.isDark!=null) {
+          Either<Failure, void> res =
+          await switchThemeUseCase(isDark: event.isDark!);
+          res.fold(
+                  (failure) => PrintLog.call(
+                  tag: "SwitchTheme",
+                  message: "Error in bloc event while rebuilding the app",
+                  error: failure.message),
+                  (r) => null);
+        }
+        if(event.local!=null) {
+          Either<Failure, void> localeRes = await switchLanguageUseCase(
+              local: event.local!.languageCode);
+          localeRes.fold(
+                  (failure) => PrintLog.call(
+                  tag: "Switch language to ${event.local?.toLanguageTag()}",
+                  message: "Error in bloc event while rebuilding the app",
+                  error: failure.message),
+                  (r) => null);
+        }
+
+        emit(ReBuildTheAppState(state: event.event,locale: event.local));
       } else if (event is DeleteAccountEvent) {
         emit(const LoadingState());
         if (event.userEmail == null) {
