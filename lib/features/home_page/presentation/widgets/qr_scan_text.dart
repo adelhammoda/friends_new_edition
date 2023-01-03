@@ -14,7 +14,7 @@ class QrScanText extends StatelessWidget {
       ),
       child: SizedBox(
         width: responsive.responsiveWidth(forUnInitialDevices: 92),
-        child: Text(StringManager.placeYourDeviceOnQrCode,
+        child: Text(StringManager.placeYourDeviceOnQrCode(context),
             style: Theme.of(context).textTheme.bodyLarge,
             textAlign: TextAlign.center),
       ),

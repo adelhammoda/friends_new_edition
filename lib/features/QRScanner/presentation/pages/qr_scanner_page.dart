@@ -60,47 +60,55 @@ class _QrScannerPageState extends State<QrScannerPage> {
             return const Center(child: Loader(),);
           } else {
             return AnimatedCrossFade(
-                firstChild: Column(
-                  children: <Widget>[
-                    //static text
-                    const QrScanText(),
-                    SizedBox(
-                      height:
-                      responsive.responsiveHeight(forUnInitialDevices: 40),
-                      width: responsive.responsiveHeight(
-                          forUnInitialDevices: 40),
-                      child: Lottie.asset(
-                        AssetsManager.scanQrAnimation,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          top: responsive.responsiveHeight(
-                              forUnInitialDevices: 10)),
-                      child: FriendsButton(
-                        width: 30,
-                        height: 5,
-                        child: FittedBox(
-                          fit: BoxFit.fill,
-                          child: Text(
-                            StringManager.openCamera,
-                            style: Theme
-                                .of(context)
-                                .textTheme
-                                .titleSmall,
-                          ),
+              alignment: Alignment.center,
+                firstChild: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      //static text
+                      const QrScanText(),
+                      SizedBox(
+                        height:
+                        responsive.responsiveHeight(forUnInitialDevices: 40),
+                        width: responsive.responsiveHeight(
+                            forUnInitialDevices: 40),
+                        child: Lottie.asset(
+                          AssetsManager.scanQrAnimation,
                         ),
-                        onPressed: () {
-                          if (BlocProvider
-                              .of<CameraBloc>(context)
-                              .getController != null) {
-                            BlocProvider.of<CameraBloc>(context).add(
-                                const OpenCameraEvent());
-                          }
-                        },
                       ),
-                    )
-                  ],
+                      Padding(
+                        padding: EdgeInsets.only(
+                            top: responsive.responsiveHeight(
+                                forUnInitialDevices: 10)),
+                        child: FriendsButton(
+                          width: 30,
+                          height: 5,
+                          child: FittedBox(
+                            fit: BoxFit.fill,
+                            child: Text(
+                              StringManager.openCamera(context),
+                              style: Theme
+                                  .of(context)
+                                  .textTheme
+                                  .titleSmall,
+                            ),
+                          ),
+                          onPressed: () {
+                            if (BlocProvider
+                                .of<CameraBloc>(context)
+                                .getController != null) {
+                              BlocProvider.of<CameraBloc>(context).add(
+                                  const OpenCameraEvent());
+                            }
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                        width: double.infinity,
+                      )
+                    ],
+                  ),
                 ),
                 secondChild: SizedBox(
                   height: responsive.responsiveHeight(forUnInitialDevices: 90),

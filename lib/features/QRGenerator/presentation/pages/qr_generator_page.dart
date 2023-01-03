@@ -47,7 +47,7 @@ class QrGeneratorPage extends StatelessWidget {
                   padding: EdgeInsets.only(
                       top: responsive.responsiveHeight(forUnInitialDevices: 5)),
                   child: Text(
-                    StringManager.itWillDisappearIn2Minutes,
+                    StringManager.itWillDisappearIn2Minutes(context),
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
                 ),
@@ -71,7 +71,7 @@ class QrGeneratorPage extends StatelessWidget {
                             context: context,
                             bloc: BlocProvider.of<HomepageBloc>(context)));
                   },
-                  child: const Text(StringManager.generate)),
+                  child:  Text(StringManager.generate(context))),
             );
           }
         },

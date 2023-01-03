@@ -108,7 +108,31 @@ Map<String,Map<String,String>> translateMap= {
   },"search":{
     'en':'Search',
     'ar':'بحث'
-  },
+  },"generate":{
+    'en':'Generate',
+    'ar':'توليد'
+  },"it_will_disappear":{
+    'en':'It will disappear in 2 minutes',
+    'ar':'سوف يختفي هذا الرمز بعد دقيقتين'
+  },"open_camera":{
+    'en':'Open camera',
+    'ar':'افتح الكاميرا'
+  },"owned_packages":{
+    'en':'Owned Packages',
+    'ar':'الحزمات المملوكة'
+  },"press_to_open_camera":{
+    'en':'Press on the button then scan the QR code using your camera',
+    'ar':'اضفط على الزر ثم قم بمسح رمز الاستجابة السريعة  باستخدام الكاميرا'
+  },"subscribed":{
+    'en':'Subscribed',
+    'ar':'مشترك'
+  },"unsubscribed":{
+    'en':'Unsubscribed',
+    'ar':'غير مشترك'
+  },"unknown":{
+    'en':'Unknown',
+    'ar':'غير معروف'
+  }
 };
 
 ///

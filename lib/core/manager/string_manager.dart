@@ -117,16 +117,16 @@ class StringManager {
   static  to(BuildContext context) => "to";
   static const scannedBy = "ScannedBy";
   static const pleaseScanHere = "Please scan here";
-  static const generate = "Generate";
-  static const itWillDisappearIn2Minutes = "It will disappear in 2 minutes";
-  static const placeYourDeviceOnQrCode = "Press on the button then scan the QR code using your camera";
-  static const openCamera = "open camera";
-  static const ownedPackages = "Owned Packages";
+  static  generate(BuildContext context) => "generate".tr(context);
+  static  itWillDisappearIn2Minutes(BuildContext context) => "it_will_disappear".tr(context);
+  static  placeYourDeviceOnQrCode(BuildContext context) => "press_to_open_camera".tr(context);
+  static  openCamera(BuildContext context) => "open_camera".tr(context);
+  static  ownedPackages (BuildContext context) => "owned_packages".tr(context);
 
-  static const String subscribed = "Subscribed";
-  static const String unsubscribed = "Unsubscribed";
+  static  String subscribed (BuildContext context) => "subscribed".tr(context);
+  static  String unsubscribed (BuildContext context) => "unsubscribed".tr(context);
 
-  static const String unknown = "Unknown";
+  static  String unknown (BuildContext context) => "unknown".tr(context);
 
   static   String languages(BuildContext context)=>"language".tr(context);
   static   String arabic(BuildContext context)=>"arabic".tr(context);

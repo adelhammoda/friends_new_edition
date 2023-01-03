@@ -15,7 +15,7 @@ class LineHeader extends StatelessWidget {
         child: Row(
           children: <Widget>[
             Text(
-              StringManager.ownedPackages,
+              StringManager.ownedPackages(context),
               style: Theme.of(context).textTheme.button,
             ),
             const Icon(Icons.arrow_downward)

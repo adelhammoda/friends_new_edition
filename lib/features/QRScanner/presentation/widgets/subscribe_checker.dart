@@ -30,7 +30,7 @@ class SubscribeChecker extends StatelessWidget {
       )),
       child: Center(
         child: Text(
-          isSubscribed ? StringManager.subscribed : StringManager.unsubscribed,
+          isSubscribed ? StringManager.subscribed(context) : StringManager.unsubscribed(context),
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: isSubscribed ? ColorManager.lightGreen : ColorManager.red),
         ),
